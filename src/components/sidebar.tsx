@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useMobile, useTablet } from '@/hooks/use-mobile'
-import { Twitter, Github, } from 'lucide-react'
+import { Twitter, Github, User, BookOpen, FolderOpen, Bookmark } from 'lucide-react'
 
 
 export function Sidebar() {
@@ -11,52 +11,78 @@ export function Sidebar() {
 
   if (isMobile) {
     return (
-      <aside className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
-        <nav className="bg-background/80 backdrop-blur-sm border border-border rounded-full px-4 py-2">
-          <ul className="flex space-x-6">
+      <aside className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-sm px-4">
+        <nav className="bg-background/95 backdrop-blur-md border border-border rounded-2xl shadow-lg">
+          <ul className="flex justify-around items-center py-3">
             <li>
-              <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link href="/projects" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-                Projects
-              </Link>
-            </li>
-            <li>
-              <Link href="/bookmarks" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-                Bookmarks
-              </Link>
-            </li>
-            <li className="flex items-center gap-1">
-              <span className="text-muted-foreground hover:text-foreground transition-colors text-xs">Twitter</span>
-              <a 
-                href="https://twitter.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+              <Link 
+                href="/" 
+                className="flex flex-col items-center gap-1 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 min-w-[48px] min-h-[48px] justify-center"
+                aria-label="About"
               >
-                <Twitter size={16} />
-              </a>
+                <User size={20} />
+                <span className="text-xs font-medium">About</span>
+              </Link>
             </li>
-            <li className="flex items-center gap-1">
-              <span className="text-muted-foreground hover:text-foreground transition-colors text-xs">GitHub</span>
-              <a 
-                href="https://github.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+            <li>
+              <Link 
+                href="/blog" 
+                className="flex flex-col items-center gap-1 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 min-w-[48px] min-h-[48px] justify-center"
+                aria-label="Blog"
               >
-                <Github size={16} />
-              </a>
+                <BookOpen size={20} />
+                <span className="text-xs font-medium">Blog</span>
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/projects" 
+                className="flex flex-col items-center gap-1 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 min-w-[48px] min-h-[48px] justify-center"
+                aria-label="Projects"
+              >
+                <FolderOpen size={20} />
+                <span className="text-xs font-medium">Projects</span>
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/bookmarks" 
+                className="flex flex-col items-center gap-1 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 min-w-[48px] min-h-[48px] justify-center"
+                aria-label="Bookmarks"
+              >
+                <Bookmark size={20} />
+                <span className="text-xs font-medium">Bookmarks</span>
+              </Link>
             </li>
           </ul>
+          <div className="border-t border-border">
+            <ul className="flex justify-center items-center py-2 gap-6">
+              <li>
+                <a 
+                  href="https://twitter.com" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+                  aria-label="Twitter"
+                >
+                  <Twitter size={18} />
+                  <span className="text-sm font-medium">Twitter</span>
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://github.com" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+                  aria-label="GitHub"
+                >
+                  <Github size={18} />
+                  <span className="text-sm font-medium">GitHub</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </nav>
       </aside>
     )
