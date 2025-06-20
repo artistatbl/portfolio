@@ -1,11 +1,10 @@
 'use client'
 
-import { Sidebar } from '../components/sidebar'
-import { useMobile, useTablet } from '@/hooks/use-mobile'
+import { PageLayout } from '../components/page-layout'
+import { useMobile } from '@/hooks/use-mobile'
 
 export default function Home() {
   const isMobile = useMobile()
-  const isTablet = useTablet()
   const proudOf = [
     "being a husband & father",
     "graduated with honors in computer engineering",
@@ -39,13 +38,8 @@ export default function Home() {
   ]
 
   return (
-    <div className="min-h-screen flex justify-center items-start">
-      <Sidebar />
-      
-      <main className={`py-8 px-4 mx-auto ${
-        isMobile ? 'pb-20 max-w-2xl' : isTablet ? 'py-20 px-8 max-w-xl mr-32' : 'py-20 px-8 max-w-2xl'
-      }`}>
-        <div>
+    <PageLayout>
+      <div>
           <h1 className={`font-bold text-foreground mb-4 ${
             isMobile ? 'text-2xl' : 'text-4xl'
           }`}>leerob</h1>
@@ -82,8 +76,7 @@ export default function Home() {
               ))}
             </ul>
           </section>
-        </div>
-      </main>
-    </div>
+      </div>
+    </PageLayout>
   )
 }

@@ -2,7 +2,7 @@
 title: "React Best Practices for 2024"
 date: "2024-01-15"
 excerpt: "Essential React best practices and patterns that every developer should know to write clean, maintainable, and performant React applications."
-author: "Your Name"
+author: "Jean Daly"
 tags: ["react", "javascript", "best-practices", "performance"]
 ---
 

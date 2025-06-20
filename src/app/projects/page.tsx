@@ -1,11 +1,10 @@
 'use client'
 
-import { Sidebar } from '../../components/sidebar'
-import { useMobile, useTablet } from '@/hooks/use-mobile'
+import { PageLayout } from '../../components/page-layout'
+import { useMobile } from '@/hooks/use-mobile'
 
 export default function Projects() {
   const isMobile = useMobile()
-  const isTablet = useTablet()
   const projects = [
     {
       title: "Portfolio Website",
@@ -38,15 +37,8 @@ export default function Projects() {
   ]
 
   return (
-    <div className="min-h-screen flex justify-center items-start">
-      <div className="absolute inset-0 -z-10 opacity-50 mix-blend-soft-light bg-[url('/noise.svg')] [mask-image:radial-gradient(ellipse_at_center,black,transparent)]" />
-      
-      <Sidebar />
-      
-      <main className={`mx-auto ${
-        isMobile ? 'py-8 px-4 pb-20 max-w-2xl' : isTablet ? 'py-20 px-8 max-w-xl mr-32' : 'py-20 px-8 max-w-2xl'
-      }`}>
-        <div>
+    <PageLayout>
+      <div>
           <h1 className={`font-bold text-foreground mb-8 ${
             isMobile ? 'text-2xl' : 'text-4xl'
           }`}>Projects</h1>
@@ -91,8 +83,7 @@ export default function Projects() {
               </div>
             ))}
           </div>
-        </div>
-      </main>
-    </div>
+      </div>
+    </PageLayout>
   )
 }

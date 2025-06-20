@@ -2,7 +2,7 @@
 title: "Tailwind CSS: The Utility-First Revolution"
 date: "2024-01-18"
 excerpt: "Discover how Tailwind CSS transforms the way we write CSS with its utility-first approach and why it's becoming the preferred choice for developers."
-author: "Your Name"
+author: "Jean Daly"
 tags: ["tailwindcss", "css", "frontend", "design"]
 ---
 

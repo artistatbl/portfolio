@@ -2,7 +2,7 @@
 title: "Next.js: Why It's Good for Modern Web Development"
 date: "2024-01-20"
 excerpt: "Exploring the benefits and features that make Next.js a powerful React framework for building modern web applications."
-author: "Your Name"
+author: "Jean Daly"
 tags: ["nextjs", "react", "web-development", "javascript"]
 ---
 
