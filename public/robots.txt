@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://jeandaly.dev/sitemap.xml
+
+# Disallow crawling of API routes
+Disallow: /api/
+
+# Allow crawling of RSS feed
+Allow: /rss.xml

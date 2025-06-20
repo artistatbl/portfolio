@@ -13,10 +13,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link 
+          rel="alternate" 
+          type="application/rss+xml" 
+          title="Jean Daly - Blog RSS Feed" 
+          href="/rss.xml" 
+        />
+      </head>
       <body className="antialiased">
         <main className="bg-background">
-
-        <Providers>{children}</Providers>
+          <Providers>{children}</Providers>
         </main>
       </body>
     </html>

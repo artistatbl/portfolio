@@ -4,6 +4,7 @@ import { PageLayout } from '../../components/page-layout'
 import { useMobile } from '@/hooks/use-mobile'
 import { formatDate, type BlogPostMeta } from '@/lib/blog'
 import { Badge } from '@/components/ui/badge'
+import { RSSLink } from '@/components/rss-link'
 import Link from 'next/link'
 
 interface BlogClientProps {
@@ -16,12 +17,27 @@ export function BlogClient({ posts }: BlogClientProps) {
   return (
     <PageLayout>
       <div>
-          <h1 className={`font-bold text-foreground mb-8 ${
-            isMobile ? 'text-2xl' : 'text-4xl'
-          }`}>Blog</h1>
-          <p className={`text-muted-foreground ${
-            isMobile ? 'mb-8 text-sm' : 'mb-12'
-          }`}>Thoughts on development, design, and technology</p>
+          <div className="flex items-start justify-between mb-8">
+            <div>
+              <h1 className={`font-bold text-foreground mb-4 ${
+                isMobile ? 'text-2xl' : 'text-4xl'
+              }`}>Blog</h1>
+              <p className={`text-muted-foreground ${
+                isMobile ? 'text-sm' : 'text-base'
+              }`}>Thoughts on development, design, and technology</p>
+            </div>
+            {!isMobile && (
+              <div className="flex-shrink-0">
+                <RSSLink />
+              </div>
+            )}
+          </div>
+          
+          {isMobile && (
+            <div className="mb-8">
+              <RSSLink />
+            </div>
+          )}
           
           <div className={isMobile ? 'space-y-8' : 'space-y-10'}>
             {posts.map((post) => (
