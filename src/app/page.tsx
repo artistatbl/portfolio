@@ -1,6 +1,6 @@
 'use client'
 
-import { Sidebar } from './components/sidebar'
+import { Sidebar } from '../components/sidebar'
 import { useMobile, useTablet } from '@/hooks/use-mobile'
 
 export default function Home() {

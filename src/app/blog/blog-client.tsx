@@ -1,6 +1,6 @@
 'use client'
 
-import { Sidebar } from '../components/sidebar'
+import { Sidebar } from '../../components/sidebar'
 import { useMobile, useTablet } from '@/hooks/use-mobile'
 import { formatDate, type BlogPostMeta } from '@/lib/blog'
 import Link from 'next/link'
