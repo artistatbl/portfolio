@@ -6,6 +6,7 @@ export interface BlogPost {
   author: string
   tags: string[]
   content: string
+  readingTime: number
 }
 
 export interface BlogPostMeta {
@@ -15,6 +16,7 @@ export interface BlogPostMeta {
   excerpt: string
   author: string
   tags: string[]
+  readingTime: number
 }
 
 export async function getAllPosts(): Promise<BlogPostMeta[]> {

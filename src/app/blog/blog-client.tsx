@@ -3,6 +3,7 @@
 import { PageLayout } from '../../components/page-layout'
 import { useMobile } from '@/hooks/use-mobile'
 import { formatDate, type BlogPostMeta } from '@/lib/blog'
+import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
 
 interface BlogClientProps {
@@ -46,6 +47,16 @@ export function BlogClient({ posts }: BlogClientProps) {
                         </span>
                       </>
                     )}
+                    {post.readingTime && (
+                      <>
+                        <span className="text-muted-foreground/50">•</span>
+                        <span className={`text-muted-foreground ${
+                          isMobile ? 'text-xs' : 'text-sm'
+                        }`}>
+                          {post.readingTime} min read
+                        </span>
+                      </>
+                    )}
                   </div>
                   
                   <p className={`text-muted-foreground leading-relaxed mb-4 ${
@@ -55,14 +66,15 @@ export function BlogClient({ posts }: BlogClientProps) {
                   {post.tags && post.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {post.tags.map((tag) => (
-                        <span
+                        <Badge
                           key={tag}
-                          className={`bg-muted/80 text-muted-foreground px-3 py-1 rounded-full border border-border/50 group-hover:bg-muted transition-colors ${
+                          variant="outline"
+                          className={`group-hover:bg-accent/50 transition-colors ${
                             isMobile ? 'text-xs' : 'text-sm'
                           }`}
                         >
                           #{tag}
-                        </span>
+                        </Badge>
                       ))}
                     </div>
                   )}

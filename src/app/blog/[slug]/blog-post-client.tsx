@@ -33,6 +33,65 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       Prism.highlightAll()
+      
+      // Add copy buttons to code blocks
+      const codeBlocks = document.querySelectorAll('pre[class*="language-"]')
+      
+      codeBlocks.forEach((block) => {
+        // Skip if already has a copy button
+        if (block.parentElement?.classList.contains('code-block-wrapper')) {
+          return
+        }
+        
+        // Create wrapper
+        const wrapper = document.createElement('div')
+        wrapper.className = 'code-block-wrapper'
+        
+        // Create copy button
+        const copyButton = document.createElement('button')
+        copyButton.className = 'copy-button'
+        copyButton.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+            <path d="m4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+          </svg>
+          Copy
+        `
+        
+        // Add click handler
+        copyButton.addEventListener('click', async () => {
+          const code = block.querySelector('code')?.textContent || ''
+          
+          try {
+            await navigator.clipboard.writeText(code)
+            copyButton.innerHTML = `
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20,6 9,17 4,12"/>
+              </svg>
+              Copied!
+            `
+            copyButton.classList.add('copied')
+            
+            setTimeout(() => {
+              copyButton.innerHTML = `
+                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                   <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                   <path d="m4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                 </svg>
+                 Copy
+               `
+              copyButton.classList.remove('copied')
+            }, 2000)
+          } catch (err) {
+            console.error('Failed to copy code:', err)
+          }
+        })
+        
+        // Wrap the code block and add copy button
+        block.parentNode?.insertBefore(wrapper, block)
+        wrapper.appendChild(block)
+        wrapper.appendChild(copyButton)
+      })
     }
   }, [post.content])
 

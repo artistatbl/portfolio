@@ -7,6 +7,14 @@ import html from 'remark-html'
 
 const postsDirectory = path.join(process.cwd(), 'src/content/blog')
 
+// Calculate reading time based on word count (average 200 words per minute)
+function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200
+  const words = content.trim().split(/\s+/).length
+  const readingTime = Math.ceil(words / wordsPerMinute)
+  return readingTime
+}
+
 export interface BlogPost {
   slug: string
   title: string
@@ -15,6 +23,7 @@ export interface BlogPost {
   author: string
   tags: string[]
   content: string
+  readingTime: number
 }
 
 export interface BlogPostMeta {
@@ -24,6 +33,7 @@ export interface BlogPostMeta {
   excerpt: string
   author: string
   tags: string[]
+  readingTime: number
 }
 
 async function getAllPosts(): Promise<BlogPostMeta[]> {
@@ -37,6 +47,7 @@ async function getAllPosts(): Promise<BlogPostMeta[]> {
           const fullPath = path.join(postsDirectory, fileName)
           const fileContents = await readFile(fullPath, 'utf8')
           const matterResult = matter(fileContents)
+          const readingTime = calculateReadingTime(matterResult.content)
 
           return {
             slug,
@@ -45,6 +56,7 @@ async function getAllPosts(): Promise<BlogPostMeta[]> {
             excerpt: matterResult.data.excerpt,
             author: matterResult.data.author,
             tags: matterResult.data.tags || [],
+            readingTime,
           } as BlogPostMeta
         })
     )
@@ -75,6 +87,7 @@ async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 
     const fileContents = await readFile(fullPath, 'utf8')
     const matterResult = matter(fileContents)
+    const readingTime = calculateReadingTime(matterResult.content)
 
     // Use remark to convert markdown into HTML string
     const processedContent = await remark()
@@ -90,6 +103,7 @@ async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       author: matterResult.data.author,
       tags: matterResult.data.tags || [],
       content: contentHtml,
+      readingTime,
     } as BlogPost
   } catch (error) {
     console.error(`Error reading blog post ${slug}:`, error)
