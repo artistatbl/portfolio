@@ -46,23 +46,44 @@ export default function Bookmarks() {
                 <h2 className={`font-semibold text-foreground mb-6 ${
                   isMobile ? 'text-lg' : 'text-2xl'
                 }`}>{category}</h2>
-                <div className="space-y-2">
+                <div className={`grid gap-3 ${
+                  isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'
+                }`}>
                   {tools.map((tool, index) => (
-                    <div key={index} className="flex items-center space-x-2">
-                      <a 
-                        href={tool.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`text-foreground hover:text-muted-foreground transition-colors underline ${
-                          isMobile ? 'text-sm' : 'text-base'
-                        }`}
-                      >
-                        {tool.name}
-                      </a>
-                      <span className={`text-muted-foreground ${
-                        isMobile ? 'text-xs' : 'text-sm'
-                      }`}>— {tool.description}</span>
-                    </div>
+                    <a 
+                      key={index}
+                      href={tool.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`group block p-5 rounded-xl border border-border/40 bg-gradient-to-br from-card/20 to-card/40 hover:from-card/40 hover:to-card/70 hover:border-border/80 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 ${
+                        isMobile ? '' : 'hover:-translate-y-1 hover:scale-[1.02]'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1">
+                          <h3 className={`font-medium text-foreground group-hover:text-primary transition-colors ${
+                            isMobile ? 'text-sm' : 'text-base'
+                          }`}>
+                            {tool.name}
+                          </h3>
+                          <p className={`text-muted-foreground mt-1 ${
+                            isMobile ? 'text-xs' : 'text-sm'
+                          }`}>
+                            {tool.description}
+                          </p>
+                        </div>
+                        <div className="w-8 h-8 rounded-full bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-colors flex-shrink-0">
+                           <svg 
+                             className="w-4 h-4 text-primary/70 group-hover:text-primary transition-colors" 
+                             fill="none" 
+                             stroke="currentColor" 
+                             viewBox="0 0 24 24"
+                           >
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                           </svg>
+                         </div>
+                      </div>
+                    </a>
                   ))}
                 </div>
               </div>
