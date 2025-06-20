@@ -5,6 +5,22 @@ import { useMobile, useTablet } from '@/hooks/use-mobile'
 import { formatDate, type BlogPost } from '@/lib/blog'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+import { useEffect } from 'react'
+import Prism from 'prismjs'
+import 'prismjs/themes/prism-tomorrow.css'
+import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-typescript'
+import 'prismjs/components/prism-jsx'
+import 'prismjs/components/prism-tsx'
+import 'prismjs/components/prism-css'
+import 'prismjs/components/prism-scss'
+import 'prismjs/components/prism-json'
+import 'prismjs/components/prism-bash'
+import 'prismjs/components/prism-python'
+import 'prismjs/components/prism-java'
+import 'prismjs/components/prism-go'
+import 'prismjs/components/prism-rust'
+import 'prismjs/components/prism-sql'
 
 interface BlogPostClientProps {
   post: BlogPost
@@ -13,6 +29,12 @@ interface BlogPostClientProps {
 export function BlogPostClient({ post }: BlogPostClientProps) {
   const isMobile = useMobile()
   const isTablet = useTablet()
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      Prism.highlightAll()
+    }
+  }, [post.content])
 
   return (
     <div className="min-h-screen flex justify-center items-start">
@@ -27,35 +49,40 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
           {/* Back to blog link */}
           <Link 
             href="/blog" 
-            className={`inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-8 ${
+            className={`inline-flex items-center text-muted-foreground hover:text-foreground transition-all duration-200 hover:translate-x-[-2px] mb-8 ${
               isMobile ? 'text-sm' : 'text-base'
             }`}
           >
-            <ArrowLeft className={`mr-2 ${
+            <ArrowLeft className={`mr-2 transition-transform duration-200 ${
               isMobile ? 'h-4 w-4' : 'h-5 w-5'
             }`} />
             Back to Blog
           </Link>
           
           {/* Post header */}
-          <header className={isMobile ? 'mb-8' : 'mb-12'}>
-            <h1 className={`font-bold text-foreground ${
+          <header className={`border-b border-border/50 pb-8 ${
+            isMobile ? 'mb-8' : 'mb-12'
+          }`}>
+            <h1 className={`font-bold text-foreground leading-tight ${
               isMobile ? 'text-2xl mb-4' : 'text-4xl mb-6'
             }`}>{post.title}</h1>
             
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-3">
               <div className="flex items-center space-x-4">
-                <time className={`text-muted-foreground ${
+                <time className={`text-muted-foreground font-medium ${
                   isMobile ? 'text-sm' : 'text-base'
                 }`}>
                   {formatDate(post.date)}
                 </time>
                 {post.author && (
-                  <span className={`text-muted-foreground ${
-                    isMobile ? 'text-sm' : 'text-base'
-                  }`}>
-                    by {post.author}
-                  </span>
+                  <>
+                    <span className="text-muted-foreground/50">•</span>
+                    <span className={`text-muted-foreground ${
+                      isMobile ? 'text-sm' : 'text-base'
+                    }`}>
+                      by {post.author}
+                    </span>
+                  </>
                 )}
               </div>
               
@@ -64,11 +91,11 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className={`bg-muted text-muted-foreground px-2 py-1 rounded-md ${
+                      className={`bg-muted/80 text-muted-foreground px-3 py-1 rounded-full border border-border/50 hover:bg-muted transition-colors ${
                         isMobile ? 'text-xs' : 'text-sm'
                       }`}
                     >
-                      {tag}
+                      #{tag}
                     </span>
                   ))}
                 </div>
@@ -83,6 +110,27 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
             }`}
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
+          
+          {/* Post footer */}
+          <footer className={`border-t border-border/50 pt-8 mt-12 ${
+            isMobile ? 'text-sm' : 'text-base'
+          }`}>
+            <div className="flex items-center justify-between">
+              <Link 
+                href="/blog" 
+                className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ArrowLeft className={`mr-2 ${
+                  isMobile ? 'h-4 w-4' : 'h-5 w-5'
+                }`} />
+                Back to all posts
+              </Link>
+              
+              <div className="text-muted-foreground">
+                Published {formatDate(post.date)}
+              </div>
+            </div>
+          </footer>
         </div>
       </main>
     </div>

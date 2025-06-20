@@ -188,3 +188,212 @@
     letter-spacing: var(--tracking-normal);
   }
 }
+
+/* Enhanced Blog Post Styling */
+@layer components {
+  .prose {
+    @apply text-foreground;
+  }
+  
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-foreground font-bold;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .prose h1 {
+    @apply text-3xl;
+  }
+  
+  .prose h2 {
+    @apply text-2xl;
+  }
+  
+  .prose h3 {
+    @apply text-xl;
+  }
+  
+  .prose p {
+    @apply text-foreground leading-relaxed;
+    margin-bottom: 1.5rem;
+  }
+  
+  .prose a {
+    @apply text-primary hover:text-primary/80 underline transition-colors;
+  }
+  
+  .prose ul,
+  .prose ol {
+    @apply text-foreground;
+    margin-bottom: 1.5rem;
+  }
+  
+  .prose li {
+    @apply mb-2;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-muted-foreground/30 pl-4 italic text-muted-foreground;
+    margin: 1.5rem 0;
+  }
+  
+  /* Enhanced Code Block Styling with Prism.js */
+  .prose pre {
+    @apply border border-border rounded-lg overflow-x-auto shadow-sm;
+    margin: 1.5rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    background: #2d3748 !important;
+    padding: 1.5rem !important;
+  }
+  
+  .prose code {
+    @apply bg-muted/70 text-foreground px-1.5 py-0.5 rounded-md;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+  }
+  
+  .prose pre code {
+    @apply bg-transparent p-0;
+    color: inherit;
+    background: transparent !important;
+  }
+  
+  /* Prism.js theme overrides for better integration */
+  .prose pre[class*="language-"] {
+    background: #2d3748 !important;
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+  
+  .prose code[class*="language-"],
+  .prose pre[class*="language-"] {
+    color: #e2e8f0;
+    text-shadow: none;
+    font-family: var(--font-mono);
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.6;
+    tab-size: 2;
+    hyphens: none;
+  }
+  
+  /* Custom token colors for dark theme */
+  .prose .token.comment,
+  .prose .token.prolog,
+  .prose .token.cdata {
+    color: #718096;
+    font-style: italic;
+  }
+  
+  .prose .token.punctuation {
+    color: #e2e8f0;
+  }
+  
+  .prose .token.property,
+  .prose .token.tag,
+  .prose .token.boolean,
+  .prose .token.number,
+  .prose .token.constant,
+  .prose .token.symbol,
+  .prose .token.deleted {
+    color: #f56565;
+  }
+  
+  .prose .token.selector,
+  .prose .token.attr-name,
+  .prose .token.string,
+  .prose .token.char,
+  .prose .token.builtin,
+  .prose .token.inserted {
+    color: #68d391;
+  }
+  
+  .prose .token.operator,
+  .prose .token.entity,
+  .prose .token.url,
+  .prose .language-css .token.string,
+  .prose .style .token.string {
+    color: #63b3ed;
+  }
+  
+  .prose .token.atrule,
+  .prose .token.attr-value,
+  .prose .token.keyword {
+    color: #d53f8c;
+  }
+  
+  .prose .token.function,
+  .prose .token.class-name {
+    color: #fbb6ce;
+  }
+  
+  .prose .token.regex,
+  .prose .token.important,
+  .prose .token.variable {
+    color: #ed8936;
+  }
+  
+  .prose .token.important,
+  .prose .token.bold {
+    font-weight: bold;
+  }
+  
+  .prose .token.italic {
+    font-style: italic;
+  }
+  
+  /* Mac-style window decoration for code blocks */
+  .prose pre[class*="language-"]::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff5f57;
+    box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #28ca42;
+  }
+  
+  .prose pre[class*="language-"] {
+    position: relative;
+    padding-top: 2.5rem !important;
+  }
+  
+  /* Table styling */
+  .prose table {
+    @apply w-full border-collapse border border-border;
+    margin: 1.5rem 0;
+  }
+  
+  .prose th,
+  .prose td {
+    @apply border border-border px-4 py-2 text-left;
+  }
+  
+  .prose th {
+    @apply bg-muted font-semibold;
+  }
+  
+  /* Image styling */
+  .prose img {
+    @apply rounded-lg shadow-md;
+    margin: 1.5rem 0;
+  }
+  
+  /* Horizontal rule */
+  .prose hr {
+    @apply border-border my-8;
+  }
+}
