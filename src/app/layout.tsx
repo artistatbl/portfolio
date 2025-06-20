@@ -1,13 +1,10 @@
 import type { Metadata } from "next"
 import { Providers } from "../components/providers"
+import { generateMetadata } from "@/lib/seo"
 
 import "./globals.css"
-
-export const metadata: Metadata = {
-  title: "Your Name - Portfolio",
-  description: "Full Stack Developer & UI/UX Designer - Portfolio",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
-}
+ 
+export const metadata: Metadata = generateMetadata('home')
 
 export default function RootLayout({
   children,

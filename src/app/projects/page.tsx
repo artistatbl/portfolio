@@ -33,6 +33,27 @@ export default function Projects() {
       tech: "React, D3.js, OpenWeather API",
       url: "https://github.com/yourusername/weather-dashboard",
       demo: "https://yourweatherapp.com"
+    },
+    {
+      title: "Social Media Analytics",
+      description: "Analytics dashboard for social media performance tracking",
+      tech: "Next.js, Chart.js, MongoDB, Express",
+      url: "https://github.com/yourusername/social-analytics",
+      demo: "https://yoursocialanalytics.com"
+    },
+    {
+      title: "Recipe Finder App",
+      description: "Mobile-first recipe discovery app with meal planning",
+      tech: "React Native, Redux, Spoonacular API",
+      url: "https://github.com/yourusername/recipe-finder",
+      demo: "https://yourrecipeapp.com"
+    },
+    {
+      title: "Expense Tracker",
+      description: "Personal finance management with budget tracking and insights",
+      tech: "Vue.js, Nuxt.js, Supabase, Chart.js",
+      url: "https://github.com/yourusername/expense-tracker",
+      demo: "https://yourexpensetracker.com"
     }
   ]
 

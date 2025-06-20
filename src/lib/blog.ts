@@ -21,7 +21,9 @@ export interface BlogPostMeta {
 
 export async function getAllPosts(): Promise<BlogPostMeta[]> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog`)
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+      (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
+    const response = await fetch(`${baseUrl}/api/blog`)
     if (!response.ok) {
       throw new Error('Failed to fetch posts')
     }
@@ -34,7 +36,9 @@ export async function getAllPosts(): Promise<BlogPostMeta[]> {
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog?slug=${slug}`)
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+      (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
+    const response = await fetch(`${baseUrl}/api/blog?slug=${slug}`)
     if (!response.ok) {
       return null
     }
@@ -47,7 +51,9 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 
 export async function getAllPostSlugs(): Promise<string[]> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog?action=slugs`)
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+      (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
+    const response = await fetch(`${baseUrl}/api/blog?action=slugs`)
     if (!response.ok) {
       throw new Error('Failed to fetch slugs')
     }
