@@ -37,6 +37,7 @@ export function ThemeToggle() {
       width: 100vw;
       height: 100vh;
       z-index: 9999;
+      background: transparent;
       clip-path: circle(0% at top right);
       transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       pointer-events: none;
@@ -56,12 +57,12 @@ export function ThemeToggle() {
       } else {
         setTheme('dark')
       }
-    }, 400)
+    }, 100)
     
     // Remove overlay after animation
     setTimeout(() => {
       document.body.removeChild(overlay)
-    }, 800)
+    }, 100)
   }
 
   const getIcon = () => {
