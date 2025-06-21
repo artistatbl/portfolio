@@ -1,6 +1,6 @@
 ---
 title: "Tailwind CSS v4.0: A Revolutionary Performance Leap"
-date: "2025-6-21"
+date: "2024-12-20"
 excerpt: "Explore the groundbreaking features of Tailwind CSS v4.0, including 5x faster builds, modern CSS features, and a completely reimagined developer experience."
 author: "Jean Daly"
 tags: ["tailwindcss", "css", "frontend", "performance", "web-development"]
