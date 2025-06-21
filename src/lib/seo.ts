@@ -8,7 +8,7 @@ interface SEOConfig {
   canonical?: string
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://yourportfolio.com"
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://jeandaly.dev"
 const defaultOgImage = "/og-image.jpg"
 
 // Base metadata that applies to all pages
@@ -80,7 +80,7 @@ export function generateMetadata(pageKey: keyof typeof seoConfig, customConfig?:
       title: config.title,
       description: config.description,
       images: [config.ogImage || defaultOgImage],
-      creator: "@yourhandle", // Replace with your Twitter handle
+      creator: "@yvesdalyy", // Replace with your Twitter handle
     },
     alternates: {
       canonical: config.canonical || `${baseUrl}/${pageKey === 'home' ? '' : pageKey}`,
@@ -126,7 +126,7 @@ export function generateBlogPostMetadata(post: {
       title: post.title,
       description: post.description,
       images: [defaultOgImage],
-      creator: "@yourhandle", // Replace with your Twitter handle
+      creator: "@yvesdalyy", // Replace with your Twitter handle
     },
     alternates: {
       canonical: url,

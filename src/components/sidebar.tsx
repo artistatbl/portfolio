@@ -95,7 +95,7 @@ export function Sidebar() {
           <li className="flex justify-end items-center gap-2">
             <span className="text-muted-foreground hover:text-foreground transition-colors text-sm">twitter</span>
             <a 
-              href="https://twitter.com" 
+              href="https://twitter.com/yvesdalyy" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -106,7 +106,7 @@ export function Sidebar() {
           <li className="flex justify-end items-center gap-2">
             <span className="text-muted-foreground hover:text-foreground transition-colors text-sm">gitHub</span>
             <a 
-              href="https://github.com" 
+              href="https://github.com/artistatbl" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
