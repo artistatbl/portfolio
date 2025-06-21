@@ -431,4 +431,51 @@
   .prose hr {
     @apply border-border my-8;
   }
+
+  /* Mobile responsive code blocks */
+  @media (max-width: 768px) {
+    .prose pre[class*="language-"] {
+      overflow-x: auto;
+      white-space: pre;
+      word-wrap: normal;
+      max-width: 100%;
+      margin: 1rem -0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .prose code {
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .prose pre code {
+      white-space: pre;
+      word-break: normal;
+      overflow-wrap: normal;
+    }
+
+    .prose table {
+      overflow-x: auto;
+      display: block;
+      white-space: nowrap;
+    }
+
+    .prose {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+  }
+
+  /* Ensure horizontal scrolling for wide content */
+  .prose pre {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .prose table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
