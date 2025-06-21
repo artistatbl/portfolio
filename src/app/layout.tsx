@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Providers } from "../components/providers"
+import { ThemeToggle } from "../components/theme-toggle"
 import { generateMetadata } from "@/lib/seo"
 
 import "./globals.css"
@@ -12,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link 
           rel="alternate" 
@@ -23,7 +24,10 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <main className="bg-background">
-          <Providers>{children}</Providers>
+          <Providers>
+            {children}
+            <ThemeToggle />
+          </Providers>
         </main>
       </body>
     </html>

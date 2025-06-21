@@ -5,6 +5,7 @@ import { useMobile, useTablet } from '@/hooks/use-mobile'
 import { Twitter, Github, User, BookOpen, FolderOpen, Bookmark } from 'lucide-react'
 
 
+
 export function Sidebar() {
   const isMobile = useMobile()
   const isTablet = useTablet()
@@ -56,7 +57,7 @@ export function Sidebar() {
             </li>
           </ul>
           <div className="border-t border-border">
-            <ul className="flex justify-center items-center py-2 gap-6">
+            <ul className="flex justify-center items-center py-2 gap-4">
               <li>
                 <a 
                   href="https://twitter.com" 
@@ -81,6 +82,7 @@ export function Sidebar() {
                   <span className="text-sm font-medium">GitHub</span>
                 </a>
               </li>
+
             </ul>
           </div>
         </nav>
@@ -136,6 +138,7 @@ export function Sidebar() {
               <Github size={20} />
             </a>
           </li>
+
         </ul>
       </nav>
     </aside>
