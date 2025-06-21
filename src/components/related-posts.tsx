@@ -13,7 +13,7 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
   }
 
   return (
-    <section className="border-t border-border/50 pt-8 mt-8 max-w-7xl mx-auto">
+    <section className="border-t border-border/50 pt-8 mt-8 max-w-5xl mx-auto">
       <h2 className="text-xl font-semibold mb-6 text-foreground">
         Related Posts
       </h2>
