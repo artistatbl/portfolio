@@ -36,7 +36,6 @@ export function ThemeToggle() {
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: ${theme === 'dark' ? '#f5f5f5' : '#1a1a1a'};
       z-index: 9999;
       clip-path: circle(0% at top right);
       transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1);
