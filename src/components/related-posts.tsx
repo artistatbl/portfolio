@@ -13,11 +13,11 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
   }
 
   return (
-    <section className="border-t border-border/50 pt-8 mt-8">
+    <section className="border-t border-border/50 pt-8 mt-8 max-w-7xl mx-auto">
       <h2 className="text-xl font-semibold mb-6 text-foreground">
         Related Posts
       </h2>
-      <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 w-full">
         {posts.map((post) => (
           <Link
             key={post.slug}

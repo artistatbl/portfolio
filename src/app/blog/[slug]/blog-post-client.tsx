@@ -159,11 +159,19 @@ export function BlogPostClient({ meta, children, relatedPosts = [] }: BlogPostCl
         <article className="prose prose-neutral dark:prose-invert max-w-none prose-sm sm:prose-base lg:prose-lg prose-headings:scroll-mt-20 prose-img:rounded-lg prose-img:shadow-lg prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:overflow-x-auto">
           {children}
         </article>
+        </div>
 
-        {/* Related Posts Section */}
+      {/* Related Posts Section - Full width */}
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <RelatedPosts posts={relatedPosts} />
+      </div>
 
-        {/* Post footer */}
+      {/* Post footer - Back to constrained width */}
+      <div className={`w-full mx-auto py-8 ${
+        isMobile 
+          ? 'px-3 max-w-full' 
+          : 'max-w-xl px-3 sm:px-4 md:px-6 lg:px-8'
+      }`}>
         <footer className="border-t border-border/50 pt-6 mt-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <Link
@@ -180,7 +188,7 @@ export function BlogPostClient({ meta, children, relatedPosts = [] }: BlogPostCl
             </div>
           </div>
         </footer>
-        </div>
+      </div>
       </main>
     </div>
   )
