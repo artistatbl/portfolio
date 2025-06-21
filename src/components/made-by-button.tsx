@@ -23,7 +23,7 @@ export function MadeByButton() {
       title="Made by Jean Daly - Follow on Twitter"
       onClick={handleClick}
     >
-      made by jean
+      made by Jean
     </Button>
   )
 }
