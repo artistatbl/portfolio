@@ -9,7 +9,7 @@ interface SEOConfig {
 }
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://jeandaly.dev"
-const defaultOgImage = "/og-image.jpg"
+const defaultOgImage = "/og-image.png"
 
 // Base metadata that applies to all pages
 const baseMetadata = {
