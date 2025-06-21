@@ -5,8 +5,23 @@ import { generateMetadata } from '@/lib/seo'
 
 export const metadata: Metadata = generateMetadata('blog')
 
-export default async function Blog() {
-  const posts = await getAllPosts()
+interface BlogPageProps {
+  searchParams: Promise<{ page?: string }>
+}
 
-  return <BlogClient posts={posts} />
+export default async function Blog({ searchParams }: BlogPageProps) {
+  const params = await searchParams
+  const currentPage = parseInt(params.page || '1', 10)
+  const postsPerPage = 5
+  
+  const result = await getAllPosts(currentPage, postsPerPage)
+
+  return (
+    <BlogClient 
+      posts={result.posts} 
+      currentPage={currentPage}
+      totalPages={result.totalPages}
+      total={result.total}
+    />
+  )
 }

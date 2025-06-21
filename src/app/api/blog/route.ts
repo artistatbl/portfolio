@@ -36,7 +36,7 @@ export interface BlogPostMeta {
   readingTime: number
 }
 
-async function getAllPosts(): Promise<BlogPostMeta[]> {
+async function getAllPosts(page?: number, limit?: number): Promise<{ posts: BlogPostMeta[], total: number, totalPages: number }> {
   try {
     const fileNames = await readdir(postsDirectory)
     const allPostsData = await Promise.all(
@@ -62,16 +62,30 @@ async function getAllPosts(): Promise<BlogPostMeta[]> {
     )
 
     // Sort posts by date (newest first)
-    return allPostsData.sort((a, b) => {
+    const sortedPosts = allPostsData.sort((a, b) => {
       if (a.date < b.date) {
         return 1
       } else {
         return -1
       }
     })
+
+    const total = sortedPosts.length
+    
+    // If no pagination parameters, return all posts (for backward compatibility)
+    if (page === undefined || limit === undefined) {
+      return { posts: sortedPosts, total, totalPages: 1 }
+    }
+
+    const startIndex = (page - 1) * limit
+    const endIndex = startIndex + limit
+    const paginatedPosts = sortedPosts.slice(startIndex, endIndex)
+    const totalPages = Math.ceil(total / limit)
+
+    return { posts: paginatedPosts, total, totalPages }
   } catch (error) {
     console.error('Error reading blog posts:', error)
-    return []
+    return { posts: [], total: 0, totalPages: 0 }
   }
 }
 
@@ -115,11 +129,13 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const slug = searchParams.get('slug')
   const action = searchParams.get('action')
+  const page = searchParams.get('page')
+  const limit = searchParams.get('limit')
 
   try {
     if (action === 'slugs') {
-      const posts = await getAllPosts()
-      const slugs = posts.map(post => post.slug)
+      const result = await getAllPosts()
+      const slugs = result.posts.map(post => post.slug)
       return NextResponse.json(slugs)
     }
     
@@ -131,8 +147,12 @@ export async function GET(request: Request) {
       return NextResponse.json(post)
     }
     
-    const posts = await getAllPosts()
-    return NextResponse.json(posts)
+    // Handle pagination
+    const pageNum = page ? parseInt(page, 10) : undefined
+    const limitNum = limit ? parseInt(limit, 10) : undefined
+    
+    const result = await getAllPosts(pageNum, limitNum)
+    return NextResponse.json(result)
   } catch (error) {
     console.error('API Error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

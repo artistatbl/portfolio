@@ -19,18 +19,37 @@ export interface BlogPostMeta {
   readingTime: number
 }
 
-export async function getAllPosts(): Promise<BlogPostMeta[]> {
+export async function getAllPosts(page?: number, limit?: number): Promise<{ posts: BlogPostMeta[], total: number, totalPages: number }> {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
       (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
-    const response = await fetch(`${baseUrl}/api/blog`)
+    
+    let url = `${baseUrl}/api/blog`
+    const params = new URLSearchParams()
+    
+    if (page !== undefined) params.append('page', page.toString())
+    if (limit !== undefined) params.append('limit', limit.toString())
+    
+    if (params.toString()) {
+      url += `?${params.toString()}`
+    }
+    
+    const response = await fetch(url)
     if (!response.ok) {
       throw new Error('Failed to fetch posts')
     }
-    return await response.json()
+    
+    const result = await response.json()
+    
+    // Handle backward compatibility - if response is array, convert to new format
+    if (Array.isArray(result)) {
+      return { posts: result, total: result.length, totalPages: 1 }
+    }
+    
+    return result as { posts: BlogPostMeta[]; total: number; totalPages: number }
   } catch (error) {
-    console.error('Error fetching blog posts:', error)
-    return []
+    console.error('Error fetching posts:', error)
+    return { posts: [], total: 0, totalPages: 0 }
   }
 }
 
@@ -75,14 +94,14 @@ export function formatDate(dateString: string): string {
 
 export function getPostsByTag(tag: string): Promise<BlogPostMeta[]> {
   return getAllPosts().then(posts => 
-    posts.filter(post => post.tags.includes(tag))
+    posts.posts.filter(post => post.tags.includes(tag))
   )
 }
 
 export function getAllTags(): Promise<string[]> {
   return getAllPosts().then(posts => {
     const tags = new Set<string>()
-    posts.forEach(post => {
+    posts.posts.forEach(post => {
       post.tags.forEach(tag => tags.add(tag))
     })
     return Array.from(tags).sort()

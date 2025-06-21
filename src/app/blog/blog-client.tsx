@@ -4,13 +4,128 @@ import { PageLayout } from '../../components/page-layout'
 import { formatDate, type BlogPostMeta } from '@/lib/blog'
 import { Badge } from '@/components/ui/badge'
 import { RSSLink } from '@/components/rss-link'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
 import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 interface BlogClientProps {
   posts: BlogPostMeta[]
+  currentPage: number
+  totalPages: number
+  total: number
 }
 
-export function BlogClient({ posts }: BlogClientProps) {
+export function BlogClient({ posts, currentPage, totalPages, total }: BlogClientProps) {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString())
+    if (page === 1) {
+      params.delete('page')
+    } else {
+      params.set('page', page.toString())
+    }
+    const queryString = params.toString()
+    const url = queryString ? `/blog?${queryString}` : '/blog'
+    router.push(url)
+  }
+
+  const renderPaginationItems = () => {
+    const items = []
+    const maxVisiblePages = 5
+    
+    if (totalPages <= maxVisiblePages) {
+      // Show all pages if total pages is small
+      for (let i = 1; i <= totalPages; i++) {
+        items.push(
+          <PaginationItem key={i}>
+            <PaginationLink
+              onClick={() => handlePageChange(i)}
+              isActive={currentPage === i}
+              className="cursor-pointer"
+            >
+              {i}
+            </PaginationLink>
+          </PaginationItem>
+        )
+      }
+    } else {
+      // Show first page
+      items.push(
+        <PaginationItem key={1}>
+          <PaginationLink
+            onClick={() => handlePageChange(1)}
+            isActive={currentPage === 1}
+            className="cursor-pointer"
+          >
+            1
+          </PaginationLink>
+        </PaginationItem>
+      )
+
+      // Show ellipsis if needed
+      if (currentPage > 3) {
+        items.push(
+          <PaginationItem key="ellipsis1">
+            <PaginationEllipsis />
+          </PaginationItem>
+        )
+      }
+
+      // Show pages around current page
+      const start = Math.max(2, currentPage - 1)
+      const end = Math.min(totalPages - 1, currentPage + 1)
+      
+      for (let i = start; i <= end; i++) {
+        items.push(
+          <PaginationItem key={i}>
+            <PaginationLink
+              onClick={() => handlePageChange(i)}
+              isActive={currentPage === i}
+              className="cursor-pointer"
+            >
+              {i}
+            </PaginationLink>
+          </PaginationItem>
+        )
+      }
+
+      // Show ellipsis if needed
+      if (currentPage < totalPages - 2) {
+        items.push(
+          <PaginationItem key="ellipsis2">
+            <PaginationEllipsis />
+          </PaginationItem>
+        )
+      }
+
+      // Show last page
+      if (totalPages > 1) {
+        items.push(
+          <PaginationItem key={totalPages}>
+            <PaginationLink
+              onClick={() => handlePageChange(totalPages)}
+              isActive={currentPage === totalPages}
+              className="cursor-pointer"
+            >
+              {totalPages}
+            </PaginationLink>
+          </PaginationItem>
+        )
+      }
+    }
+
+    return items
+  }
 
   return (
     <PageLayout>
@@ -81,6 +196,39 @@ export function BlogClient({ posts }: BlogClientProps) {
           {posts.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground text-sm md:text-base">No blog posts found. Check back soon!</p>
+            </div>
+          )}
+          
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="mt-12 space-y-4">
+              <div className="text-center text-sm text-muted-foreground">
+                Showing {((currentPage - 1) * 5) + 1} to {Math.min(currentPage * 5, total)} of {total} posts
+              </div>
+              
+              <Pagination>
+                <PaginationContent>
+                  {currentPage > 1 && (
+                    <PaginationItem>
+                      <PaginationPrevious
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        className="cursor-pointer"
+                      />
+                    </PaginationItem>
+                  )}
+                  
+                  {renderPaginationItems()}
+                  
+                  {currentPage < totalPages && (
+                    <PaginationItem>
+                      <PaginationNext
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        className="cursor-pointer"
+                      />
+                    </PaginationItem>
+                  )}
+                </PaginationContent>
+              </Pagination>
             </div>
           )}
       </div>
