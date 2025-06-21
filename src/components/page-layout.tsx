@@ -17,7 +17,7 @@ export function PageLayout({ children }: PageLayoutProps) {
       
       <Sidebar />
       
-      <main className="flex-1 py-8 px-4 pb-20 md:py-20 md:px-8 max-w-xl mx-auto">
+      <main className="flex-1 py-8 px-4 pb-48 md:py-20 md:px-8 md:pb-20 max-w-xl mx-auto">
         {children}
       </main>
     </div>

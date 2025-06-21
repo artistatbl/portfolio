@@ -97,7 +97,7 @@ export function BlogPostClient({ meta, children }: BlogPostClientProps) {
       <Sidebar />
       
       <main className={`flex-1 w-full ${
-        isMobile ? 'pb-24' : 'md:mr-32 lg:mr-40'
+        isMobile ? 'pb-48' : 'md:mr-32 lg:mr-40'
       }`}>
         <div className={`w-full mx-auto py-8 md:py-20 ${
           isMobile 

@@ -17,9 +17,9 @@ export function Sidebar() {
 
   if (isMobile) {
     return (
-      <aside className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-sm px-4 mr-24">
-        <nav className="bg-background/95 backdrop-blur-md border border-border rounded-2xl shadow-lg">
-          <ul className="flex justify-around items-center py-3">
+      <aside className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-sm px-4">
+        <nav className="bg-background/70 backdrop-blur-md border border-border rounded-2xl shadow-lg hover:bg-background/95 transition-all duration-200">
+          <ul className="flex justify-around items-center py-2">
             <li>
               <Link 
                 href="/" 
@@ -27,7 +27,7 @@ export function Sidebar() {
                 aria-label="About"
               >
                 <User size={20} />
-                <span className="text-xs font-medium">Aboutsss</span>
+                <span className="text-xs font-medium">About</span>
               </Link>
             </li>
             <li>
@@ -62,7 +62,7 @@ export function Sidebar() {
             </li>
           </ul>
           <div className="border-t border-border">
-            <ul className="flex justify-center items-center py-2 gap-4">
+            <ul className="flex justify-center items-center py-1 gap-4">
               <li>
                 <a 
                   href="https://twitter.com" 
