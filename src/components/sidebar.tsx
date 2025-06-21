@@ -17,79 +17,50 @@ export function Sidebar() {
 
   if (isMobile) {
     return (
-      <aside className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-sm px-4">
-        <nav className="bg-background/70 backdrop-blur-md border border-border rounded-2xl shadow-lg hover:bg-background/95 transition-all duration-200">
-          <ul className="flex justify-around items-center py-2">
+      <aside className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+        <nav className="bg-background border border-border rounded-lg shadow-sm px-4 py-2">
+          <ul className="flex items-center gap-6">
             <li>
               <Link 
                 href="/" 
-                className="flex flex-col items-center gap-1 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 min-w-[48px] min-h-[48px] justify-center"
+                className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="About"
               >
                 <User size={20} />
-                <span className="text-xs font-medium">About</span>
+                <span className="text-xs">About</span>
               </Link>
             </li>
             <li>
               <Link 
                 href="/blog" 
-                className="flex flex-col items-center gap-1 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 min-w-[48px] min-h-[48px] justify-center"
+                className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Blog"
               >
                 <BookOpen size={20} />
-                <span className="text-xs font-medium">Blog</span>
+                <span className="text-xs">Blog</span>
               </Link>
             </li>
             <li>
               <Link 
                 href="/projects" 
-                className="flex flex-col items-center gap-1 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 min-w-[48px] min-h-[48px] justify-center"
+                className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Projects"
               >
                 <FolderOpen size={20} />
-                <span className="text-xs font-medium">Projects</span>
+                <span className="text-xs">Projects</span>
               </Link>
             </li>
             <li>
               <Link 
                 href="/bookmarks" 
-                className="flex flex-col items-center gap-1 p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 min-w-[48px] min-h-[48px] justify-center"
+                className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Bookmarks"
               >
                 <Bookmark size={20} />
-                <span className="text-xs font-medium">Bookmarks</span>
+                <span className="text-xs">Bookmarks</span>
               </Link>
             </li>
           </ul>
-          <div className="border-t border-border">
-            <ul className="flex justify-center items-center py-1 gap-4">
-              <li>
-                <a 
-                  href="https://twitter.com" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-                  aria-label="Twitter"
-                >
-                  <Twitter size={18} />
-                  <span className="text-sm font-medium">Twitter</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://github.com" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-                  aria-label="GitHub"
-                >
-                  <Github size={18} />
-                  <span className="text-sm font-medium">GitHub</span>
-                </a>
-              </li>
-
-            </ul>
-          </div>
         </nav>
       </aside>
     )
