@@ -107,3 +107,46 @@ export function getAllTags(): Promise<string[]> {
     return Array.from(tags).sort()
   })
 }
+
+export async function getRelatedPosts(currentSlug: string, limit: number = 3): Promise<BlogPostMeta[]> {
+  try {
+    const currentPost = await getPostBySlug(currentSlug)
+    if (!currentPost) return []
+    
+    const allPosts = await getAllPosts()
+    const otherPosts = allPosts.posts.filter(post => post.slug !== currentSlug)
+    
+    // Calculate similarity score based on shared tags
+    const postsWithScore = otherPosts.map(post => {
+      const sharedTags = post.tags.filter(tag => currentPost.tags.includes(tag))
+      const score = sharedTags.length
+      return { post, score }
+    })
+    
+    // Sort by score (most related first), then by date (newest first)
+    const sortedPosts = postsWithScore
+      .filter(item => item.score > 0) // Only posts with shared tags
+      .sort((a, b) => {
+        if (a.score !== b.score) {
+          return b.score - a.score // Higher score first
+        }
+        return new Date(b.post.date).getTime() - new Date(a.post.date).getTime() // Newer first
+      })
+    
+    // If we don't have enough related posts with shared tags, fill with recent posts
+    const relatedPosts = sortedPosts.map(item => item.post)
+    if (relatedPosts.length < limit) {
+      const recentPosts = otherPosts
+        .filter(post => !relatedPosts.some(rp => rp.slug === post.slug))
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, limit - relatedPosts.length)
+      
+      relatedPosts.push(...recentPosts)
+    }
+    
+    return relatedPosts.slice(0, limit)
+  } catch (error) {
+    console.error('Error fetching related posts:', error)
+    return []
+  }
+}

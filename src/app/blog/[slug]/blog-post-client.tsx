@@ -3,7 +3,7 @@
 import { Sidebar } from '../../../components/sidebar'
 import { formatDate, type BlogPostMeta } from '@/lib/blog'
 import { Badge } from '@/components/ui/badge'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Clock } from 'lucide-react'
 import Link from 'next/link'
 import { ReactNode, useEffect } from 'react'
 import { useMobile } from '@/hooks/use-mobile'
@@ -26,9 +26,10 @@ import 'prismjs/components/prism-sql'
 interface BlogPostClientProps {
   meta: BlogPostMeta
   children: ReactNode
+  relatedPosts?: BlogPostMeta[]
 }
 
-export function BlogPostClient({ meta, children }: BlogPostClientProps) {
+export function BlogPostClient({ meta, children, relatedPosts = [] }: BlogPostClientProps) {
   const isMobile = useMobile()
   
   useEffect(() => {
@@ -157,6 +158,61 @@ export function BlogPostClient({ meta, children }: BlogPostClientProps) {
         <article className="prose prose-neutral dark:prose-invert max-w-none prose-sm sm:prose-base lg:prose-lg prose-headings:scroll-mt-20 prose-img:rounded-lg prose-img:shadow-lg prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:overflow-x-auto">
           {children}
         </article>
+
+        {/* Related Posts Section */}
+        {relatedPosts.length > 0 && (
+          <section className="border-t border-border/50 pt-8 mt-8">
+            <h2 className="text-xl font-semibold mb-6 text-foreground">
+              Related Posts
+            </h2>
+            <div className="grid gap-4 sm:gap-6">
+              {relatedPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group block p-4 rounded-lg border border-border/50 hover:border-border transition-all duration-200 hover:shadow-sm bg-card/50"
+                >
+                  <div className="space-y-2">
+                    <h3 className="font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <time>{formatDate(post.date)}</time>
+                      {post.readingTime && (
+                        <>
+                          <span>•</span>
+                          <div className="flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            <span>{post.readingTime} min</span>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {post.tags && post.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-1">
+                        {post.tags.slice(0, 3).map((tag) => (
+                          <Badge
+                            key={tag}
+                            variant="outline"
+                            className="text-xs px-1.5 py-0.5 h-auto"
+                          >
+                            #{tag}
+                          </Badge>
+                        ))}
+                        {post.tags.length > 3 && (
+                          <span className="text-xs text-muted-foreground">+{post.tags.length - 3}</span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Post footer */}
         <footer className="border-t border-border/50 pt-6 mt-8">

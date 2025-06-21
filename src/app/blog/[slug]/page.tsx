@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getPostBySlug, getAllPostSlugs } from '@/lib/blog'
+import { getPostBySlug, getAllPostSlugs, getRelatedPosts } from '@/lib/blog'
 import { BlogPostClient } from './blog-post-client'
 import { notFound } from 'next/navigation'
 import { generateBlogPostMetadata } from '@/lib/seo'
@@ -46,8 +46,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
+  const relatedPosts = await getRelatedPosts(slug, 3)
+
   return (
-    <BlogPostClient meta={post}>
+    <BlogPostClient meta={post} relatedPosts={relatedPosts}>
       <div dangerouslySetInnerHTML={{ __html: post.content }} />
     </BlogPostClient>
   )
