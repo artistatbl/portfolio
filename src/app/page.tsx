@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <PageLayout>
       <div>
-          <h1 className="font-extrabold mb-6 tracking-tight text-3xl md:text-5xl lg:text-6xl">Jean Daly</h1>
+          <h1 className="font-extrabold mb-6 tracking-tight text-2xl md:text-4xl lg:text-5xl">Jean Daly</h1>
           <p className="text-muted-foreground mb-8 text-sm md:mb-16 md:text-base">I teach developers how to build the future</p>
           
           <section className="mb-8 md:mb-16">

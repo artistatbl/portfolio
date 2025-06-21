@@ -67,33 +67,33 @@ export function Sidebar() {
   }
 
   return (
-    <aside className={`fixed top-20 w-auto ${
+    <aside className={`fixed top-16 mr-20 w-auto ${
       isTablet ? 'right-4' : 'right-1/4'
     }`}>
-      <nav>
+      <nav className='text-sm'>
         <ul className="space-y-4 flex flex-col items-end">
           <li className="flex justify-end">
             <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right">
-              About
+              about
             </Link>
           </li>
           <li className="flex justify-end">
             <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right">
-              Blog
+              blog
             </Link>
           </li>
           <li className="flex justify-end">
             <Link href="/projects" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right">
-              Projects
+              projects
             </Link>
           </li>
           <li className="flex justify-end">
             <Link href="/bookmarks" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right">
-              Bookmarks
+              bookmarks
             </Link>
           </li>
           <li className="flex justify-end items-center gap-2">
-            <span className="text-muted-foreground hover:text-foreground transition-colors text-sm">Twitter</span>
+            <span className="text-muted-foreground hover:text-foreground transition-colors text-sm">twitter</span>
             <a 
               href="https://twitter.com" 
               target="_blank"
@@ -104,7 +104,7 @@ export function Sidebar() {
             </a>
           </li>
           <li className="flex justify-end items-center gap-2">
-            <span className="text-muted-foreground hover:text-foreground transition-colors text-sm">GitHub</span>
+            <span className="text-muted-foreground hover:text-foreground transition-colors text-sm">gitHub</span>
             <a 
               href="https://github.com" 
               target="_blank"
