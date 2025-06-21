@@ -1,10 +1,25 @@
 'use client'
 
 import { PageLayout } from '../../components/page-layout'
-import { useMobile } from '@/hooks/use-mobile'
+import { VcsIcon, CursorIcon, DesignIcon, FrameworkIcon, ProductivityIcon } from '@/components/icons'
 
 export default function Bookmarks() {
-  const isMobile = useMobile()
+  
+  const getIconForCategory = (category: string) => {
+    switch (category) {
+      case "Development Tools":
+        return VcsIcon
+      case "Design Tools":
+        return DesignIcon
+      case "Frameworks & Libraries":
+        return FrameworkIcon
+      case "Productivity":
+        return ProductivityIcon
+      default:
+        return VcsIcon
+    }
+  }
+  
   const categories = {
     "Development Tools": [
       { name: "VS Code", description: "Code editor", url: "https://code.visualstudio.com" },
@@ -33,61 +48,46 @@ export default function Bookmarks() {
   return (
     <PageLayout>
       <div>
-          <h1 className={`font-bold text-foreground mb-8 ${
-            isMobile ? 'text-2xl' : 'text-4xl'
-          }`}>Bookmarks</h1>
-          <p className={`text-muted-foreground ${
-            isMobile ? 'mb-8 text-sm' : 'mb-12'
-          }`}>Software and tools I use daily</p>
+          <h1 className="font-bold text-foreground mb-8 text-2xl md:text-4xl">Bookmarks</h1>
+          <p className="text-muted-foreground mb-8 text-sm md:mb-12 md:text-base">Software and tools I use daily</p>
           
-          <div className={isMobile ? 'space-y-8' : 'space-y-12'}>
-            {Object.entries(categories).map(([category, tools]) => (
-              <div key={category}>
-                <h2 className={`font-semibold text-foreground mb-6 ${
-                  isMobile ? 'text-lg' : 'text-2xl'
-                }`}>{category}</h2>
-                <div className={`grid gap-3 ${
-                  isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'
-                }`}>
+          <div className="space-y-8 md:space-y-12">
+            {Object.entries(categories).map(([category, tools]) => {
+              const IconComponent = getIconForCategory(category)
+              return (
+                <div key={category}>
+                  <h2 className="font-semibold text-foreground mb-6 text-lg md:text-2xl">{category}</h2>
+                  <div className="grid gap-3 grid-cols-1 md:grid-cols-2">
                   {tools.map((tool, index) => (
                     <a 
                       key={index}
                       href={tool.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`group block p-5 rounded-xl border border-border/40 bg-gradient-to-br from-card/20 to-card/40 hover:from-card/40 hover:to-card/70 hover:border-border/80 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 ${
-                        isMobile ? '' : 'hover:-translate-y-1 hover:scale-[1.02]'
-                      }`}
+                      className="group block p-5 rounded-xl border border-border/40 bg-gradient-to-br from-card/20 to-card/40 hover:from-card/40 hover:to-card/70 hover:border-border/80 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 md:hover:-translate-y-1 md:hover:scale-[1.02]"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1">
-                          <h3 className={`font-medium text-foreground group-hover:text-primary transition-colors ${
-                            isMobile ? 'text-sm' : 'text-base'
-                          }`}>
+                          <h3 className="font-medium text-foreground group-hover:text-primary transition-colors text-sm md:text-base">
                             {tool.name}
                           </h3>
-                          <p className={`text-muted-foreground mt-1 ${
-                            isMobile ? 'text-xs' : 'text-sm'
-                          }`}>
+                          <p className="text-muted-foreground mt-1 text-xs md:text-sm">
                             {tool.description}
                           </p>
                         </div>
                         <div className="w-8 h-8 rounded-full bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-colors flex-shrink-0">
-                           <svg 
-                             className="w-4 h-4 text-primary/70 group-hover:text-primary transition-colors" 
-                             fill="none" 
-                             stroke="currentColor" 
-                             viewBox="0 0 24 24"
-                           >
-                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                           </svg>
-                         </div>
+                          <IconComponent 
+                            className="text-primary/70 group-hover:text-primary transition-colors" 
+                            size={16}
+                          />
+                        </div>
                       </div>
                     </a>
                   ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
       </div>
     </PageLayout>

@@ -1,7 +1,7 @@
 'use client'
 
 import { Sidebar } from './sidebar'
-import { useMobile, useTablet } from '@/hooks/use-mobile'
+
 import { ReactNode } from 'react'
 
 interface PageLayoutProps {
@@ -9,8 +9,7 @@ interface PageLayoutProps {
 }
 
 export function PageLayout({ children }: PageLayoutProps) {
-  const isMobile = useMobile()
-  const isTablet = useTablet()
+
 
   return (
     <div className="min-h-screen flex justify-center items-center">
@@ -18,9 +17,7 @@ export function PageLayout({ children }: PageLayoutProps) {
       
       <Sidebar />
       
-      <main className={`flex-1  ${
-isMobile ? 'py-8 px-4 pb-20 max-w-xl mx-auto' : isTablet ? 'py-20 px-8 max-w-xl mx-auto ' : 'py-20 px-8 max-w-xl mx-auto '
-      }`}>
+      <main className="flex-1 py-8 px-4 pb-20 md:py-20 md:px-8 max-w-xl mx-auto">
         {children}
       </main>
     </div>

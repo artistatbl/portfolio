@@ -12,7 +12,7 @@ export function Sidebar() {
 
   if (isMobile) {
     return (
-      <aside className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-sm px-4">
+      <aside className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-sm px-4 mr-24">
         <nav className="bg-background/95 backdrop-blur-md border border-border rounded-2xl shadow-lg">
           <ul className="flex justify-around items-center py-3">
             <li>
@@ -22,7 +22,7 @@ export function Sidebar() {
                 aria-label="About"
               >
                 <User size={20} />
-                <span className="text-xs font-medium">About</span>
+                <span className="text-xs font-medium">Aboutsss</span>
               </Link>
             </li>
             <li>

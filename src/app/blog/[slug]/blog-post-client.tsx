@@ -1,11 +1,11 @@
 'use client'
 
-import { Sidebar } from '../../../components/sidebar'
-import { useMobile, useTablet } from '@/hooks/use-mobile'
-import { formatDate, type BlogPost } from '@/lib/blog'
-import Link from 'next/link'
+import { PageLayout } from '../../../components/page-layout'
+import { formatDate, type BlogPostMeta } from '@/lib/blog'
+import { Badge } from '@/components/ui/badge'
 import { ArrowLeft } from 'lucide-react'
-import { useEffect } from 'react'
+import Link from 'next/link'
+import { ReactNode, useEffect } from 'react'
 import Prism from 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'prismjs/components/prism-javascript'
@@ -23,13 +23,11 @@ import 'prismjs/components/prism-rust'
 import 'prismjs/components/prism-sql'
 
 interface BlogPostClientProps {
-  post: BlogPost
+  meta: BlogPostMeta
+  children: ReactNode
 }
 
-export function BlogPostClient({ post }: BlogPostClientProps) {
-  const isMobile = useMobile()
-  const isTablet = useTablet()
-
+export function BlogPostClient({ meta, children }: BlogPostClientProps) {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       Prism.highlightAll()
@@ -93,106 +91,85 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
         wrapper.appendChild(copyButton)
       })
     }
-  }, [post.content])
+  }, [children])
 
   return (
-    <div className="min-h-screen flex justify-center items-start">
-      <div className="absolute inset-0 -z-10 opacity-50 mix-blend-soft-light bg-[url('/noise.svg')] [mask-image:radial-gradient(ellipse_at_center,black,transparent)]" />
-      
-      <Sidebar />
-      
-      <main className={`mx-auto ${
-        isMobile ? 'py-8 px-4 pb-20 max-w-2xl' : isTablet ? 'py-20 px-8 max-w-xl mr-32' : 'py-20 px-8 max-w-2xl'
-      }`}>
-        <div>
-          {/* Back to blog link */}
-          <Link 
-            href="/blog" 
-            className={`inline-flex items-center text-muted-foreground hover:text-foreground transition-all duration-200 hover:translate-x-[-2px] mb-8 ${
-              isMobile ? 'text-sm' : 'text-base'
-            }`}
-          >
-            <ArrowLeft className={`mr-2 transition-transform duration-200 ${
-              isMobile ? 'h-4 w-4' : 'h-5 w-5'
-            }`} />
-            Back to Blog
-          </Link>
+    <PageLayout>
+      <div className="w-full max-w-4xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        {/* Back to blog link */}
+        <Link 
+          href="/blog" 
+          className="inline-flex items-center text-muted-foreground hover:text-foreground transition-all duration-200 hover:translate-x-[-2px] mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base"
+        >
+          <ArrowLeft className="mr-2 transition-transform duration-200 h-4 w-4 sm:h-5 sm:w-5" />
+          Back to Blog
+        </Link>
+        
+        {/* Post header */}
+        <header className="border-b border-border/50 pb-4 sm:pb-6 md:pb-8 mb-4 sm:mb-6 md:mb-8 lg:mb-12">
+          <h1 className="font-bold text-foreground leading-tight text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-3 sm:mb-4 md:mb-6">{meta.title}</h1>
           
-          {/* Post header */}
-          <header className={`border-b border-border/50 pb-8 ${
-            isMobile ? 'mb-8' : 'mb-12'
-          }`}>
-            <h1 className={`font-bold text-foreground leading-tight ${
-              isMobile ? 'text-2xl mb-4' : 'text-4xl mb-6'
-            }`}>{post.title}</h1>
-            
-            <div className="flex flex-col space-y-3">
-              <div className="flex items-center space-x-4">
-                <time className={`text-muted-foreground font-medium ${
-                  isMobile ? 'text-sm' : 'text-base'
-                }`}>
-                  {formatDate(post.date)}
-                </time>
-                {post.author && (
-                  <>
-                    <span className="text-muted-foreground/50">•</span>
-                    <span className={`text-muted-foreground ${
-                      isMobile ? 'text-sm' : 'text-base'
-                    }`}>
-                      by {post.author}
-                    </span>
-                  </>
-                )}
-              </div>
-              
-              {post.tags && post.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className={`bg-muted/80 text-muted-foreground px-3 py-1 rounded-full border border-border/50 hover:bg-muted transition-colors ${
-                        isMobile ? 'text-xs' : 'text-sm'
-                      }`}
-                    >
-                      #{tag}
-                    </span>
-                  ))}
+          <div className="flex flex-col space-y-3">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2 md:gap-4">
+              <time className="text-muted-foreground font-medium text-xs sm:text-sm md:text-base">
+                {formatDate(meta.date)}
+              </time>
+              {meta.author && (
+                <div className="flex items-center gap-2">
+                  <span className="text-muted-foreground/50 hidden sm:inline">•</span>
+                  <span className="text-muted-foreground text-xs sm:text-sm md:text-base">
+                    by {meta.author}
+                  </span>
+                </div>
+              )}
+              {meta.readingTime && (
+                <div className="flex items-center gap-2">
+                  <span className="text-muted-foreground/50 hidden sm:inline">•</span>
+                  <span className="text-muted-foreground text-xs sm:text-sm md:text-base">
+                    {meta.readingTime} min read
+                  </span>
                 </div>
               )}
             </div>
-          </header>
-          
-          {/* Post content */}
-          <article 
-            className={`prose prose-neutral dark:prose-invert max-w-none ${
-              isMobile ? 'prose-sm' : 'prose-lg'
-            }`}
-            dangerouslySetInnerHTML={{ __html: post.content }}
-            suppressHydrationWarning={true}
-          />
-          
-          {/* Post footer */}
-          <footer className={`border-t border-border/50 pt-8 mt-12 ${
-            isMobile ? 'text-sm' : 'text-base'
-          }`}>
-            <div className="flex items-center justify-between">
-              <Link 
-                href="/blog" 
-                className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <ArrowLeft className={`mr-2 ${
-                  isMobile ? 'h-4 w-4' : 'h-5 w-5'
-                }`} />
-                Back to all posts
-              </Link>
-              
-              <div className="text-muted-foreground">
-                Published {formatDate(post.date)}
+            
+            {meta.tags && meta.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1 sm:gap-1.5 md:gap-2">
+                {meta.tags.map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant="outline"
+                    className="text-xs sm:text-sm px-1.5 py-0.5 sm:px-2 sm:py-1"
+                  >
+                    #{tag}
+                  </Badge>
+                ))}
               </div>
+            )}
+          </div>
+        </header>
+        
+        {/* Post content */}
+        <article className="prose prose-neutral dark:prose-invert max-w-none prose-sm sm:prose-base md:prose-lg lg:prose-xl prose-headings:scroll-mt-20 prose-img:rounded-lg prose-img:shadow-lg prose-pre:bg-muted prose-pre:border prose-pre:border-border overflow-hidden break-words">
+          {children}
+        </article>
+        
+        {/* Post footer */}
+        <footer className="border-t border-border/50 pt-4 sm:pt-6 md:pt-8 mt-6 sm:mt-8 md:mt-12 text-xs sm:text-sm md:text-base">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
+            <Link 
+              href="/blog" 
+              className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors w-fit"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+              Back to all posts
+            </Link>
+            
+            <div className="text-muted-foreground text-xs sm:text-sm">
+              Published {formatDate(meta.date)}
             </div>
-          </footer>
-        </div>
-      </main>
-    </div>
+          </div>
+        </footer>
+      </div>
+    </PageLayout>
   )
 }

@@ -1,0 +1,5 @@
+export { VcsIcon } from './vcs'
+export { CursorIcon } from './cursor'
+export { DesignIcon } from './design'
+export { FrameworkIcon } from './framework'
+export { ProductivityIcon } from './productivity'

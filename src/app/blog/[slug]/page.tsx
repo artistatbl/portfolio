@@ -4,6 +4,7 @@ import { BlogPostClient } from './blog-post-client'
 import { notFound } from 'next/navigation'
 import { generateBlogPostMetadata } from '@/lib/seo'
 
+
 interface BlogPostPageProps {
   params: Promise<{
     slug: string
@@ -45,5 +46,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
-  return <BlogPostClient post={post} />
+  return (
+    <BlogPostClient meta={post}>
+      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+    </BlogPostClient>
+  )
 }
