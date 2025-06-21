@@ -4,6 +4,7 @@ import path from 'path'
 import matter from 'gray-matter'
 import { remark } from 'remark'
 import html from 'remark-html'
+import remarkGfm from 'remark-gfm'
 
 const postsDirectory = path.join(process.cwd(), 'src/content/blog')
 
@@ -105,6 +106,7 @@ async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 
     // Use remark to convert markdown into HTML string
     const processedContent = await remark()
+      .use(remarkGfm)
       .use(html)
       .process(matterResult.content)
     const contentHtml = processedContent.toString()
