@@ -12,7 +12,7 @@ interface BlogPageProps {
 export default async function Blog({ searchParams }: BlogPageProps) {
   const params = await searchParams
   const currentPage = parseInt(params.page || '1', 10)
-  const postsPerPage = 5
+  const postsPerPage = 3
   
   const result = await getAllPosts(currentPage, postsPerPage)
 

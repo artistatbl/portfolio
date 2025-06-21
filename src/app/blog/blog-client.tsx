@@ -47,30 +47,30 @@ export function BlogClient({ posts, currentPage, totalPages, total }: BlogClient
       // Show all pages if total pages is small
       for (let i = 1; i <= totalPages; i++) {
         items.push(
-          <PaginationItem key={i}>
-            <PaginationLink
-              onClick={() => handlePageChange(i)}
-              isActive={currentPage === i}
-              className="cursor-pointer"
-            >
-              {i}
-            </PaginationLink>
-          </PaginationItem>
-        )
+           <PaginationItem key={i}>
+             <PaginationLink
+               onClick={() => handlePageChange(i)}
+               isActive={currentPage === i}
+               className="cursor-pointer select-none"
+             >
+               {i}
+             </PaginationLink>
+           </PaginationItem>
+         )
       }
     } else {
       // Show first page
       items.push(
-        <PaginationItem key={1}>
-          <PaginationLink
-            onClick={() => handlePageChange(1)}
-            isActive={currentPage === 1}
-            className="cursor-pointer"
-          >
-            1
-          </PaginationLink>
-        </PaginationItem>
-      )
+         <PaginationItem key={1}>
+           <PaginationLink
+             onClick={() => handlePageChange(1)}
+             isActive={currentPage === 1}
+             className="cursor-pointer select-none"
+           >
+             1
+           </PaginationLink>
+         </PaginationItem>
+       )
 
       // Show ellipsis if needed
       if (currentPage > 3) {
@@ -86,18 +86,18 @@ export function BlogClient({ posts, currentPage, totalPages, total }: BlogClient
       const end = Math.min(totalPages - 1, currentPage + 1)
       
       for (let i = start; i <= end; i++) {
-        items.push(
-          <PaginationItem key={i}>
-            <PaginationLink
-              onClick={() => handlePageChange(i)}
-              isActive={currentPage === i}
-              className="cursor-pointer"
-            >
-              {i}
-            </PaginationLink>
-          </PaginationItem>
-        )
-      }
+         items.push(
+           <PaginationItem key={i}>
+             <PaginationLink
+               onClick={() => handlePageChange(i)}
+               isActive={currentPage === i}
+               className="cursor-pointer select-none"
+             >
+               {i}
+             </PaginationLink>
+           </PaginationItem>
+         )
+       }
 
       // Show ellipsis if needed
       if (currentPage < totalPages - 2) {
@@ -111,16 +111,16 @@ export function BlogClient({ posts, currentPage, totalPages, total }: BlogClient
       // Show last page
       if (totalPages > 1) {
         items.push(
-          <PaginationItem key={totalPages}>
-            <PaginationLink
-              onClick={() => handlePageChange(totalPages)}
-              isActive={currentPage === totalPages}
-              className="cursor-pointer"
-            >
-              {totalPages}
-            </PaginationLink>
-          </PaginationItem>
-        )
+           <PaginationItem key={totalPages}>
+             <PaginationLink
+               onClick={() => handlePageChange(totalPages)}
+               isActive={currentPage === totalPages}
+               className="cursor-pointer select-none"
+             >
+               {totalPages}
+             </PaginationLink>
+           </PaginationItem>
+         )
       }
     }
 
@@ -201,18 +201,18 @@ export function BlogClient({ posts, currentPage, totalPages, total }: BlogClient
           
           {/* Pagination Controls */}
           {totalPages > 1 && (
-            <div className="mt-12 space-y-4">
-              <div className="text-center text-sm text-muted-foreground">
-                Showing {((currentPage - 1) * 5) + 1} to {Math.min(currentPage * 5, total)} of {total} posts
-              </div>
+            <div className="mt-12 space-y-6">
+              <div className="text-center text-xs md:text-sm text-muted-foreground">
+                 Showing {((currentPage - 1) * 5) + 1} to {Math.min(currentPage * 5, total)} of {total} posts
+               </div>
               
-              <Pagination>
-                <PaginationContent>
+              <Pagination className="px-4">
+                <PaginationContent className="flex-wrap justify-center">
                   {currentPage > 1 && (
                     <PaginationItem>
                       <PaginationPrevious
                         onClick={() => handlePageChange(currentPage - 1)}
-                        className="cursor-pointer"
+                        className="cursor-pointer select-none"
                       />
                     </PaginationItem>
                   )}
@@ -223,7 +223,7 @@ export function BlogClient({ posts, currentPage, totalPages, total }: BlogClient
                     <PaginationItem>
                       <PaginationNext
                         onClick={() => handlePageChange(currentPage + 1)}
-                        className="cursor-pointer"
+                        className="cursor-pointer select-none"
                       />
                     </PaginationItem>
                   )}
