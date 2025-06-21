@@ -20,7 +20,7 @@ const PaginationContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ul
     ref={ref}
-    className={cn("flex flex-row items-center gap-1 md:gap-2", className)}
+    className={cn("flex flex-row items-center gap-1", className)}
     {...props}
   />
 ))
@@ -49,9 +49,8 @@ const PaginationLink = ({
     variant={isActive ? "outline" : "ghost"}
     size={size}
     className={cn(
-      "h-10 w-10 md:h-9 md:w-9 text-sm md:text-base min-w-[2.5rem] touch-manipulation",
-      isActive && "bg-accent text-accent-foreground border-border font-medium",
-      "hover:bg-accent/80 transition-colors",
+      "h-8 w-8 text-sm",
+      isActive && "bg-accent text-accent-foreground",
       className
     )}
     {...props}
@@ -65,13 +64,11 @@ const PaginationPrevious = ({
 }: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink
     aria-label="Go to previous page"
-    size="default"
-    className={cn("gap-1.5 pl-2.5 pr-3 h-10 md:h-9 touch-manipulation", className)}
+    size="icon"
+    className={cn("h-8 w-8", className)}
     {...props}
   >
     <ChevronLeft className="h-4 w-4" />
-    <span className="hidden xs:inline">Previous</span>
-    <span className="xs:hidden">Prev</span>
   </PaginationLink>
 )
 PaginationPrevious.displayName = "PaginationPrevious"
@@ -82,12 +79,10 @@ const PaginationNext = ({
 }: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink
     aria-label="Go to next page"
-    size="default"
-    className={cn("gap-1.5 pl-3 pr-2.5 h-10 md:h-9 touch-manipulation", className)}
+    size="icon"
+    className={cn("h-8 w-8", className)}
     {...props}
   >
-    <span className="hidden xs:inline">Next</span>
-    <span className="xs:hidden">Next</span>
     <ChevronRight className="h-4 w-4" />
   </PaginationLink>
 )
@@ -99,10 +94,10 @@ const PaginationEllipsis = ({
 }: React.ComponentProps<"span">) => (
   <span
     aria-hidden
-    className={cn("flex h-10 w-10 md:h-9 md:w-9 items-center justify-center text-muted-foreground", className)}
+    className={cn("flex h-8 w-8 items-center justify-center text-muted-foreground", className)}
     {...props}
   >
-    <MoreHorizontal className="h-4 w-4" />
+    <MoreHorizontal className="h-3 w-3" />
     <span className="sr-only">More pages</span>
   </span>
 )
