@@ -124,6 +124,18 @@
   --tracking-normal: 0em;
 }
 
+* {
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+html {
+  transition: background-color 0.3s ease-in-out;
+}
+
+body {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
 .dark {
   --background: oklch(0.2747 0.0139 57.6523);
   --foreground: oklch(0.9239 0.0190 83.0636);
