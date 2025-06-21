@@ -249,7 +249,7 @@
     font-family: var(--font-mono);
     font-size: 0.75rem;
     line-height: 1.6;
-    background: #2d3748 !important;
+    background: #1a1b26 !important;
     padding: 1.5rem !important;
   }
 
@@ -267,7 +267,7 @@
 
   /* Prism.js theme overrides for better integration */
   .prose pre[class*="language-"] {
-    background: #2d3748 !important;
+    background: #1a1b26 !important;
     border: 1px solid hsl(var(--border));
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -354,22 +354,10 @@
     font-style: italic;
   }
 
-  /* Mac-style window decoration for code blocks */
-.prose pre[class*="language-"]::before {
-  content: '';
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #ff5f57;
-  box-shadow: 20px 0 #ffbd2e, 40px 0 #28ca42;
-}
-
 .prose pre[class*="language-"] {
   position: relative;
-  padding-top: 3rem !important;
+  padding-top: 1.5rem !important;
+  border-radius: 0.5rem;
 }
 
 /* Copy button styling */
