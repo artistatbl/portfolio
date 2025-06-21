@@ -10,6 +10,11 @@ export function Sidebar() {
   const isMobile = useMobile()
   const isTablet = useTablet()
 
+  // Don't render anything during SSR to prevent hydration mismatch
+  if (isMobile === null || isTablet === null) {
+    return null
+  }
+
   if (isMobile) {
     return (
       <aside className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-sm px-4 mr-24">
