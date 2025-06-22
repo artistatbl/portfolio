@@ -1,21 +1,20 @@
 export const proudOf = [
-  "being a husband & father",
+  "being a husband and father",
   "graduated with honors in software engineering",
   "building mantlz",
-  "actually a decent fortnite player (Haven't play over 6 months)",
-  "pretty good at football (any sport really)",
-  "currently have a 95 week inbox zero streak",
-  "keeping doing what I love",
+  "actually being a decent Fortnite player (haven't played in over 6 months)",
+  "being pretty good at football (and any sport really)",
+  "currently having a 95-week inbox zero streak",
+  "continuing to do what I love",
   "creating open-source projects",
   "trying to be a better version of myself every day",
-]
+];
 
 export const believe = [
   "shipping beats perfecting",
   "velocity is your competitive edge",
   "default to action over analysis",
-  "lean teams outpace bloated ones",
-  "ai-first companies will dominate the hesitant",
+  "AI-first companies will dominate the hesitant",
   "user adoption trumps feature count",
   "build, launch, learn, iterate endlessly",
   "your potential is limitless",
@@ -35,5 +34,5 @@ export const believe = [
   "stay curious, stay relevant",
   "genuine beats polished every time",
   "lift others up to rise yourself",
-  "share your struggles to inspire others"
-]
+  "share your struggles to inspire others",
+];
