@@ -4,7 +4,6 @@ export const proudOf = [
   "building mantlz",
   "actually being a decent Fortnite player (haven't played in over 6 months)",
   "being pretty good at football (and any sport really)",
-  "currently having a 95-week inbox zero streak",
   "continuing to do what I love",
   "creating open-source projects",
   "trying to be a better version of myself every day",
