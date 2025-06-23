@@ -84,8 +84,8 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       className="fixed top-4 right-4 z-50 h-9 w-9 rounded-lg bg-background/80 backdrop-blur-sm border border-border/40 hover:bg-accent hover:scale-110 transition-all duration-300 ease-in-out active:scale-95"
       title={`Current theme: ${theme}. Click to toggle between light and dark.`}
-      data-s:event="Theme Toggle"
-      data-s:event-props={`theme=${theme === 'dark' ? 'light' : 'dark'}`}
+data-s-event="Theme Toggle"
+      data-s-event-props={`theme=${theme === 'dark' ? 'light' : 'dark'}`}
     >
       {getIcon()}
       <span className="sr-only">Toggle theme</span>

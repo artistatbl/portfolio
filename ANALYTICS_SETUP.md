@@ -80,24 +80,26 @@ One Dollar Stats uses HTML data attributes for event tracking:
 
 ```html
 <!-- Basic event -->
-<button data-s:event="Button Click">Click me</button>
+<button data-s-event="Button Click">Click me</button>
 
 <!-- Event with properties -->
 <button 
-  data-s:event="Navigation Click"
-  data-s:event-props="page=about;device=mobile"
+  data-s-event="Navigation Click"
+  data-s-event-props="page=about;device=mobile"
 >
   About
 </button>
 
 <!-- Event with custom path -->
 <button 
-  data-s:event="Custom Event"
-  data-s:event-path="/custom/path"
+  data-s-event="Custom Event"
+  data-s-event-path="/custom/path"
 >
   Custom
 </button>
 ```
+
+**Note**: We use dashes (`data-s-event`) instead of colons (`data-s:event`) to avoid JSX namespace conflicts in React.
 
 ### Property Syntax Rules
 
