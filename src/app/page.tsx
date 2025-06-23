@@ -8,7 +8,7 @@ export default function Home() {
     <PageLayout>
       <div>
           <h1 className="font-extrabold mb-6 tracking-tight text-2xl md:text-4xl lg:text-5xl">Jean Daly</h1>
-          <p className="text-muted-foreground mb-8 text-sm md:mb-16 md:text-base">Creating the tools I wish existed <a href="https://mantlz.app" target="_blank" rel="noopener noreferrer" className=" bg-orange-400  dark:bg-orange-600 px-1 text-black dark:text-white rounded"><span>mantlz</span></a></p>
+          <p className="text-muted-foreground mb-8 text-sm md:mb-16 md:text-base">Creating the tools I wish existed <a href="https://mantlz.app" target="_blank" rel="noopener noreferrer" className=" bg-orange-400  dark:bg-orange-600 px-1 text-black dark:text-white rounded" data-s:event="External Link Click" data-s:event-props="destination=mantlz;source=homepage"><span>mantlz</span></a></p>
           
           <section className="mb-8 md:mb-16">
             <h2 className="font-semibold text-foreground mb-6 text-lg md:text-2xl">things i'm proud of</h2>

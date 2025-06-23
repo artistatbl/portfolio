@@ -25,6 +25,8 @@ export function Sidebar() {
                 href="/" 
                 className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="About"
+                data-s:event="Navigation Click"
+                data-s:event-props="page=about;device=mobile"
               >
                 <User size={20} />
                 <span className="text-xs">About</span>
@@ -35,6 +37,8 @@ export function Sidebar() {
                 href="/blog" 
                 className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Blog"
+                data-s:event="Navigation Click"
+                data-s:event-props="page=blog;device=mobile"
               >
                 <BookOpen size={20} />
                 <span className="text-xs">Blog</span>
@@ -45,6 +49,8 @@ export function Sidebar() {
                 href="/projects" 
                 className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Projects"
+                data-s:event="Navigation Click"
+                data-s:event-props="page=projects;device=mobile"
               >
                 <FolderOpen size={20} />
                 <span className="text-xs">Projects</span>
@@ -55,6 +61,8 @@ export function Sidebar() {
                 href="/bookmarks" 
                 className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Bookmarks"
+                data-s:event="Navigation Click"
+                data-s:event-props="page=bookmarks;device=mobile"
               >
                 <Bookmark size={20} />
                 <span className="text-xs">Bookmarks</span>
@@ -73,22 +81,34 @@ export function Sidebar() {
       <nav className='text-sm'>
         <ul className="space-y-4 flex flex-col items-end">
           <li className="flex justify-end">
-            <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right">
+            <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right"
+              data-s:event="Navigation Click"
+              data-s:event-props="page=about;device=desktop"
+            >
               about
             </Link>
           </li>
           <li className="flex justify-end">
-            <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right">
+            <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right"
+              data-s:event="Navigation Click"
+              data-s:event-props="page=blog;device=desktop"
+            >
               blog
             </Link>
           </li>
           <li className="flex justify-end">
-            <Link href="/projects" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right">
+            <Link href="/projects" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right"
+              data-s:event="Navigation Click"
+              data-s:event-props="page=projects;device=desktop"
+            >
               projects
             </Link>
           </li>
           <li className="flex justify-end">
-            <Link href="/bookmarks" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right">
+            <Link href="/bookmarks" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right"
+              data-s:event="Navigation Click"
+              data-s:event-props="page=bookmarks;device=desktop"
+            >
               bookmarks
             </Link>
           </li>
@@ -99,6 +119,8 @@ export function Sidebar() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
+              data-s:event="Social Link Click"
+              data-s:event-props="platform=twitter;source=sidebar"
             >
               <Twitter size={20} />
             </a>
@@ -110,6 +132,8 @@ export function Sidebar() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
+              data-s:event="Social Link Click"
+              data-s:event-props="platform=github;source=sidebar"
             >
               <Github size={20} />
             </a>
