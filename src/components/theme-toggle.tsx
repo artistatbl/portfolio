@@ -28,41 +28,80 @@ export function ThemeToggle() {
   }
 
   const toggleTheme = () => {
-    // Create overlay element for transition effect
-    const overlay = document.createElement('div')
-    overlay.style.cssText = `
+    // Create container for rain drops
+    const container = document.createElement('div')
+    container.style.cssText = `
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
       z-index: 9999;
-      background: transparent;
-      clip-path: circle(0% at top right);
-      transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
       pointer-events: none;
     `
+    document.body.appendChild(container)
     
-    document.body.appendChild(overlay)
+    // Set the background color based on the target theme (opposite of current)
+    const targetTheme = theme === 'dark' ? 'light' : 'dark'
+    const bgColor = targetTheme === 'dark' ? 'oklch(0.2747 0.0139 57.6523)' : 'oklch(0.9582 0.0152 90.2357)'
     
-    // Trigger the corner expansion animation
-    requestAnimationFrame(() => {
-      overlay.style.clipPath = 'circle(150% at top right)'
-    })
+    // Create rain drops
+    const dropCount = 100
+    const drops = []
     
-    // Change theme halfway through animation
+    for (let i = 0; i < dropCount; i++) {
+      const drop = document.createElement('div')
+      const size = Math.random() * 5 + 3
+      const xPos = Math.random() * 100
+      const delay = Math.random() * 0.5
+      const duration = Math.random() * 0.5 + 0.5
+      
+      drop.style.cssText = `
+        position: absolute;
+        top: -20px;
+        left: ${xPos}%;
+        width: ${size}px;
+        height: ${size * 3}px;
+        background: ${bgColor};
+        border-radius: 50%;
+        opacity: 0.8;
+        transform: translateY(-100px);
+        animation: rain ${duration}s linear ${delay}s forwards;
+      `
+      
+      container.appendChild(drop)
+      drops.push(drop)
+    }
+    
+    // Add animation style
+    const style = document.createElement('style')
+    style.textContent = `
+      @keyframes rain {
+        0% {
+          transform: translateY(-100px);
+        }
+        100% {
+          transform: translateY(calc(100vh + 100px));
+        }
+      }
+    `
+    document.head.appendChild(style)
+    
+    // Change theme after a short delay
     setTimeout(() => {
       if (theme === 'dark') {
         setTheme('light')
       } else {
         setTheme('dark')
       }
-    }, 100)
+    }, 300)
     
-    // Remove overlay after animation
+    // Remove elements after animation completes
     setTimeout(() => {
-      document.body.removeChild(overlay)
-    }, 100)
+      document.body.removeChild(container)
+      document.head.removeChild(style)
+    }, 1500)
   }
 
   const getIcon = () => {
