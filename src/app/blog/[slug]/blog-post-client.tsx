@@ -50,7 +50,7 @@ export function BlogPostClient({ meta, children, relatedPosts = [] }: BlogPostCl
         const copyButton = document.createElement('button')
         copyButton.className = 'copy-button'
         copyButton.innerHTML = `
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
             <path d="m4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
           </svg>
@@ -63,7 +63,7 @@ export function BlogPostClient({ meta, children, relatedPosts = [] }: BlogPostCl
           try {
             await navigator.clipboard.writeText(code)
             copyButton.innerHTML = `
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="20,6 9,17 4,12"/>
               </svg>
               <span class="hidden xs:inline">Copied!</span>
@@ -72,7 +72,7 @@ export function BlogPostClient({ meta, children, relatedPosts = [] }: BlogPostCl
 
             setTimeout(() => {
               copyButton.innerHTML = `
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
                   <path d="m4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
                 </svg>
