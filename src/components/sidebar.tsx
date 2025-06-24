@@ -113,28 +113,28 @@ data-s-event="Navigation Click"
             </Link>
           </li>
           <li className="flex justify-end items-center gap-2">
-            <span className="text-muted-foreground hover:text-foreground transition-colors text-sm">twitter</span>
             <a 
               href="https://twitter.com/yvesdalyy" 
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
 data-s-event="Social Link Click"
               data-s-event-props="platform=twitter;source=sidebar"
             >
+              <span className="text-sm">twitter</span>
               <Twitter size={20} />
             </a>
           </li>
           <li className="flex justify-end items-center gap-2">
-            <span className="text-muted-foreground hover:text-foreground transition-colors text-sm">gitHub</span>
             <a 
               href="https://github.com/artistatbl" 
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
 data-s-event="Social Link Click"
               data-s-event-props="platform=github;source=sidebar"
             >
+              <span className="text-sm">gitHub</span>
               <Github size={20} />
             </a>
           </li>
