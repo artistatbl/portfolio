@@ -1,7 +1,7 @@
 'use client'
 
 import { PageLayout } from '../../components/page-layout'
-import { bookmarkCategories, getIconForCategory } from '@/lib/bookmarks-data'
+import { bookmarkCategories, getIconForCategory, getIconForTool } from '@/lib/bookmarks-data'
 
 export default function Bookmarks() {
 
@@ -26,10 +26,16 @@ export default function Bookmarks() {
                       rel="noopener noreferrer"
                       className="group flex items-center gap-3 py-2 hover:text-primary transition-colors"
                     >
-                      <IconComponent 
-                        className="text-muted-foreground group-hover:text-primary transition-colors" 
-                        size={16}
-                      />
+                      {(() => {
+                        const ToolIcon = getIconForTool(tool.name);
+                        const IconToUse = ToolIcon || IconComponent;
+                        return (
+                          <IconToUse 
+                            className="text-muted-foreground group-hover:text-primary transition-colors" 
+                            size={16}
+                          />
+                        );
+                      })()}
                       <div className="flex-1">
                         <span className="font-medium text-foreground group-hover:text-primary transition-colors">
                           {tool.name}

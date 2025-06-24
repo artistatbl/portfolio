@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { useMobile, useTablet } from '@/hooks/use-mobile'
-import { Twitter, Github, User, BookOpen, FolderOpen, Bookmark } from 'lucide-react'
+import { User, BookOpen, FolderOpen, Bookmark } from 'lucide-react'
+import { GitHubIcon, TwitterIcon } from '@/components/icons'
 
 
 
@@ -122,7 +123,7 @@ data-s-event="Social Link Click"
               data-s-event-props="platform=twitter;source=sidebar"
             >
               <span className="text-sm">twitter</span>
-              <Twitter size={20} />
+              <TwitterIcon size={20} />
             </a>
           </li>
           <li className="flex justify-end items-center gap-2">
@@ -135,7 +136,7 @@ data-s-event="Social Link Click"
               data-s-event-props="platform=github;source=sidebar"
             >
               <span className="text-sm">gitHub</span>
-              <Github size={20} />
+              <GitHubIcon size={20} />
             </a>
           </li>
 
