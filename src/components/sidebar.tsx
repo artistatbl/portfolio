@@ -123,7 +123,7 @@ data-s-event="Social Link Click"
               data-s-event-props="platform=twitter;source=sidebar"
             >
               <span className="text-sm">twitter</span>
-              <TwitterIcon size={20} />
+              <TwitterIcon size={14} />
             </a>
           </li>
           <li className="flex justify-end items-center gap-2">
