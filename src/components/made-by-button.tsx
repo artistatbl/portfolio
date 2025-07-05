@@ -26,7 +26,7 @@ export function MadeByButton() {
 data-s-event="Social Link Click"
       data-s-event-props="platform=twitter;source=made_by_button"
     >
-      <span>made by Jean</span>
+      <span>Made by Jean</span>
     </Button>
   )
 }
