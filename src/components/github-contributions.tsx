@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
+import { useMobile } from "@/hooks/use-mobile"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardAction } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
@@ -56,6 +57,14 @@ export default function GitHubContributions() {
   const [loading, setLoading] = useState(true)
   const currentYear = new Date().getFullYear()
   const [year, setYear] = useState<number>(currentYear)
+  const isMobile = useMobile()
+  const [compact, setCompact] = useState(true)
+
+  useEffect(() => {
+    if (isMobile !== null) {
+      setCompact(isMobile ? true : false)
+    }
+  }, [isMobile])
 
   useEffect(() => {
     const load = async () => {
@@ -114,6 +123,19 @@ export default function GitHubContributions() {
     return { weeks, monthLabels }
   }, [data])
 
+  const visibleWeeks = useMemo(() => {
+    if (!weeks.length) return [] as Day[][]
+    const total = weeks.length
+    const target = compact ? Math.min(26, total) : total
+    return weeks.slice(total - target)
+  }, [weeks, compact])
+
+  const visibleMonthLabels = useMemo(() => {
+    if (!monthLabels.length) return [] as (string | null)[]
+    const offset = monthLabels.length - visibleWeeks.length
+    return monthLabels.slice(offset)
+  }, [monthLabels, visibleWeeks])
+
   return (
     <Card>
       <CardHeader className="border-b">
@@ -160,26 +182,26 @@ export default function GitHubContributions() {
         {loading && (
           <div className="space-y-3">
             <div className="text-muted-foreground text-sm">Loading contributions…</div>
-            <div className="overflow-x-auto">
-              <div className="flex items-start gap-3">
-                <div className="grid grid-rows-7 gap-1 text-[10px] text-muted-foreground">
+            <div className="-mx-2 px-2 sm:mx-0 sm:px-0 md:overflow-x-auto">
+              <div className="flex items-start gap-2 sm:gap-3 md:w-max md:min-w-max">
+                <div className="hidden md:grid grid-rows-7 gap-0.5 sm:gap-1 text-[10px] text-muted-foreground">
                   <span className="row-start-2">Mon</span>
                   <span className="row-start-4">Wed</span>
                   <span className="row-start-6">Fri</span>
                 </div>
                 <div className="space-y-1">
-                  <div className="flex gap-1">
-                    {Array.from({ length: 54 }).map((_, i) => (
-                      <div key={i} className="w-[10px] md:w-[12px] text-[10px]" />
+                  <div className="hidden md:flex gap-1 md:min-w-max md:pr-2">
+                    {Array.from({ length: compact ? 26 : 54 }).map((_, i) => (
+                      <div key={i} className="w-[9px] sm:w-[10px] md:w-[12px] text-[10px]" />
                     ))}
                   </div>
-                  <div className="grid grid-rows-7 grid-flow-col auto-cols-[10px] md:auto-cols-[12px] gap-1">
-                    {Array.from({ length: 54 }).map((_, colIdx) => (
-                      <div key={colIdx} className="contents">
+                  <div className="flex flex-wrap md:grid md:grid-rows-7 md:grid-flow-col md:auto-cols-[12px] gap-0.5 sm:gap-1 md:min-w-max md:pr-2">
+                    {Array.from({ length: compact ? 26 : 54 }).map((_, colIdx) => (
+                      <div key={colIdx} className="grid grid-rows-7 md:row-span-7 w-[9px] sm:w-[10px] md:w-[12px] gap-0.5 sm:gap-1">
                         {Array.from({ length: 7 }).map((_, rowIdx) => (
                           <div
                             key={`${colIdx}-${rowIdx}`}
-                            className="size-[10px] md:size-[12px] rounded-[2px] bg-muted animate-pulse"
+                            className="size-[9px] sm:size-[10px] md:size-[12px] rounded-[2px] bg-muted animate-pulse"
                           />
                         ))}
                       </div>
@@ -218,34 +240,34 @@ export default function GitHubContributions() {
             })()}
 
             {/* Grid */}
-            <div className="overflow-x-auto">
-              <div className="flex items-start gap-3">
+            <div className="-mx-2 px-2 sm:mx-0 sm:px-0 md:overflow-x-auto">
+              <div className="flex items-start gap-2 sm:gap-3 md:w-max md:min-w-max">
                 {/* Weekday labels */}
-                <div className="grid grid-rows-7 gap-1 text-[10px] text-muted-foreground">
+                <div className="hidden md:grid grid-rows-7 gap-0.5 sm:gap-1 text-[10px] text-muted-foreground">
                   <span className="row-start-2">Mon</span>
                   <span className="row-start-4">Wed</span>
                   <span className="row-start-6">Fri</span>
                 </div>
                 <div className="space-y-1">
                   {/* Month labels */}
-                  <div className="flex gap-1 text-[10px] text-muted-foreground">
-                    {monthLabels.map((label, i) => (
-                      <div key={i} className="w-[10px] md:w-[12px]">
+                  <div className="hidden md:flex gap-1 text-[10px] text-muted-foreground md:min-w-max md:pr-2">
+                    {visibleMonthLabels.map((label, i) => (
+                      <div key={i} className="w-[9px] sm:w-[10px] md:w-[12px]">
                         {label}
                       </div>
                     ))}
                   </div>
 
                   {/* Calendar grid */}
-                  <div className="grid grid-rows-7 grid-flow-col auto-cols-[10px] md:auto-cols-[12px] gap-1">
-                    {weeks.map((col, colIdx) => (
-                      <div key={colIdx} className="contents">
+                  <div className="flex flex-wrap md:grid md:grid-rows-7 md:grid-flow-col md:auto-cols-[12px] gap-0.5 sm:gap-1 md:min-w-max md:pr-2">
+                    {visibleWeeks.map((col, colIdx) => (
+                      <div key={colIdx} className="grid grid-rows-7 md:row-span-7 w-[9px] sm:w-[10px] md:w-[12px] gap-0.5 sm:gap-1">
                         {col.map((d, rowIdx) => (
-                          <Tooltip key={`${d.date}-${rowIdx}`}>
+                          <Tooltip key={`${d.date}-${rowIdx}`}> 
                             <TooltipTrigger asChild>
                               <button
                                 type="button"
-                                className={`size-[10px] md:size-[12px] rounded-[2px] ${levelClass(d.level)} hover:ring-1 hover:ring-primary/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring`}
+                                className={`size-[9px] sm:size-[10px] md:size-[12px] rounded-[2px] ${levelClass(d.level)} hover:ring-1 hover:ring-primary/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring`}
                                 aria-label={`${d.date}: ${d.count} contributions`}
                               />
                             </TooltipTrigger>
@@ -262,7 +284,7 @@ export default function GitHubContributions() {
                     ))}
                   </div>
                   {/* Legend moved to bottom */}
-                  <div className="flex items-center gap-2 pt-3 text-[10px] text-muted-foreground">
+                  <div className="hidden sm:flex items-center gap-2 pt-3 text-[10px] text-muted-foreground">
                     <span>Less</span>
                     {[0, 1, 2, 3, 4].map((lvl) => (
                       <div key={lvl} className={`size-3 rounded-[2px] ${levelClass(lvl)}`} />
