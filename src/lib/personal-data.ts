@@ -2,7 +2,7 @@ export const proudOf = [
   "being a husband and father",
   "graduated with honors in software engineering",
   "building mantlz",
-  // "actually being a decent Fortnite player (haven't played in over 6 months)",
+  "building feedgot",
   "being pretty good at football (and any sport really)",
   "continuing to do what I love",
   "creating open-source projects",
