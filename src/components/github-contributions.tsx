@@ -19,8 +19,11 @@ type Payload = { username: string; total: number; days: Day[] }
 const levelClass = (level: number) => `github-level-${Math.max(0, Math.min(4, level))}`
 
 const parseDate = (s: string) => {
-  const [y, m, d] = s.split("-").map(Number)
-  return new Date(y, m - 1, d)
+  const parts = s.split("-")
+  const y = Number(parts[0] ?? 0)
+  const m = Number(parts[1] ?? 1)
+  const d = Number(parts[2] ?? 1)
+  return new Date(y, Math.max(0, m - 1), d)
 }
 const fmtMonth = (d: Date) => d.toLocaleString(undefined, { month: "short" })
 
@@ -37,7 +40,9 @@ function computeStreaks(days: Day[]) {
   }
   let current = 0
   for (let i = days.length - 1; i >= 0; i--) {
-    if (days[i]?.count > 0) current++
+    const item = days[i]
+    if (!item) break
+    if (item.count > 0) current++
     else break
   }
   const maxDay = days.reduce((m, d) => Math.max(m, d.count), 0)
@@ -78,8 +83,8 @@ export default function GitHubContributions() {
     const byDate = new Map<string, Day>()
     for (const d of days) byDate.set(d.date, d)
 
-    const first = parseDate(days[0].date)
-    const last = parseDate(days[days.length - 1].date)
+    const first = parseDate(days[0]!.date)
+    const last = parseDate(days[days.length - 1]!.date)
 
     const start = new Date(first)
     while (start.getDay() !== 0) start.setDate(start.getDate() - 1) // back to Sunday

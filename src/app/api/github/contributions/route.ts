@@ -41,8 +41,25 @@ async function fetchViaGraphQL(
   })
 
   if (!res.ok) throw new Error(await res.text())
-  const json = await res.json()
-  const weeks = json?.data?.user?.contributionsCollection?.contributionCalendar?.weeks || []
+  type GraphQLResponse = {
+    data?: {
+      user?: {
+        contributionsCollection?: {
+          contributionCalendar?: {
+            weeks?: Array<{
+              contributionDays: Array<{
+                date: string
+                contributionCount: number
+                color?: string
+              }>
+            }>
+          }
+        }
+      }
+    }
+  }
+  const json = (await res.json()) as GraphQLResponse
+  const weeks = json.data?.user?.contributionsCollection?.contributionCalendar?.weeks ?? []
   const days: Day[] = []
   for (const w of weeks) {
     for (const d of w.contributionDays) {
@@ -78,12 +95,14 @@ async function fetchViaScrape(username: string, start: string, end: string): Pro
   // Try multiple patterns to be resilient to markup variations
   while ((match = rectRegexDouble.exec(html)) !== null) {
     const date = match[1]
+    if (!date) continue
     const count = Number(match[2]) || 0
     const level = Number(match[3]) || (count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 10 ? 3 : 4)
     days.push({ date, count, level })
   }
   while ((match = rectRegexSingle.exec(html)) !== null) {
     const date = match[1]
+    if (!date) continue
     const count = Number(match[2]) || 0
     const level = Number(match[3]) || (count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 10 ? 3 : 4)
     days.push({ date, count, level })
@@ -91,6 +110,7 @@ async function fetchViaScrape(username: string, start: string, end: string): Pro
   if (days.length === 0) {
     while ((match = rectRegexNoLevelDouble.exec(html)) !== null) {
       const date = match[1]
+      if (!date) continue
       const count = Number(match[2]) || 0
       const level = count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 10 ? 3 : 4
       days.push({ date, count, level })
@@ -99,6 +119,7 @@ async function fetchViaScrape(username: string, start: string, end: string): Pro
   if (days.length === 0) {
     while ((match = rectRegexNoLevelSingle.exec(html)) !== null) {
       const date = match[1]
+      if (!date) continue
       const count = Number(match[2]) || 0
       const level = count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 10 ? 3 : 4
       days.push({ date, count, level })
@@ -113,12 +134,14 @@ async function fetchViaScrape(username: string, start: string, end: string): Pro
       let m: RegExpExecArray | null
       while ((m = rectRegexDouble.exec(html2)) !== null) {
         const date = m[1]
+        if (!date) continue
         const count = Number(m[2]) || 0
         const level = Number(m[3]) || (count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 10 ? 3 : 4)
         days.push({ date, count, level })
       }
       while ((m = rectRegexSingle.exec(html2)) !== null) {
         const date = m[1]
+        if (!date) continue
         const count = Number(m[2]) || 0
         const level = Number(m[3]) || (count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 10 ? 3 : 4)
         days.push({ date, count, level })
@@ -126,6 +149,7 @@ async function fetchViaScrape(username: string, start: string, end: string): Pro
       if (days.length === 0) {
         while ((m = rectRegexNoLevelDouble.exec(html2)) !== null) {
           const date = m[1]
+          if (!date) continue
           const count = Number(m[2]) || 0
           const level = count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 10 ? 3 : 4
           days.push({ date, count, level })
@@ -134,6 +158,7 @@ async function fetchViaScrape(username: string, start: string, end: string): Pro
       if (days.length === 0) {
         while ((m = rectRegexNoLevelSingle.exec(html2)) !== null) {
           const date = m[1]
+          if (!date) continue
           const count = Number(m[2]) || 0
           const level = count === 0 ? 0 : count < 3 ? 1 : count < 6 ? 2 : count < 10 ? 3 : 4
           days.push({ date, count, level })
@@ -153,8 +178,12 @@ async function fetchViaPublicAPI(username: string, start: string, end: string): 
       headers: { "User-Agent": "portfolio-app" },
     })
     if (!res.ok) return []
-    const json = await res.json()
-    const list: { date: string; count: number }[] = json?.contributions || json?.data || []
+    type PublicAPIResponse = {
+      contributions?: Array<{ date: string; count: number }>
+      data?: Array<{ date: string; count: number }>
+    }
+    const json = (await res.json()) as PublicAPIResponse
+    const list: { date: string; count: number }[] = json.contributions ?? json.data ?? []
     const startDate = new Date(`${start}T00:00:00Z`)
     const endDate = new Date(`${end}T23:59:59Z`)
     const days: Day[] = []
