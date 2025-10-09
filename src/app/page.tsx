@@ -2,6 +2,7 @@
 
 import { PageLayout } from '../components/page-layout'
 import { proudOf, believe } from '@/lib/personal-data'
+import GitHubContributions from '@/components/github-contributions'
 
 export default function Home() {
   return (
@@ -31,6 +32,9 @@ export default function Home() {
               ))}
             </ul>
           </section>
+      </div>
+      <div className="mt-8 md:mt-16">
+        <GitHubContributions />
       </div>
     </PageLayout>
   )
