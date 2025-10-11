@@ -119,11 +119,11 @@ export function BlogPostClient({ meta, children, relatedPosts = [] }: BlogPostCl
       
       <Sidebar
         extra={tocItems.length > 0 ? (
-          <nav className="border border-border/50 rounded-md p-3 bg-card/50 max-h-[60vh] overflow-auto">
-            <div className="text-sm font-medium mb-2 text-foreground">On this page</div>
-            <ul className="space-y-2">
+          <nav className="border border-border/50 rounded-md p-3 bg-card/50 max-h-[60vh] overflow-auto text-right">
+            <div className="text-sm font-medium mb-2 text-foreground text-right">On this page</div>
+            <ul className="space-y-2 text-right">
               {tocItems.map(item => (
-                <li key={item.id} className={item.level === 3 ? 'pl-4' : ''}>
+                <li key={item.id} className={item.level === 3 ? 'pr-4' : ''}>
                   <a href={`#${item.id}`} className="text-muted-foreground hover:text-foreground transition-colors">
                     {item.text}
                   </a>
