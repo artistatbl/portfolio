@@ -18,55 +18,51 @@ export function Sidebar() {
 
   if (isMobile) {
     return (
-      <aside className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-        <nav className="bg-background border border-border rounded-lg shadow-sm px-4 py-2">
-          <ul className="flex items-center gap-6">
+      <aside className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
+        <nav className="bg-background/80 rounded-md px-3 py-1.5">
+          <ul className="flex items-center gap-4">
             <li>
               <Link 
                 href="/" 
-                className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center justify-center p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="About"
 data-s-event="Navigation Click"
                 data-s-event-props="page=about;device=mobile"
               >
-                <User size={20} />
-                <span className="text-xs">About</span>
+                <User size={14} />
               </Link>
             </li>
             <li>
               <Link 
                 href="/blog" 
-                className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center justify-center p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Blog"
 data-s-event="Navigation Click"
                 data-s-event-props="page=blog;device=mobile"
               >
-                <BookOpen size={20} />
-                <span className="text-xs">Blog</span>
+                <BookOpen size={14} />
               </Link>
             </li>
             <li>
               <Link 
                 href="/projects" 
-                className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center justify-center p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Projects"
 data-s-event="Navigation Click"
                 data-s-event-props="page=projects;device=mobile"
               >
-                <FolderOpen size={20} />
-                <span className="text-xs">Projects</span>
+                <FolderOpen size={14} />
               </Link>
             </li>
             <li>
               <Link 
                 href="/bookmarks" 
-                className="flex flex-col items-center gap-1 p-2 text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center justify-center p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Bookmarks"
 data-s-event="Navigation Click"
                 data-s-event-props="page=bookmarks;device=mobile"
               >
-                <Bookmark size={20} />
-                <span className="text-xs">Bookmarks</span>
+                <Bookmark size={14} />
               </Link>
             </li>
           </ul>
