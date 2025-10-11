@@ -123,10 +123,10 @@ export function BlogPostClient({ meta, children, relatedPosts = [] }: BlogPostCl
             <div className="text-sm font-normal mb-2 text-black dark:text-white text-right">On this page</div>
             <ul className="space-y-1 text-right">
               {tocItems.map(item => (
-                <li key={item.id} className={item.level === 3 ? 'pr-4' : ''}>
+                <li key={item.id} className="">
                   <a
                     href={`#${item.id}`}
-                    className="block truncate text-muted-foreground hover:text-foreground transition-colors"
+                    className="block w-full truncate text-right text-muted-foreground hover:text-foreground transition-colors"
                     title={item.text}
                   >
                     {item.text}
