@@ -19,6 +19,18 @@ type Payload = { username: string; total: number; days: Day[] }
 
 const levelClass = (level: number) => `github-level-${Math.max(0, Math.min(4, level))}`
 
+function ContributionLegend() {
+  return (
+    <div className="flex items-center gap-2 pt-3 text-[10px] text-muted-foreground">
+      <span>Less</span>
+      {[0, 1, 2, 3, 4].map((lvl) => (
+        <div key={lvl} className={`size-3 rounded-[2px] ${levelClass(lvl)}`} />
+      ))}
+      <span>More</span>
+    </div>
+  )
+}
+
 const parseDate = (s: string) => {
   const parts = s.split("-")
   const y = Number(parts[0] ?? 0)
@@ -273,17 +285,11 @@ export default function GitHubContributions() {
                       </div>
                     ))}
                   </div>
-                  {/* Legend moved to bottom */}
-                  <div className="hidden sm:flex items-center gap-2 pt-3 text-[10px] text-muted-foreground">
-                    <span>Less</span>
-                    {[0, 1, 2, 3, 4].map((lvl) => (
-                      <div key={lvl} className={`size-3 rounded-[2px] ${levelClass(lvl)}`} />
-                    ))}
-                    <span>More</span>
-                  </div>
                 </div>
               </div>
             </div>
+            {/* Legend placed below the scroll container so it doesn't scroll with the grid */}
+            <ContributionLegend />
           </div>
         )}
       </CardContent>
