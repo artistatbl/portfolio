@@ -242,15 +242,15 @@ export default function GitHubContributions() {
             })()}
 
             {/* Grid */}
-            <div className="-mx-2 px-2 sm:mx-0 sm:px-0 md:overflow-x-auto">
-              <div className="flex items-start gap-2 sm:gap-3 md:w-max md:min-w-max">
+            <div className="-mx-2 px-2 sm:mx-0 sm:px-0">
+              <div className="flex items-start gap-2 sm:gap-3">
                 {/* Weekday labels */}
                 <div className="hidden md:grid grid-rows-7 gap-0.5 sm:gap-1 text-[10px] text-muted-foreground">
                   <span className="row-start-2">Mon</span>
                   <span className="row-start-4">Wed</span>
                   <span className="row-start-6">Fri</span>
                 </div>
-                <div className="space-y-1">
+                <div className="space-y-1 md:flex-1 md:overflow-x-auto">
                   {/* Month labels */}
                   <div className="hidden md:flex gap-1 text-[10px] text-muted-foreground md:min-w-max md:pr-2">
                     {visibleMonthLabels.map((label, i) => (
