@@ -4,7 +4,7 @@ import { Sidebar } from '../../../components/sidebar'
 import { formatDate, type BlogPostMeta } from '@/lib/blog'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { useMobile } from '@/hooks/use-mobile'
 import { RelatedPosts } from '@/components/related-posts'
 import Prism from 'prismjs'
@@ -32,6 +32,8 @@ interface BlogPostClientProps {
 
 export function BlogPostClient({ meta, children, relatedPosts = [] }: BlogPostClientProps) {
   const isMobile = useMobile()
+  const [tocItems, setTocItems] = useState<{ id: string; text: string; level: number }[]>([])
+  const [progress, setProgress] = useState(0)
   
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -87,16 +89,50 @@ export function BlogPostClient({ meta, children, relatedPosts = [] }: BlogPostCl
 
         block.parentNode?.insertBefore(wrapper, block)
         wrapper.appendChild(block)
-        wrapper.appendChild(copyButton)
-      })
+      wrapper.appendChild(copyButton)
+    })
+
+      // Build Table of Contents from headings
+      const headings = Array.from(document.querySelectorAll('article h2, article h3')) as HTMLHeadingElement[]
+      const items = headings.map(h => ({ id: h.id, text: h.textContent || '', level: h.tagName === 'H2' ? 2 : 3 }))
+      setTocItems(items)
+
+      // Reading progress bar
+      const onScroll = () => {
+        const total = document.documentElement.scrollHeight - window.innerHeight
+        const scrolled = Math.min(Math.max(window.scrollY / total, 0), 1)
+        setProgress(scrolled * 100)
+      }
+      onScroll()
+      window.addEventListener('scroll', onScroll, { passive: true })
+      return () => {
+        window.removeEventListener('scroll', onScroll)
+      }
     }
   }, [children])
 
   return (
     <div className="min-h-screen flex">
+      {/* Reading progress bar */}
+      <div className="fixed top-0 left-0 h-1 bg-primary/80 z-50 transition-[width]" style={{ width: `${progress}%` }} />
       <div className="absolute inset-0 -z-10 opacity-50 mix-blend-soft-light bg-[url('/noise.svg')] [mask-image:radial-gradient(ellipse_at_center,black,transparent)]" />
       
-      <Sidebar />
+      <Sidebar
+        extra={tocItems.length > 0 ? (
+          <nav className="border border-border/50 rounded-md p-3 bg-card/50 max-h-[60vh] overflow-auto">
+            <div className="text-sm font-medium mb-2 text-foreground">On this page</div>
+            <ul className="space-y-2">
+              {tocItems.map(item => (
+                <li key={item.id} className={item.level === 3 ? 'pl-4' : ''}>
+                  <a href={`#${item.id}`} className="text-muted-foreground hover:text-foreground transition-colors">
+                    {item.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ) : undefined}
+      />
       
       <main className={`flex-1 w-full ${
         isMobile ? 'pb-48' : 'md:mr-32 lg:mr-40'
@@ -154,6 +190,8 @@ export function BlogPostClient({ meta, children, relatedPosts = [] }: BlogPostCl
             )}
           </div>
         </header>
+
+        {/* TOC moved to right sidebar */}
 
         {/* Post content */}
         <article className="prose prose-neutral dark:prose-invert max-w-none prose-sm sm:prose-base lg:prose-lg prose-headings:scroll-mt-20 prose-img:rounded-lg prose-img:shadow-lg prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:overflow-x-auto">

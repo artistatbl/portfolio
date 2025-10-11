@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { useMobile, useTablet } from '@/hooks/use-mobile'
 import { User, BookOpen, FolderOpen, Bookmark } from 'lucide-react'
 import { GitHubIcon, TwitterIcon } from '@/components/icons'
+import { ReactNode } from 'react'
 
 
-
-export function Sidebar() {
+export function Sidebar({ extra }: { extra?: ReactNode }) {
   const isMobile = useMobile()
   const isTablet = useTablet()
 
@@ -138,6 +138,11 @@ data-s-event="Social Link Click"
 
         </ul>
       </nav>
+      {extra && (
+        <div className="mt-6 w-64 text-sm">
+          {extra}
+        </div>
+      )}
     </aside>
   )
 }

@@ -3,8 +3,11 @@ import { readdir, readFile, access } from 'fs/promises'
 import path from 'path'
 import matter from 'gray-matter'
 import { remark } from 'remark'
-import html from 'remark-html'
 import remarkGfm from 'remark-gfm'
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeSlug from 'rehype-slug'
 
 const postsDirectory = path.join(process.cwd(), 'src/content/blog')
 
@@ -104,10 +107,16 @@ async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     const matterResult = matter(fileContents)
     const readingTime = calculateReadingTime(matterResult.content)
 
-    // Use remark to convert markdown into HTML string
+    // Use remark+rehype to convert markdown into HTML with slugged, linkable headings
     const processedContent = await remark()
       .use(remarkGfm)
-      .use(html)
+      .use(remarkRehype)
+      .use(rehypeSlug)
+      .use(rehypeAutolinkHeadings, {
+        behavior: 'wrap',
+        properties: { className: ['heading-link'] },
+      })
+      .use(rehypeStringify)
       .process(matterResult.content)
     const contentHtml = processedContent.toString()
 
