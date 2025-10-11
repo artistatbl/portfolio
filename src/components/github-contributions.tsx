@@ -165,16 +165,6 @@ export default function GitHubContributions() {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
-            {data?.username && (
-              <a
-                href={`https://github.com/users/${data.username}/contributions?from=${year}-01-01&to=${year}-12-31`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs underline-offset-4 hover:underline text-muted-foreground"
-              >
-                View on GitHub
-              </a>
-            )}
           </div>
         </CardAction>
       </CardHeader>
