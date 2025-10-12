@@ -5,6 +5,7 @@ import { useMobile } from "@/hooks/use-mobile"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardAction } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
+import { ContributionSkeleton } from "@/components/ui/contribution-skeleton"
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -183,35 +184,7 @@ export default function GitHubContributions() {
       <CardContent className="space-y-4">
         {loading && (
           <div className="space-y-3">
-            <div className="text-muted-foreground text-sm">Loading contributions…</div>
-            <div className="-mx-2 px-2 sm:mx-0 sm:px-0 md:overflow-x-auto">
-              <div className="flex items-start gap-2 sm:gap-3 md:w-max md:min-w-max">
-                <div className="hidden md:grid grid-rows-7 gap-0.5 sm:gap-1 text-[10px] text-muted-foreground">
-                  <span className="row-start-2">Mon</span>
-                  <span className="row-start-4">Wed</span>
-                  <span className="row-start-6">Fri</span>
-                </div>
-                <div className="space-y-1">
-                  <div className="hidden md:flex gap-1 md:min-w-max md:pr-2">
-                    {Array.from({ length: compact ? 26 : 54 }).map((_, i) => (
-                      <div key={i} className="w-[9px] sm:w-[10px] md:w-[12px] text-[10px]" />
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap md:grid md:grid-rows-7 md:grid-flow-col md:auto-cols-[12px] gap-0.5 sm:gap-1 md:min-w-max md:pr-2">
-                    {Array.from({ length: compact ? 26 : 54 }).map((_, colIdx) => (
-                      <div key={colIdx} className="grid grid-rows-7 md:row-span-7 w-[9px] sm:w-[10px] md:w-[12px] gap-0.5 sm:gap-1">
-                        {Array.from({ length: 7 }).map((_, rowIdx) => (
-                          <div
-                            key={`${colIdx}-${rowIdx}`}
-                            className="size-[9px] sm:size-[10px] md:size-[12px] rounded-[2px] bg-muted animate-pulse"
-                          />
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ContributionSkeleton compact={compact} />
           </div>
         )}
         {!loading && error && (
