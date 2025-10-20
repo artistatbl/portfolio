@@ -6,12 +6,11 @@ import { generateMetadata } from '@/lib/seo'
 export const metadata: Metadata = generateMetadata('blog')
 
 interface BlogPageProps {
-  searchParams: Promise<{ page?: string }>
+  searchParams?: { page?: string }
 }
 
 export default async function Blog({ searchParams }: BlogPageProps) {
-  const params = await searchParams
-  const currentPage = parseInt(params.page || '1', 10)
+  const currentPage = parseInt(searchParams?.page ?? '1', 10)
   const postsPerPage = 3
   
   const result = await getAllPosts(currentPage, postsPerPage)

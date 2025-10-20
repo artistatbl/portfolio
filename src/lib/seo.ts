@@ -24,6 +24,11 @@ const baseMetadata = {
   authors: [{ name: "Jean" }],
   creator: "Jean",
   publisher: "Jean",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
 }
 
 // Page-specific SEO configurations

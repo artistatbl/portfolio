@@ -5,11 +5,13 @@ import { useMobile, useTablet } from '@/hooks/use-mobile'
 import { User, BookOpen, FolderOpen, Bookmark } from 'lucide-react'
 import { GitHubIcon, TwitterIcon } from '@/components/icons'
 import { ReactNode } from 'react'
+import { usePathname } from 'next/navigation'
 
 
 export function Sidebar({ extra }: { extra?: ReactNode }) {
   const isMobile = useMobile()
   const isTablet = useTablet()
+  const pathname = usePathname()
 
   // Don't render anything during SSR to prevent hydration mismatch
   if (isMobile === null || isTablet === null) {
@@ -19,14 +21,15 @@ export function Sidebar({ extra }: { extra?: ReactNode }) {
   if (isMobile) {
     return (
       <aside className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
-        <nav className="bg-background/80 rounded-md px-3 py-1.5">
+        <nav aria-label="Primary" className="bg-background/80 rounded-md px-3 py-1.5">
           <ul className="flex items-center gap-4">
             <li>
               <Link 
                 href="/" 
                 className="flex items-center justify-center p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="About"
-data-s-event="Navigation Click"
+                aria-current={pathname === '/' ? 'page' : undefined}
+                data-s-event="Navigation Click"
                 data-s-event-props="page=about;device=mobile"
               >
                 <User size={14} />
@@ -37,7 +40,8 @@ data-s-event="Navigation Click"
                 href="/blog" 
                 className="flex items-center justify-center p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Blog"
-data-s-event="Navigation Click"
+                aria-current={pathname === '/blog' ? 'page' : undefined}
+                data-s-event="Navigation Click"
                 data-s-event-props="page=blog;device=mobile"
               >
                 <BookOpen size={14} />
@@ -48,7 +52,8 @@ data-s-event="Navigation Click"
                 href="/projects" 
                 className="flex items-center justify-center p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Projects"
-data-s-event="Navigation Click"
+                aria-current={pathname === '/projects' ? 'page' : undefined}
+                data-s-event="Navigation Click"
                 data-s-event-props="page=projects;device=mobile"
               >
                 <FolderOpen size={14} />
@@ -59,7 +64,8 @@ data-s-event="Navigation Click"
                 href="/bookmarks" 
                 className="flex items-center justify-center p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Bookmarks"
-data-s-event="Navigation Click"
+                aria-current={pathname === '/bookmarks' ? 'page' : undefined}
+                data-s-event="Navigation Click"
                 data-s-event-props="page=bookmarks;device=mobile"
               >
                 <Bookmark size={14} />
@@ -75,11 +81,12 @@ data-s-event="Navigation Click"
     <aside className={`fixed top-16 mr-20 w-auto ${
       isTablet ? 'right-4' : 'right-1/4'
     }`}>
-      <nav className='text-sm'>
+      <nav aria-label='Primary' className='text-sm'>
         <ul className="space-y-4 flex flex-col items-end">
           <li className="flex justify-end">
             <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right"
-data-s-event="Navigation Click"
+              aria-current={pathname === '/' ? 'page' : undefined}
+              data-s-event="Navigation Click"
               data-s-event-props="page=about;device=desktop"
             >
               about
@@ -87,7 +94,8 @@ data-s-event="Navigation Click"
           </li>
           <li className="flex justify-end">
             <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right"
-data-s-event="Navigation Click"
+              aria-current={pathname === '/blog' ? 'page' : undefined}
+              data-s-event="Navigation Click"
               data-s-event-props="page=blog;device=desktop"
             >
               blog
@@ -95,7 +103,8 @@ data-s-event="Navigation Click"
           </li>
           <li className="flex justify-end">
             <Link href="/projects" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right"
-data-s-event="Navigation Click"
+              aria-current={pathname === '/projects' ? 'page' : undefined}
+              data-s-event="Navigation Click"
               data-s-event-props="page=projects;device=desktop"
             >
               projects
@@ -103,7 +112,8 @@ data-s-event="Navigation Click"
           </li>
           <li className="flex justify-end">
             <Link href="/bookmarks" className="text-muted-foreground hover:text-foreground transition-colors w-20 text-right"
-data-s-event="Navigation Click"
+              aria-current={pathname === '/bookmarks' ? 'page' : undefined}
+              data-s-event="Navigation Click"
               data-s-event-props="page=bookmarks;device=desktop"
             >
               bookmarks
@@ -115,7 +125,7 @@ data-s-event="Navigation Click"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
-data-s-event="Social Link Click"
+              data-s-event="Social Link Click"
               data-s-event-props="platform=twitter;source=sidebar"
             >
               <span className="text-sm">twitter</span>
@@ -128,10 +138,10 @@ data-s-event="Social Link Click"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
-data-s-event="Social Link Click"
+              data-s-event="Social Link Click"
               data-s-event-props="platform=github;source=sidebar"
             >
-              <span className="text-sm">gitHub</span>
+              <span className="text-sm">GitHub</span>
               <GitHubIcon size={20} />
             </a>
           </li>
