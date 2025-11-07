@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Providers } from "../components/providers";
 import { ThemeToggle } from "../components/theme-toggle";
-import { MadeByButton } from "../components/made-by-button";
+// import { MadeByButton } from "../components/made-by-button";
 import { generateMetadata } from "@/lib/seo";
 
 import "./globals.css";
@@ -28,7 +28,7 @@ export default function RootLayout({
           <Providers>
             {children}
             <ThemeToggle />
-            <MadeByButton />
+            {/* <MadeByButton /> */}
           </Providers>
           <script
             defer
