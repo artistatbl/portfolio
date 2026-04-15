@@ -22,7 +22,7 @@ export function PortfolioPage() {
             username={github.username}
           />
           <ItemListSection title="Experience" items={experienceItems} />
-          <ItemListSection title="Projects" items={projectItems} />
+          <ItemListSection title="Projects" items={projectItems} divider={false} />
         </div>
       </div>
     </main>
