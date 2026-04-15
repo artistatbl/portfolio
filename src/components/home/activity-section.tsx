@@ -29,7 +29,7 @@ export async function ActivitySection({
           <span>{contributionCountLabel}</span>
         </div>
 
-        <div className="grid grid-cols-[repeat(25,minmax(0,1fr))] gap-1.5">
+        <div className="grid grid-cols-[repeat(30,minmax(0,1fr))] gap-1.5">
           {activity.days.map((day) => (
             <span
               key={day.date}

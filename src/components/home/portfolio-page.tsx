@@ -16,7 +16,7 @@ export function PortfolioPage() {
 
   return (
     <main className="min-h-screen px-5 py-8 text-[#171513] sm:px-8 md:px-10 md:py-12">
-      <div className="mx-auto max-w-[23rem]">
+      <div className="mx-auto max-w-[26rem]">
         <div className="space-y-10">
           <BioSection profile={profile} paragraphs={narrativeParagraphs} />
           <ContactSection links={contactLinks} />
