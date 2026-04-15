@@ -261,6 +261,10 @@ a {
     border-color: var(--line);
   }
 
+  .home-list > :not([hidden]) ~ :not([hidden]) {
+    border-color: var(--line);
+  }
+
   .home-label {
     color: var(--muted-foreground);
   }

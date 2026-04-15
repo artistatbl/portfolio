@@ -13,7 +13,7 @@ export function ItemListSection({
 }: ItemListSectionProps) {
   return (
     <SectionBlock title={title} divider>
-      <ul className="home-list divide-y border-y">
+      <ul className="home-list border-y [&>*+*]:border-t">
         {items.map((item) => (
           <ItemRow key={item.id} item={item} />
         ))}
