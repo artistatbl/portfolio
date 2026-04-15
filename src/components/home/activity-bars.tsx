@@ -28,19 +28,21 @@ function formatTooltipDate(value: string) {
   });
 }
 
-function baseHeight(level: number) {
-  if (level >= 4) return 26;
-  if (level === 3) return 24;
-  if (level === 2) return 21;
-  if (level === 1) return 18;
-  return 16;
+function scaleY(distance: number | null) {
+  if (distance === null) return 1;
+  if (distance === 0) return 0.7;
+  if (distance === 1) return 0.88;
+  if (distance === 2) return 0.95;
+  if (distance === 3) return 0.98;
+  return 1;
 }
 
-function hoverBoost(distance: number) {
-  if (distance === 0) return 12;
-  if (distance === 1) return 8;
-  if (distance === 2) return 4;
-  return 0;
+function scaleX(distance: number | null) {
+  if (distance === null) return 1;
+  if (distance === 0) return 0.78;
+  if (distance === 1) return 0.92;
+  if (distance === 2) return 0.97;
+  return 1;
 }
 
 export function ActivityBars({ days }: ActivityBarsProps) {
@@ -50,13 +52,13 @@ export function ActivityBars({ days }: ActivityBarsProps) {
     <div className="grid grid-cols-[repeat(30,minmax(0,1fr))] items-end gap-1.5">
       {days.map((day, index) => {
         const distance = activeIndex === null ? null : Math.abs(activeIndex - index);
-        const height = baseHeight(day.level) + (distance === null ? 0 : hoverBoost(distance));
         const isActive = activeIndex === index;
+        const transitionDelay = distance === null ? "0ms" : `${Math.min(distance, 3) * 18}ms`;
 
         return (
           <div
             key={day.date}
-            className="group relative flex h-10 items-end"
+            className="group relative flex h-7 items-end"
             onMouseEnter={() => setActiveIndex(index)}
             onMouseLeave={() => setActiveIndex(null)}
             onFocus={() => setActiveIndex(index)}
@@ -66,10 +68,16 @@ export function ActivityBars({ days }: ActivityBarsProps) {
               type="button"
               className={`block w-full rounded-[4px] ${activityClass(
                 day.level
-              )} outline-none transition-[height,transform,filter] duration-200 ease-out ${
-                isActive ? "brightness-[0.9]" : ""
+              )} h-6 outline-none will-change-transform transition-transform ${
+                isActive ? "brightness-[0.92] saturate-[1.08]" : ""
               }`}
-              style={{ height: `${height}px` }}
+              style={{
+                transform: `scaleX(${scaleX(distance)}) scaleY(${scaleY(distance)})`,
+                transformOrigin: "bottom center",
+                transitionDuration: "220ms",
+                transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+                transitionDelay,
+              }}
               aria-label={`${formatTooltipDate(day.date)}: ${day.count} commits`}
             />
 
