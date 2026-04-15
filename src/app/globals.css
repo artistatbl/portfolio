@@ -239,6 +239,15 @@ a {
 }
 
 @layer components {
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
   .home-copy {
     @apply max-w-[34ch] text-[1rem] font-medium leading-[1.75] tracking-[-0.02em] sm:text-[1.08rem];
     color: var(--intro);

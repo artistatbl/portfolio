@@ -1,4 +1,15 @@
+"use client";
+
 import { GitHubIcon } from "@/components/icons";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import {
   Blocks,
   BriefcaseBusiness,
@@ -6,8 +17,10 @@ import {
   FolderOpen,
   Rocket,
   SquareTerminal,
+  X,
   type LucideIcon,
 } from "lucide-react";
+import type { ComponentType } from "react";
 import type { TimelineItemData } from "@/lib/content";
 
 type IconProps = {
@@ -15,7 +28,7 @@ type IconProps = {
   size?: number;
 };
 
-type MixedIcon = React.ComponentType<IconProps> | LucideIcon;
+type MixedIcon = ComponentType<IconProps> | LucideIcon;
 
 const iconMap: Record<string, MixedIcon> = {
   blocks: Blocks,
@@ -53,33 +66,185 @@ function ItemIcon({ iconKey }: { iconKey?: string }) {
   );
 }
 
-interface ItemRowProps {
-  item: TimelineItemData;
+function ItemMeta({ item }: { item: TimelineItemData }) {
+  if (!item.meta) {
+    return null;
+  }
+
+  return (
+    <span
+      className={
+        item.metaVariant === "pill"
+          ? "status-pill rounded-full px-2.5 py-1 text-[0.56rem] font-semibold uppercase tracking-[0.08em] text-primary-foreground"
+          : "text-muted-foreground pt-0.5 text-[0.76rem]"
+      }
+    >
+      {item.meta}
+    </span>
+  );
 }
 
-export function ItemRow({ item }: ItemRowProps) {
+function RowBody({ item }: { item: TimelineItemData }) {
   return (
-    <li className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 py-3">
+    <>
       <ItemIcon iconKey={item.iconKey} />
-      <div className="min-w-0">
+      <div className="min-w-0 text-left">
         <p className="text-[0.84rem] font-medium tracking-[-0.01em] text-foreground">
           {item.title}
           {item.description ? (
-            <span className="font-normal text-muted-foreground"> · {item.description}</span>
+            <span className="font-normal text-muted-foreground">
+              {" "}
+              · {item.description}
+            </span>
           ) : null}
         </p>
       </div>
-      {item.meta ? (
-        <span
-          className={
-            item.metaVariant === "pill"
-              ? "status-pill rounded-full px-2.5 py-1 text-[0.56rem] font-semibold uppercase tracking-[0.08em] text-primary-foreground"
-              : "text-muted-foreground pt-0.5 text-[0.76rem]"
-          }
-        >
-          {item.meta}
-        </span>
-      ) : null}
+      <ItemMeta item={item} />
+    </>
+  );
+}
+
+function StaticRow({ item }: { item: TimelineItemData }) {
+  return (
+    <li className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 py-3">
+      <RowBody item={item} />
     </li>
   );
+}
+
+function ProjectDrawer({ item }: { item: TimelineItemData }) {
+  const detail = item.detail;
+  const notes = detail?.points ?? [];
+
+  return (
+    <Drawer>
+      <li>
+        <DrawerTrigger asChild>
+          <button
+            type="button"
+            className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 py-3 text-left transition-opacity hover:opacity-80"
+          >
+            <RowBody item={item} />
+          </button>
+        </DrawerTrigger>
+      </li>
+      <DrawerContent className="flex max-h-[85vh] w-full flex-col overflow-hidden rounded-t-[1.5rem] border-border bg-background">
+        <DrawerHeader className="border-b border-border px-4 pb-4 pt-4 text-left sm:px-6">
+          <div className="flex w-full items-center justify-between gap-4">
+            <div className="mx-auto flex w-full max-w-[44rem] min-w-0 items-center gap-3">
+              <div className="flex min-w-0 items-center gap-2">
+                <ItemIcon iconKey={item.iconKey} />
+                <DrawerTitle className="truncate text-[0.82rem] font-medium tracking-[-0.02em] text-foreground">
+                  {item.title}
+                  {item.meta ? (
+                    <span className="ml-2 font-normal text-muted-foreground">
+                      {item.meta}
+                    </span>
+                  ) : null}
+                </DrawerTitle>
+              </div>
+              <span className="rounded-full border border-border px-3 py-1 text-[0.68rem] text-muted-foreground">
+                Mock project
+              </span>
+            </div>
+            <div className="shrink-0">
+              <DrawerClose asChild>
+                <button
+                  type="button"
+                  aria-label="Close project details"
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  <X size={14} />
+                </button>
+              </DrawerClose>
+            </div>
+          </div>
+        </DrawerHeader>
+        <div className="scrollbar-hidden min-h-0 flex-1 overflow-y-auto">
+          <div className="mx-auto w-full max-w-[44rem] px-4 py-6 sm:px-6 sm:py-7">
+            <div className="grid gap-5 md:grid-cols-2">
+              <div className="rounded-[1.1rem] border border-border bg-muted/30 p-4">
+                <div className="flex aspect-[4/5] items-center justify-center rounded-[0.9rem] bg-foreground text-background">
+                  <div className="grid grid-cols-6 gap-1.5">
+                    {Array.from({ length: 30 }).map((_, index) => (
+                      <span
+                        key={index}
+                        className="h-3.5 w-3.5 rounded-[3px] bg-background/90"
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-[1.1rem] border border-border bg-muted/20 p-4">
+                <div className="flex aspect-[4/5] flex-col justify-between rounded-[0.9rem] border border-border bg-background p-5">
+                  <div className="space-y-2">
+                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                      Overview
+                    </p>
+                    <DrawerDescription className="text-sm leading-6 text-muted-foreground">
+                      {detail?.summary ??
+                        item.description ??
+                        "Project details coming soon."}
+                    </DrawerDescription>
+                  </div>
+                  <div className="space-y-3">
+                    {notes.slice(0, 3).map((point, index) => (
+                      <div
+                        key={point}
+                        className="flex items-start gap-3 rounded-[0.9rem] border border-border px-3 py-3"
+                      >
+                        <span className="mt-0.5 text-[0.68rem] font-semibold text-muted-foreground">
+                          0{index + 1}
+                        </span>
+                        <p className="text-[0.8rem] leading-5 text-foreground">
+                          {point}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mx-auto mt-6 max-w-[24rem] space-y-4">
+              <p className="text-[0.86rem] leading-6 text-foreground">
+                {item.description
+                  ? `${item.title} is currently framed as ${item.description.toLowerCase()}.`
+                  : `${item.title} is an in-progress project concept.`}
+              </p>
+              {notes.length ? (
+                <div className="space-y-3">
+                  {notes.map((point) => (
+                    <p
+                      key={point}
+                      className="text-[0.82rem] leading-6 text-muted-foreground"
+                    >
+                      {point}
+                    </p>
+                  ))}
+                </div>
+              ) : null}
+              <div className="pt-1">
+                <span className="inline-flex rounded-full border border-border px-3 py-1 text-[0.68rem] text-muted-foreground">
+                  More project content soon
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+
+interface ItemRowProps {
+  item: TimelineItemData;
+  interactive?: boolean;
+}
+
+export function ItemRow({ item, interactive = false }: ItemRowProps) {
+  if (!interactive) {
+    return <StaticRow item={item} />;
+  }
+
+  return <ProjectDrawer item={item} />;
 }
