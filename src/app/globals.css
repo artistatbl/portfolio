@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+:root {
+  --background: #f6f3ee;
+  --foreground: #171513;
+  --muted: #8c847a;
+  --line: #e2dbd2;
+  --panel: #fbf9f5;
+  --font-sans: "DM Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
 html,
 body {
   min-height: 100%;
@@ -7,6 +17,20 @@ body {
 
 body {
   margin: 0;
-  background: #f8f6f2;
-  color: #111111;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(23, 21, 19, 0.12);
 }
