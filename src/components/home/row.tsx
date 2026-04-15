@@ -8,7 +8,7 @@ import {
   SquareTerminal,
   type LucideIcon,
 } from "lucide-react";
-import type { TimelineItemData } from "@/lib/homepage-content";
+import type { TimelineItemData } from "@/lib/content";
 
 type IconProps = {
   className?: string;

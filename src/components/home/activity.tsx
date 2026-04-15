@@ -1,6 +1,6 @@
-import { ActivityBars } from "@/components/home/activity-bars";
-import { SectionBlock } from "@/components/home/section-block";
-import { getGitHubActivity } from "@/lib/github-contributions";
+import { ActivityBars } from "@/components/home/bars";
+import { SectionBlock } from "@/components/home/block";
+import { getGitHubActivity } from "@/lib/github";
 
 interface ActivitySectionProps {
   contributionWindowLabel: string;

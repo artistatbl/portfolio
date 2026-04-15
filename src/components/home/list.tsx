@@ -1,6 +1,6 @@
-import { ItemRow } from "@/components/home/item-row";
-import { SectionBlock } from "@/components/home/section-block";
-import type { TimelineItemData } from "@/lib/homepage-content";
+import { ItemRow } from "@/components/home/row";
+import { SectionBlock } from "@/components/home/block";
+import type { TimelineItemData } from "@/lib/content";
 
 interface ItemListSectionProps {
   title: string;

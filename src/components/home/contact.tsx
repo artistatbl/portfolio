@@ -1,4 +1,4 @@
-import type { ContactLink } from "@/lib/homepage-content";
+import type { ContactLink } from "@/lib/content";
 
 interface ContactSectionProps {
   links: ContactLink[];

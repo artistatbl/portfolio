@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getGitHubActivity } from "@/lib/github-contributions";
+import { getGitHubActivity } from "@/lib/github";
 
 export const revalidate = 3600;
 

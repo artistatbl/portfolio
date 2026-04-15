@@ -1,4 +1,4 @@
-import { SectionTitle } from "@/components/home/section-title";
+import { SectionTitle } from "@/components/home/title";
 
 interface SectionBlockProps {
   children: React.ReactNode;

@@ -1,4 +1,4 @@
-import type { ProfileData } from "@/lib/homepage-content";
+import type { ProfileData } from "@/lib/content";
 
 interface BioSectionProps {
   profile: ProfileData;

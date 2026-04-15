@@ -1,8 +1,8 @@
-import { BioSection } from "@/components/home/bio-section";
-import { ContactSection } from "@/components/home/contact-section";
-import { ItemListSection } from "@/components/home/item-list-section";
-import { ActivitySection } from "@/components/home/activity-section";
-import { homepageContent } from "@/lib/homepage-content";
+import { BioSection } from "@/components/home/bio";
+import { ContactSection } from "@/components/home/contact";
+import { ItemListSection } from "@/components/home/list";
+import { ActivitySection } from "@/components/home/activity";
+import { homepageContent } from "@/lib/content";
 
 export function PortfolioPage() {
   const {
