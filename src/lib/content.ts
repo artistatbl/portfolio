@@ -30,7 +30,7 @@ export interface HomepageContent {
 export const homepageContent: HomepageContent = {
   narrativeParagraphs: [
     "I'm Jean Daly, a software developer who likes building products that feel simple, clear, and fast to use.",
-    "I care about useful software, thoughtful interfaces, and shipping things people actually come back to — especially around AI tools and practical workflows.",
+    "I care about useful software, thoughtful interfaces, and shipping things people actually come back to especially around AI tools and practical workflows.",
     "Right now I'm building Featul at featul.com.",
   ],
   contactLinks: [
