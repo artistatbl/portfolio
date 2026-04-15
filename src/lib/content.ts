@@ -1,9 +1,3 @@
-export interface ProfileData {
-  name: string;
-  role: string;
-  introTail: string;
-}
-
 export interface ContactLink {
   label: string;
   href: string;
@@ -25,7 +19,6 @@ export interface TimelineItemData {
 }
 
 export interface HomepageContent {
-  profile: ProfileData;
   narrativeParagraphs: string[];
   contactLinks: ContactLink[];
   github: GitHubConfig;
@@ -35,26 +28,19 @@ export interface HomepageContent {
 
 // Replace any temporary copy here as the real portfolio content becomes available.
 export const homepageContent: HomepageContent = {
-  profile: {
-    name: "Jean Daly",
-    role: "software developer",
-    introTail:
-      "focused on building software that feels simple, clear, and fast to use — especially around AI tools, useful workflows, and products people return to.",
-  },
   narrativeParagraphs: [
-    "I'm currently building Mantlz and Feedgot.",
-    "I do my best work iterating quickly, staying close to the product, and improving the details through repeated shipping.",
-    "If you're working on something interesting, let's chat.",
+    "I'm Jean Daly, a software developer who likes building products that feel simple, clear, and fast to use.",
+    "I care about useful software, thoughtful interfaces, and shipping things people actually come back to — especially around AI tools and practical workflows.",
+    "Right now I'm building Featul at featul.com.",
   ],
   contactLinks: [
     {
-      label: "GitHub",
-      href: "https://github.com/artistatbl",
-      external: true,
+      label: "hi@jeandaly.dev",
+      href: "mailto:hi@jeandaly.dev",
     },
     {
-      label: "X",
-      href: "https://twitter.com/yvesdalyy",
+      label: "x.com",
+      href: "https://x.com/yvesdalyy",
       external: true,
     },
   ],
