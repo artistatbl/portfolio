@@ -1,0 +1,94 @@
+"use client";
+
+import { useState } from "react";
+
+type ActivityDay = {
+  date: string;
+  count: number;
+  level: number;
+  repositories?: string[];
+};
+
+interface ActivityBarsProps {
+  days: ActivityDay[];
+}
+
+function activityClass(level: number) {
+  if (level >= 4) return "bg-[#16a34a]";
+  if (level === 3) return "bg-[#22c55e]";
+  if (level === 2) return "bg-[#4ade80]";
+  if (level === 1) return "bg-[#86efac]";
+  return "bg-[#e8e2d9]";
+}
+
+function formatTooltipDate(value: string) {
+  return new Date(`${value}T00:00:00`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function baseHeight(level: number) {
+  if (level >= 4) return 26;
+  if (level === 3) return 24;
+  if (level === 2) return 21;
+  if (level === 1) return 18;
+  return 16;
+}
+
+function hoverBoost(distance: number) {
+  if (distance === 0) return 12;
+  if (distance === 1) return 8;
+  if (distance === 2) return 4;
+  return 0;
+}
+
+export function ActivityBars({ days }: ActivityBarsProps) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  return (
+    <div className="grid grid-cols-[repeat(30,minmax(0,1fr))] items-end gap-1.5">
+      {days.map((day, index) => {
+        const distance = activeIndex === null ? null : Math.abs(activeIndex - index);
+        const height = baseHeight(day.level) + (distance === null ? 0 : hoverBoost(distance));
+        const isActive = activeIndex === index;
+
+        return (
+          <div
+            key={day.date}
+            className="group relative flex h-10 items-end"
+            onMouseEnter={() => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(null)}
+            onFocus={() => setActiveIndex(index)}
+            onBlur={() => setActiveIndex((current) => (current === index ? null : current))}
+          >
+            <button
+              type="button"
+              className={`block w-full rounded-[4px] ${activityClass(
+                day.level
+              )} outline-none transition-[height,transform,filter] duration-200 ease-out ${
+                isActive ? "brightness-[0.9]" : ""
+              }`}
+              style={{ height: `${height}px` }}
+              aria-label={`${formatTooltipDate(day.date)}: ${day.count} commits`}
+            />
+
+            <div className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 w-max max-w-[12rem] -translate-x-1/2 rounded-xl bg-[#161616] px-3 py-2 text-left text-white opacity-0 shadow-[0_8px_30px_rgba(0,0,0,0.22)] transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100">
+              <p className="text-[0.82rem] font-medium leading-5">
+                {formatTooltipDate(day.date)}
+              </p>
+              <p className="text-[0.9rem] leading-5 text-white/95">
+                {day.count} {day.count === 1 ? "commit" : "commits"}
+              </p>
+              {day.repositories && day.repositories.length > 0 ? (
+                <p className="max-w-[10rem] text-[0.72rem] leading-4 text-white/70">
+                  {day.repositories.slice(0, 3).join(", ")}
+                </p>
+              ) : null}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
