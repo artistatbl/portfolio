@@ -2,6 +2,7 @@ type ContributionDay = {
   date: string;
   count: number;
   level: number;
+  repositories?: string[];
 };
 
 type PublicApiDay = {
@@ -194,20 +195,108 @@ async function fetchContributionDays(username: string) {
   }
 }
 
+async function fetchRecentPublicPushRepos(username: string, windowDays: number) {
+  const token = process.env.GITHUB_TOKEN;
+  const cutoff = new Date();
+  cutoff.setUTCDate(cutoff.getUTCDate() - (windowDays - 1));
+  cutoff.setUTCHours(0, 0, 0, 0);
+
+  const headers: HeadersInit = {
+    "User-Agent": "portfolio-app",
+  };
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const reposByDate = new Map<string, Set<string>>();
+
+  try {
+    for (let page = 1; page <= 3; page++) {
+      const res = await fetch(
+        `https://api.github.com/users/${username}/events/public?per_page=100&page=${page}`,
+        {
+          headers,
+          next: { revalidate: 3600 },
+        }
+      );
+
+      if (!res.ok) {
+        break;
+      }
+
+      const events = (await res.json()) as Array<{
+        type?: string;
+        created_at?: string;
+        repo?: { name?: string };
+      }>;
+
+      if (events.length === 0) {
+        break;
+      }
+
+      let reachedOlderEvents = false;
+
+      for (const event of events) {
+        if (!event.created_at) {
+          continue;
+        }
+
+        const eventDate = new Date(event.created_at);
+        if (eventDate < cutoff) {
+          reachedOlderEvents = true;
+          continue;
+        }
+
+        if (event.type !== "PushEvent") {
+          continue;
+        }
+
+        const date = event.created_at.slice(0, 10);
+        const repoName = event.repo?.name?.split("/").pop();
+
+        if (!repoName) {
+          continue;
+        }
+
+        if (!reposByDate.has(date)) {
+          reposByDate.set(date, new Set());
+        }
+
+        reposByDate.get(date)?.add(repoName);
+      }
+
+      if (reachedOlderEvents) {
+        break;
+      }
+    }
+  } catch {
+    return reposByDate;
+  }
+
+  return reposByDate;
+}
+
 export async function getGitHubActivity(username: string, windowDays = 30) {
   const requestedDays = buildRequestedDays(windowDays);
-  const liveDays = await fetchContributionDays(username);
+  const [liveDays, reposByDate] = await Promise.all([
+    fetchContributionDays(username),
+    fetchRecentPublicPushRepos(username, windowDays),
+  ]);
   const liveDayMap = new Map(liveDays.map((day) => [day.date, day]));
 
   const days = requestedDays.map((date) => {
     const liveDay = liveDayMap.get(date);
-    return (
-      liveDay ?? {
+    const repositories = Array.from(reposByDate.get(date) ?? []);
+
+    return {
+      ...(liveDay ?? {
         date,
         count: 0,
         level: 0,
-      }
-    );
+      }),
+      repositories,
+    };
   });
 
   return {

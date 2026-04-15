@@ -14,6 +14,13 @@ interface ActivitySectionProps {
   username: string;
 }
 
+function formatTooltipDate(value: string) {
+  return new Date(`${value}T00:00:00`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
+
 export async function ActivitySection({
   contributionWindowLabel,
   username,
@@ -31,11 +38,29 @@ export async function ActivitySection({
 
         <div className="grid grid-cols-[repeat(30,minmax(0,1fr))] gap-1.5">
           {activity.days.map((day) => (
-            <span
-              key={day.date}
-              className={`h-6 rounded-[4px] ${activityClass(day.level)}`}
-              title={`${day.date}: ${day.count} contributions`}
-            />
+            <div key={day.date} className="group relative">
+              <span
+                tabIndex={0}
+                className={`block h-6 rounded-[4px] ${activityClass(
+                  day.level
+                )} outline-none ring-0 transition-transform duration-150 group-hover:scale-[1.02] group-focus-within:scale-[1.02] group-focus-within:ring-1 group-focus-within:ring-[#171513]/15`}
+                aria-label={`${formatTooltipDate(day.date)}: ${day.count} commits`}
+              />
+
+              <div className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 w-max max-w-[12rem] -translate-x-1/2 rounded-xl bg-[#161616] px-3 py-2 text-left text-white opacity-0 shadow-[0_8px_30px_rgba(0,0,0,0.22)] transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100">
+                <p className="text-[0.82rem] font-medium leading-5">
+                  {formatTooltipDate(day.date)}
+                </p>
+                <p className="text-[0.9rem] leading-5 text-white/95">
+                  {day.count} {day.count === 1 ? "commit" : "commits"}
+                </p>
+                {day.repositories && day.repositories.length > 0 ? (
+                  <p className="max-w-[10rem] text-[0.72rem] leading-4 text-white/70">
+                    {day.repositories.slice(0, 3).join(", ")}
+                  </p>
+                ) : null}
+              </div>
+            </div>
           ))}
         </div>
       </div>
