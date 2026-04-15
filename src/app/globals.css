@@ -6,8 +6,19 @@
   --background: oklch(0.9551 0 0);
   --foreground: oklch(0.3211 0 0);
   --muted: oklch(0.8853 0 0);
-  --line: #e2dbd2;
-  --panel: #fbf9f5;
+  --line: oklch(0.8853 0 0);
+  --panel: oklch(0.9702 0 0);
+  --intro: oklch(0.46 0 0);
+  --icon-foreground: oklch(0.42 0 0);
+  --icon-dot: oklch(0.3211 0 0);
+  --tooltip: oklch(0.24 0 0);
+  --tooltip-foreground: oklch(0.97 0 0);
+  --activity-0: oklch(0.91 0 0);
+  --activity-1: oklch(0.84 0.09 145);
+  --activity-2: oklch(0.77 0.13 145);
+  --activity-3: oklch(0.69 0.16 145);
+  --activity-4: oklch(0.61 0.18 145);
+  --status-pill: oklch(0.62 0.2 259);
   --font-sans: Montserrat, sans-serif;
   --font-mono: Fira Code, monospace;
   --card: oklch(0.9702 0 0);
@@ -156,6 +167,19 @@ a {
 .dark {
   --background: oklch(0.2178 0 0);
   --foreground: oklch(0.8853 0 0);
+  --line: oklch(0.3290 0 0);
+  --panel: oklch(0.2435 0 0);
+  --intro: oklch(0.78 0 0);
+  --icon-foreground: oklch(0.74 0 0);
+  --icon-dot: oklch(0.8853 0 0);
+  --tooltip: oklch(0.26 0 0);
+  --tooltip-foreground: oklch(0.97 0 0);
+  --activity-0: oklch(0.32 0 0);
+  --activity-1: oklch(0.58 0.09 145);
+  --activity-2: oklch(0.63 0.12 145);
+  --activity-3: oklch(0.68 0.15 145);
+  --activity-4: oklch(0.73 0.18 145);
+  --status-pill: oklch(0.62 0.2 259);
   --card: oklch(0.2435 0 0);
   --card-foreground: oklch(0.8853 0 0);
   --popover: oklch(0.2435 0 0);
@@ -211,5 +235,73 @@ a {
 @layer base {
   body {
     letter-spacing: var(--tracking-normal);
+  }
+}
+
+@layer components {
+  .home-copy {
+    @apply max-w-[34ch] text-[1rem] font-medium leading-[1.75] tracking-[-0.02em] sm:text-[1.08rem];
+    color: var(--intro);
+  }
+
+  .home-link {
+    @apply border-b font-medium text-foreground transition-colors;
+    border-color: var(--border);
+  }
+
+  .home-link:hover {
+    border-color: var(--foreground);
+  }
+
+  .home-divider {
+    border-color: var(--line);
+  }
+
+  .home-list {
+    border-color: var(--line);
+  }
+
+  .home-label {
+    color: var(--muted-foreground);
+  }
+
+  .home-icon-shell {
+    @apply border bg-card;
+    border-color: var(--border);
+    color: var(--icon-foreground);
+  }
+
+  .home-icon-dot {
+    background: var(--icon-dot);
+  }
+
+  .home-tooltip {
+    background: var(--tooltip);
+    color: var(--tooltip-foreground);
+    box-shadow: 0 8px 30px color-mix(in oklab, var(--foreground) 22%, transparent);
+  }
+
+  .activity-level-0 {
+    background: var(--activity-0);
+  }
+
+  .activity-level-1 {
+    background: var(--activity-1);
+  }
+
+  .activity-level-2 {
+    background: var(--activity-2);
+  }
+
+  .activity-level-3 {
+    background: var(--activity-3);
+  }
+
+  .activity-level-4 {
+    background: var(--activity-4);
+  }
+
+  .status-pill {
+    background: var(--status-pill);
   }
 }

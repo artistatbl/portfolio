@@ -13,7 +13,7 @@ export function PortfolioPage() {
   } = homepageContent;
 
   return (
-    <main className="min-h-screen px-5 py-8 text-[#171513] sm:px-8 md:px-10 md:py-12">
+    <main className="min-h-screen px-5 py-8 text-foreground sm:px-8 md:px-10 md:py-12">
       <div className="mx-auto max-w-[26rem]">
         <div className="space-y-10">
           <BioSection paragraphs={narrativeParagraphs} links={contactLinks} />

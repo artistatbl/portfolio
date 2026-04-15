@@ -29,8 +29,8 @@ const iconMap: Record<string, MixedIcon> = {
 
 function FallbackIcon() {
   return (
-    <span className="flex h-7 w-7 items-center justify-center rounded-[8px] border border-[#ddd5cc] bg-[#fbf8f3]">
-      <span className="h-1.5 w-1.5 rounded-full bg-[#2c2925]" />
+    <span className="home-icon-shell flex h-7 w-7 items-center justify-center rounded-[8px]">
+      <span className="home-icon-dot h-1.5 w-1.5 rounded-full" />
     </span>
   );
 }
@@ -47,7 +47,7 @@ function ItemIcon({ iconKey }: { iconKey?: string }) {
   }
 
   return (
-    <span className="flex h-7 w-7 items-center justify-center rounded-[8px] border border-[#ddd5cc] bg-[#fbf8f3] text-[#49433d]">
+    <span className="home-icon-shell flex h-7 w-7 items-center justify-center rounded-[8px]">
       <IconComponent className="opacity-85" size={14} />
     </span>
   );
@@ -62,10 +62,10 @@ export function ItemRow({ item }: ItemRowProps) {
     <li className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 py-3">
       <ItemIcon iconKey={item.iconKey} />
       <div className="min-w-0">
-        <p className="text-[0.84rem] font-medium tracking-[-0.01em] text-[#171513]">
+        <p className="text-[0.84rem] font-medium tracking-[-0.01em] text-foreground">
           {item.title}
           {item.description ? (
-            <span className="font-normal text-[#8c847a]"> · {item.description}</span>
+            <span className="font-normal text-muted-foreground"> · {item.description}</span>
           ) : null}
         </p>
       </div>
@@ -73,8 +73,8 @@ export function ItemRow({ item }: ItemRowProps) {
         <span
           className={
             item.metaVariant === "pill"
-              ? "rounded-full bg-[#2d7fff] px-2.5 py-1 text-[0.56rem] font-semibold uppercase tracking-[0.08em] text-white"
-              : "pt-0.5 text-[0.76rem] text-[#9b9388]"
+              ? "status-pill rounded-full px-2.5 py-1 text-[0.56rem] font-semibold uppercase tracking-[0.08em] text-primary-foreground"
+              : "text-muted-foreground pt-0.5 text-[0.76rem]"
           }
         >
           {item.meta}

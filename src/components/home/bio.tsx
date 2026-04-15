@@ -11,13 +11,13 @@ export function BioSection({ paragraphs, links }: BioSectionProps) {
       {paragraphs.map((paragraph) => (
         <p
           key={paragraph}
-          className="max-w-[34ch] text-[1rem] font-medium leading-[1.75] tracking-[-0.02em] text-[#67615a] sm:text-[1.08rem]"
+          className="home-copy"
         >
           {paragraph}
         </p>
       ))}
 
-      <p className="max-w-[34ch] text-[1rem] font-medium leading-[1.75] tracking-[-0.02em] text-[#67615a] sm:text-[1.08rem]">
+      <p className="home-copy">
         <span>Reach me at </span>
         {links.map((link, index) => {
           const isLast = index === links.length - 1;
@@ -30,7 +30,7 @@ export function BioSection({ paragraphs, links }: BioSectionProps) {
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noreferrer noopener" : undefined}
-                className="border-b border-[#b6aea5] font-medium text-foreground transition-colors hover:border-[#171513]"
+                className="home-link"
               >
                 {link.label}
               </a>
