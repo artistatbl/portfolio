@@ -17,7 +17,7 @@ export async function ActivitySection({
   return (
     <SectionBlock divider className="pt-8">
       <div className="max-w-[34rem]">
-        <div className="home-label mb-3 flex items-center justify-between text-[0.66rem] font-medium uppercase tracking-[0.04em]">
+        <div className="mb-3 flex items-center justify-between text-[0.66rem] font-medium uppercase tracking-[0.04em] text-muted-foreground">
           <span>{contributionWindowLabel}</span>
           <span>{contributionCountLabel}</span>
         </div>

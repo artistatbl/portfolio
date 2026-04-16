@@ -42,8 +42,8 @@ const iconMap: Record<string, MixedIcon> = {
 
 function FallbackIcon() {
   return (
-    <span className="home-icon-shell flex h-7 w-7 items-center justify-center rounded-[8px]">
-      <span className="home-icon-dot h-1.5 w-1.5 rounded-full" />
+    <span className="flex h-7 w-7 items-center justify-center rounded-[8px] border border-border bg-card text-[var(--icon-foreground)]">
+      <span className="h-1.5 w-1.5 rounded-full bg-[var(--icon-dot)]" />
     </span>
   );
 }
@@ -60,7 +60,7 @@ function ItemIcon({ iconKey }: { iconKey?: string }) {
   }
 
   return (
-    <span className="home-icon-shell flex h-7 w-7 items-center justify-center rounded-[8px]">
+    <span className="flex h-7 w-7 items-center justify-center rounded-[8px] border border-border bg-card text-[var(--icon-foreground)]">
       <IconComponent className="opacity-85" size={14} />
     </span>
   );
@@ -75,7 +75,7 @@ function ItemMeta({ item }: { item: TimelineItemData }) {
     <span
       className={
         item.metaVariant === "pill"
-          ? "status-pill rounded-full px-2.5 py-1 text-[0.56rem] font-semibold uppercase tracking-[0.08em] text-primary-foreground"
+          ? "rounded-full bg-[var(--status-pill)] px-2.5 py-1 text-[0.56rem] font-semibold uppercase tracking-[0.08em] text-primary-foreground"
           : "text-muted-foreground pt-0.5 text-[0.76rem]"
       }
     >
@@ -89,7 +89,7 @@ function RowBody({ item }: { item: TimelineItemData }) {
     <>
       <ItemIcon iconKey={item.iconKey} />
       <div className="min-w-0 text-left">
-        <p className="text-[0.84rem] font-medium tracking-[-0.01em] text-foreground">
+        <p className="text-[1rem] font-medium leading-[1.6] tracking-[-0.02em] text-foreground sm:text-[1.08rem]">
           {item.title}
           {item.description ? (
             <span className="font-normal text-muted-foreground">
@@ -160,7 +160,7 @@ function ProjectDrawer({ item }: { item: TimelineItemData }) {
             </div>
           </div>
         </DrawerHeader>
-        <div className="scrollbar-hidden min-h-0 flex-1 overflow-y-auto">
+        <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           <div className="mx-auto w-full max-w-[44rem] px-4 py-6 sm:px-6 sm:py-7">
             <div className="grid gap-5 md:grid-cols-2">
               <div className="rounded-[1.1rem] border border-border bg-muted/30 p-4">

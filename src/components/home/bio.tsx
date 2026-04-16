@@ -11,13 +11,18 @@ export function BioSection({
   currentProject,
   links,
 }: BioSectionProps) {
+  const copyClassName =
+    "max-w-[34ch] text-[1rem] font-medium leading-[1.75] tracking-[-0.02em] text-[var(--intro)] sm:text-[1.08rem]";
+  const dottedLinkClassName =
+    "font-medium !text-blue-500 underline decoration-dotted decoration-[1.5px] underline-offset-[0.18em] decoration-[var(--border)] transition-colors hover:!text-muted-foreground hover:decoration-[var(--muted-foreground)]";
+
   return (
     <section className="space-y-7">
       {paragraphs.map((paragraph, index) => {
         const isLastParagraph = index === paragraphs.length - 1;
 
         return (
-          <p key={paragraph} className="home-copy">
+          <p key={paragraph} className={copyClassName}>
             <span>{paragraph}</span>
             {isLastParagraph ? (
               <>
@@ -40,7 +45,7 @@ export function BioSection({
         );
       })}
 
-      <p className="home-copy">
+      <p className={copyClassName}>
         <span>Reach me at </span>
         {links.map((link, index) => {
           const isLast = index === links.length - 1;
@@ -53,7 +58,7 @@ export function BioSection({
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noreferrer noopener" : undefined}
-                className="home-link !text-blue-500 transition-colors hover:!text-muted-foreground"
+                className={dottedLinkClassName}
               >
                 {link.label}
               </a>

@@ -14,11 +14,11 @@ interface ActivityBarsProps {
 }
 
 function activityClass(level: number) {
-  if (level >= 4) return "activity-level-4";
-  if (level === 3) return "activity-level-3";
-  if (level === 2) return "activity-level-2";
-  if (level === 1) return "activity-level-1";
-  return "activity-level-0";
+  if (level >= 4) return "bg-[var(--activity-4)]";
+  if (level === 3) return "bg-[var(--activity-3)]";
+  if (level === 2) return "bg-[var(--activity-2)]";
+  if (level === 1) return "bg-[var(--activity-1)]";
+  return "bg-[var(--activity-0)]";
 }
 
 function formatTooltipDate(value: string) {
@@ -81,7 +81,7 @@ export function ActivityBars({ days }: ActivityBarsProps) {
               aria-label={`${formatTooltipDate(day.date)}: ${day.count} commits`}
             />
 
-            <div className="home-tooltip pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 w-max max-w-[12rem] -translate-x-1/2 rounded-xl px-3 py-2 text-left opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100">
+            <div className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 w-max max-w-[12rem] -translate-x-1/2 rounded-xl bg-[var(--tooltip)] px-3 py-2 text-left text-[var(--tooltip-foreground)] opacity-0 shadow-[0_8px_30px_color-mix(in_oklab,var(--foreground)_22%,transparent)] transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100">
               <p className="text-[0.82rem] font-medium leading-5">
                 {formatTooltipDate(day.date)}
               </p>

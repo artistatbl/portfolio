@@ -15,7 +15,7 @@ export function SectionBlock({
 }: SectionBlockProps) {
   return (
     <section
-      className={`${divider ? "home-divider border-t pt-6" : ""} ${className}`.trim()}
+      className={`${divider ? "border-t border-[var(--line)] pt-6" : ""} ${className}`.trim()}
     >
       {title ? <SectionTitle>{title}</SectionTitle> : null}
       {children}
