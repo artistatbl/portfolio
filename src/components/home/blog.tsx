@@ -63,7 +63,7 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
         </DrawerTrigger>
       </li>
       <DrawerContent className="flex max-h-[88vh] w-full flex-col overflow-hidden rounded-t-[1.5rem] border-border bg-background">
-        <DrawerHeader className="border-b border-border px-4 pb-4 pt-4 text-left sm:px-6">
+        <DrawerHeader className="border-b border-border px-5 pb-4 pt-4 text-left sm:px-8 md:px-10">
           <div className="relative w-full">
             <DrawerClose asChild>
               <button
@@ -74,33 +74,31 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
                 <X size={14} />
               </button>
             </DrawerClose>
-            <div className="mx-auto w-full max-w-[40rem]">
-              <div className="mx-auto w-full max-w-[30rem] space-y-3 pr-10 text-left">
-                <div className="space-y-2">
-                  <DrawerTitle className="text-left text-[1.05rem] font-medium tracking-[-0.03em] text-foreground sm:text-[1.2rem]">
-                    {post.title}
-                  </DrawerTitle>
-                  {post.summary ? (
-                    <p className="max-w-[24rem] text-left text-[0.88rem] leading-6 text-muted-foreground">
-                      {post.summary}
-                    </p>
-                  ) : null}
-                </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  {formattedDate ? (
-                    <span className="text-[0.72rem] text-muted-foreground">
-                      {formattedDate}
-                    </span>
-                  ) : null}
-                </div>
+            <div className="mx-auto w-full max-w-[28rem] space-y-3 pr-10 pl-4 text-left sm:pl-5">
+              <div className="space-y-2">
+                <DrawerTitle className="text-left text-[1.1rem] font-medium tracking-[-0.03em] text-foreground sm:text-[1.24rem]">
+                  {post.title}
+                </DrawerTitle>
+                {post.summary ? (
+                  <p className="max-w-[26rem] text-left text-[0.92rem] leading-6 text-muted-foreground">
+                    {post.summary}
+                  </p>
+                ) : null}
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                {formattedDate ? (
+                  <span className="text-[0.72rem] text-muted-foreground">
+                    {formattedDate}
+                  </span>
+                ) : null}
               </div>
             </div>
           </div>
         </DrawerHeader>
         <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto w-full max-w-[40rem] px-4 py-7 sm:px-6 sm:py-8">
+          <div className="mx-auto w-full max-w-[28rem] px-5 py-7 pl-8 sm:px-8 sm:py-8 sm:pl-12 md:px-10">
             <article
-              className="blog-markdown mx-auto max-w-[30rem]"
+              className="blog-markdown w-full"
               dangerouslySetInnerHTML={{ __html: post.html }}
             />
           </div>

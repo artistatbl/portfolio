@@ -251,7 +251,7 @@ a {
   .blog-markdown h2,
   .blog-markdown h3 {
     color: var(--foreground);
-    font-size: 1rem;
+    font-size: 1.04rem;
     font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 1.55;
@@ -267,9 +267,9 @@ a {
   .blog-markdown p,
   .blog-markdown li {
     color: var(--intro);
-    font-size: 0.94rem;
+    font-size: 0.98rem;
     letter-spacing: -0.02em;
-    line-height: 1.95;
+    line-height: 1.9;
   }
 
   .blog-markdown ul,
