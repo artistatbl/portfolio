@@ -1,5 +1,6 @@
 import { ActivitySection } from "@/components/home/activity";
 import { BioSection } from "@/components/home/bio";
+import { ConnectSection } from "@/components/home/connect";
 import { ItemListSection } from "@/components/home/list";
 import { homepageContent } from "@/lib/content";
 import { getGitHubActivity } from "@/lib/github";
@@ -22,7 +23,6 @@ export async function PortfolioPage() {
           <BioSection
             paragraphs={narrativeParagraphs}
             currentProject={currentProject}
-            links={contactLinks}
           />
           <ActivitySection
             contributionWindowLabel={github.contributionWindowLabel}
@@ -36,6 +36,7 @@ export async function PortfolioPage() {
             interactive
             divider={false}
           />
+          <ConnectSection links={contactLinks} />
         </div>
       </div>
     </main>

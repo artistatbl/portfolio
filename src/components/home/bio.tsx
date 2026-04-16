@@ -1,17 +1,12 @@
 import { Anchor } from "@/components/ui/anchor";
-import type { ContactLink, CurrentProject } from "@/lib/content";
+import type { CurrentProject } from "@/lib/content";
 
 interface BioSectionProps {
   paragraphs: string[];
   currentProject: CurrentProject;
-  links: ContactLink[];
 }
 
-export function BioSection({
-  paragraphs,
-  currentProject,
-  links,
-}: BioSectionProps) {
+export function BioSection({ paragraphs, currentProject }: BioSectionProps) {
   const copyClassName =
     "max-w-[34ch] text-[1rem] font-normal leading-[1.75] tracking-[-0.02em] text-[var(--intro)] sm:text-[1.08rem]";
 
@@ -67,29 +62,6 @@ export function BioSection({
           </p>
         );
       })}
-
-      <p className={copyClassName}>
-        <span>Reach me at </span>
-        {links.map((link, index) => {
-          const isLast = index === links.length - 1;
-          const needsOr = index === links.length - 2 && links.length > 1;
-          const separator = isLast ? "." : needsOr ? " or dm on " : ", ";
-
-          return (
-            <span key={link.label}>
-              <Anchor
-                href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noreferrer noopener" : undefined}
-                variant="dotted"
-              >
-                {link.label}
-              </Anchor>
-              <span>{separator}</span>
-            </span>
-          );
-        })}
-      </p>
     </section>
   );
 }
