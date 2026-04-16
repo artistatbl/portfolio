@@ -15,10 +15,15 @@ export function BioSection({ paragraphs, currentProject }: BioSectionProps) {
       {paragraphs.map((paragraph, index) => {
         const isLastParagraph = index === paragraphs.length - 1;
         const isIntroParagraph = index === 0;
+        const introPrefix = "I'm Jean Daly";
+        const hasIntroPrefix = isIntroParagraph && paragraph.startsWith(introPrefix);
+        const introRemainder = hasIntroPrefix
+          ? paragraph.slice(introPrefix.length)
+          : paragraph;
 
         return (
           <p key={paragraph} className={copyClassName}>
-            {isIntroParagraph ? (
+            {hasIntroPrefix ? (
               <>
                 <span>I'm </span>
                 <a
@@ -35,9 +40,7 @@ export function BioSection({ paragraphs, currentProject }: BioSectionProps) {
                   </span>
                   <span>aly</span>
                 </a>
-                <span>
-                  {", a software developer who likes building products that feel simple, clear, and fast to use."}
-                </span>
+                <span>{introRemainder}</span>
               </>
             ) : (
               <span>{paragraph}</span>
@@ -50,7 +53,8 @@ export function BioSection({ paragraphs, currentProject }: BioSectionProps) {
                   href={currentProject.href}
                   target={currentProject.external ? "_blank" : undefined}
                   rel={currentProject.external ? "noreferrer noopener" : undefined}
-                  variant="plain"
+                  variant="dotted"
+                  className="font-semibold !text-foreground"
                 >
                   {currentProject.name}
                 </Anchor>

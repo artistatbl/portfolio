@@ -48,8 +48,9 @@ export interface HomepageContent {
 // Replace any temporary copy here as the real portfolio content becomes available.
 export const homepageContent: HomepageContent = {
   narrativeParagraphs: [
-    "I'm Jean Daly, a software developer who likes building products that feel simple, clear, and fast to use.",
-    "I care about useful software, thoughtful interfaces, and shipping things people actually come back to especially around AI tools and practical workflows.",
+    "I'm Jean Daly, a software developer focused on building products that feel simple, clear, and genuinely good to use.",
+    "I like working at the intersection of product, interface, and practical AI, turning messy ideas into tools that feel calm, fast, and easy to come back to.",
+    "I usually build with Next.js, AI tools, and Codex, focused on making practical products that feel fast and easy to use.",
   ],
   currentProject: {
     prefix: "I'm currently building ",
