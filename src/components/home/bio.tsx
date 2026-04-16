@@ -1,4 +1,8 @@
-import { Anchor } from "@/components/ui/anchor";
+import {
+  Anchor,
+  dottedUnderlineClassName,
+  dottedUnderlineHoverAccentClassName,
+} from "@/components/ui/anchor";
 import { cn } from "@/lib/utils";
 import type { CurrentProject } from "@/lib/content";
 
@@ -60,7 +64,10 @@ function renderParagraphWithEmphasis(paragraph: string) {
           target="_blank"
           rel="noreferrer noopener"
           variant="dotted"
-          className="select-none cursor-pointer font-semibold !text-foreground hover:!text-[var(--icon-dot)] hover:opacity-80"
+          className={cn(
+            "select-none cursor-pointer font-semibold !text-foreground",
+            dottedUnderlineHoverAccentClassName
+          )}
         >
           {part.text}
         </Anchor>
@@ -68,7 +75,9 @@ function renderParagraphWithEmphasis(paragraph: string) {
         <span
           key={`${part.text}-${index}`}
           className={cn(
-            "select-none cursor-default font-semibold text-foreground [background-image:radial-gradient(circle,var(--border)_0.7px,transparent_0.9px),linear-gradient(90deg,transparent_0%,transparent_35%,color-mix(in_oklab,var(--foreground)_22%,transparent)_50%,transparent_65%,transparent_100%)] [background-position:0_calc(100%-1px),-160%_100%] [background-repeat:repeat-x,no-repeat] [background-size:6px_2px,220%_2px] pb-[0.08em] transition-[color,background-position,opacity] duration-[200ms,420ms,200ms] hover:text-[var(--icon-dot)] hover:opacity-80 hover:[background-image:radial-gradient(circle,var(--icon-dot)_0.7px,transparent_0.9px),linear-gradient(90deg,transparent_0%,transparent_35%,color-mix(in_oklab,var(--foreground)_65%,white_35%)_50%,transparent_65%,transparent_100%)] hover:[background-position:0_calc(100%-1px),160%_100%]"
+            "select-none cursor-default font-semibold text-foreground",
+            dottedUnderlineClassName,
+            dottedUnderlineHoverAccentClassName
           )}
         >
           {part.text}
