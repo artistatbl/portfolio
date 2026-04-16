@@ -92,7 +92,7 @@ export function ActivityBars({ days }: ActivityBarsProps) {
                 </TooltipTrigger>
                 <TooltipContent
                   sideOffset={8}
-                  className="max-w-[12rem] rounded-xl border border-[var(--border)] bg-[var(--tooltip)] px-3 py-2 text-left text-[var(--tooltip-foreground)] shadow-none"
+                  className="max-w-[12rem] rounded-xl border border-[var(--border)] bg-foreground px-3 py-2 text-left text-background shadow-none"
                 >
                   <p className="text-[0.82rem] font-medium leading-5">
                     {formatTooltipDate(day.date)}
