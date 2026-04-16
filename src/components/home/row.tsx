@@ -3,9 +3,12 @@
 import { GitHubIcon } from "@/components/icons";
 import {
   BetterAuthIcon,
+  ClerkIcon,
+  ConvexIcon,
   NextjsIcon,
   ShadcnIcon,
   StripeIcon,
+  SupabaseIcon,
   VercelIcon,
 } from "@/components/icons";
 import {
@@ -38,13 +41,16 @@ type MixedIcon = ComponentType<IconProps> | LucideIcon;
 const iconMap: Record<string, MixedIcon> = {
   betterauth: BetterAuthIcon,
   blocks: Blocks,
+  clerk: ClerkIcon,
   code: Code2,
+  convex: ConvexIcon,
   folder: FolderOpen,
   github: GitHubIcon,
   nextjs: NextjsIcon,
   rocket: Rocket,
   shadcn: ShadcnIcon,
   stripe: StripeIcon,
+  supabase: SupabaseIcon,
   vercel: VercelIcon,
 };
 
