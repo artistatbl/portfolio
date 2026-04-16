@@ -28,6 +28,7 @@ export interface TimelineItemData {
   title: string;
   description?: string;
   iconKey?: string;
+  siteUrl?: string;
   href?: string;
   external?: boolean;
   meta?: string;
@@ -151,7 +152,7 @@ export const homepageContent: HomepageContent = {
       id: "featul-project",
       title: "Featul",
       description: "Customer feedback platform",
-      iconKey: "featul",
+      siteUrl: "https://featul.com",
       meta: "2026",
       detail: {
         summary:
@@ -167,6 +168,7 @@ export const homepageContent: HomepageContent = {
       id: "halttype-project",
       title: "Halttype",
       description: "Monkeytype alternative",
+      siteUrl: "https://halttype.com",
       iconKey: "folder",
       meta: "2025",
       detail: {
@@ -183,6 +185,7 @@ export const homepageContent: HomepageContent = {
       id: "dves-project",
       title: "Dves",
       description: "Open source AI chat",
+      siteUrl: "https://dves.space",
       iconKey: "code",
       meta: "2025",
       detail: {

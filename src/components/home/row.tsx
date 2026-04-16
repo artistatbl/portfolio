@@ -4,7 +4,6 @@ import {
   BetterAuthIcon,
   ClerkIcon,
   ConvexIcon,
-  FeatulLogoIcon,
   GitHubIcon,
   LinkIcon,
   NextjsIcon,
@@ -30,7 +29,7 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react";
-import type { ComponentType } from "react";
+import { useState, type ComponentType } from "react";
 import type { TimelineItemData } from "@/lib/content";
 
 type IconProps = {
@@ -46,7 +45,6 @@ const iconMap: Record<string, MixedIcon> = {
   clerk: ClerkIcon,
   code: Code2,
   convex: ConvexIcon,
-  featul: FeatulLogoIcon,
   folder: FolderOpen,
   github: GitHubIcon,
   nextjs: NextjsIcon,
@@ -59,13 +57,38 @@ const iconMap: Record<string, MixedIcon> = {
 
 function FallbackIcon() {
   return (
-    <span className="flex h-7 w-7 items-center justify-center rounded-x sborder border-border bg-card text-[var(--icon-foreground)]">
+    <span className="flex h-7 w-7 items-center justify-center rounded-xs border border-border bg-card text-[var(--icon-foreground)]">
       <span className="h-1.5 w-1.5 rounded-full bg-[var(--icon-dot)]" />
     </span>
   );
 }
 
-function ItemIcon({ iconKey }: { iconKey?: string }) {
+function FaviconIcon({ siteUrl }: { siteUrl: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return <FallbackIcon />;
+  }
+
+  const faviconUrl = `https://www.google.com/s2/favicons?sz=64&domain_url=${encodeURIComponent(siteUrl)}`;
+
+  return (
+    <span className="flex h-7 w-7 items-center justify-center rounded-xs border border-border bg-card">
+      <img
+        src={faviconUrl}
+        alt=""
+        className="h-4 w-4 rounded-[4px]"
+        onError={() => setFailed(true)}
+      />
+    </span>
+  );
+}
+
+function ItemIcon({ iconKey, siteUrl }: { iconKey?: string; siteUrl?: string }) {
+  if (siteUrl) {
+    return <FaviconIcon siteUrl={siteUrl} />;
+  }
+
   if (!iconKey) {
     return <FallbackIcon />;
   }
@@ -116,7 +139,7 @@ function ItemAction({ item }: { item: TimelineItemData }) {
 function RowBody({ item }: { item: TimelineItemData }) {
   return (
     <>
-      <ItemIcon iconKey={item.iconKey} />
+      <ItemIcon iconKey={item.iconKey} siteUrl={item.siteUrl} />
       <div className="min-w-0 text-left">
         <p className="text-[0.92rem] font-medium leading-[1.55] tracking-[-0.02em] text-foreground sm:text-[0.98rem]">
           {item.title}
