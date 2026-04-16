@@ -27,8 +27,7 @@ export function BioSection({
                   href={currentProject.href}
                   target={currentProject.external ? "_blank" : undefined}
                   rel={currentProject.external ? "noreferrer noopener" : undefined}
-                  className="font-semibold transition-colors hover:text-muted-foreground"
-                  style={{ color: "#3b82f6" }}
+                  className="font-semibold !text-blue-500 transition-colors hover:!text-muted-foreground"
                 >
                   {currentProject.name}
                 </a>
@@ -54,8 +53,7 @@ export function BioSection({
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noreferrer noopener" : undefined}
-                className="home-link transition-colors hover:text-muted-foreground"
-                style={{ color: "#3b82f6" }}
+                className="home-link !text-blue-500 transition-colors hover:!text-muted-foreground"
               >
                 {link.label}
               </a>
