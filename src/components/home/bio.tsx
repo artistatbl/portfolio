@@ -1,3 +1,4 @@
+import { Anchor } from "@/components/ui/anchor";
 import type { ContactLink, CurrentProject } from "@/lib/content";
 
 interface BioSectionProps {
@@ -13,29 +14,51 @@ export function BioSection({
 }: BioSectionProps) {
   const copyClassName =
     "max-w-[34ch] text-[1rem] font-medium leading-[1.75] tracking-[-0.02em] text-[var(--intro)] sm:text-[1.08rem]";
-  const dottedLinkClassName =
-    "font-medium !text-blue-500 underline decoration-dotted decoration-[1.5px] underline-offset-[0.18em] decoration-[var(--border)] transition-colors hover:!text-muted-foreground hover:decoration-[var(--muted-foreground)]";
 
   return (
     <section className="space-y-7">
       {paragraphs.map((paragraph, index) => {
         const isLastParagraph = index === paragraphs.length - 1;
+        const isIntroParagraph = index === 0;
 
         return (
           <p key={paragraph} className={copyClassName}>
-            <span>{paragraph}</span>
+            {isIntroParagraph ? (
+              <>
+                <span>I'm </span>
+                <a
+                  href="#"
+                  className="group inline-flex cursor-pointer font-semibold !text-blue-500 transition-colors"
+                >
+                  <span className="transition-colors group-hover:text-muted-foreground">
+                    J
+                  </span>
+                  <span>ean</span>
+                  <span>&nbsp;</span>
+                  <span className="transition-colors group-hover:text-muted-foreground">
+                    D
+                  </span>
+                  <span>aly</span>
+                </a>
+                <span>
+                  {", a software developer who likes building products that feel simple, clear, and fast to use."}
+                </span>
+              </>
+            ) : (
+              <span>{paragraph}</span>
+            )}
             {isLastParagraph ? (
               <>
                 <span> </span>
                 <span>{currentProject.prefix}</span>
-                <a
+                <Anchor
                   href={currentProject.href}
                   target={currentProject.external ? "_blank" : undefined}
                   rel={currentProject.external ? "noreferrer noopener" : undefined}
-                  className="font-semibold !text-blue-500 transition-colors hover:!text-muted-foreground"
+                  variant="plain"
                 >
                   {currentProject.name}
-                </a>
+                </Anchor>
                 {currentProject.suffix ? (
                   <span>{currentProject.suffix}</span>
                 ) : null}
@@ -54,14 +77,14 @@ export function BioSection({
 
           return (
             <span key={link.label}>
-              <a
+              <Anchor
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noreferrer noopener" : undefined}
-                className={dottedLinkClassName}
+                variant="dotted"
               >
                 {link.label}
-              </a>
+              </Anchor>
               <span>{separator}</span>
             </span>
           );
