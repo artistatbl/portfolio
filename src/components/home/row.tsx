@@ -89,7 +89,7 @@ function RowBody({ item }: { item: TimelineItemData }) {
     <>
       <ItemIcon iconKey={item.iconKey} />
       <div className="min-w-0 text-left">
-        <p className="text-[1rem] font-medium leading-[1.6] tracking-[-0.02em] text-foreground sm:text-[1.08rem]">
+        <p className="text-[0.92rem] font-medium leading-[1.55] tracking-[-0.02em] text-foreground sm:text-[0.98rem]">
           {item.title}
           {item.description ? (
             <span className="font-normal text-muted-foreground">
