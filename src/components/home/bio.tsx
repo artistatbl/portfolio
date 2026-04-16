@@ -7,12 +7,17 @@ interface BioSectionProps {
   currentProject: CurrentProject;
 }
 
-const EMPHASIS_ITEMS = [
+interface EmphasisItem {
+  text: string;
+  href?: string;
+}
+
+const EMPHASIS_ITEMS: EmphasisItem[] = [
   { text: "simple, clear" },
   { text: "practical AI" },
   { text: "Next.js", href: "https://nextjs.org" },
   { text: "Codex", href: "https://openai.com/codex/" },
-] as const;
+];
 
 function renderParagraphWithEmphasis(paragraph: string) {
   const parts: Array<{ text: string; emphasized: boolean; href?: string }> = [];
@@ -41,7 +46,7 @@ function renderParagraphWithEmphasis(paragraph: string) {
     parts.push({
       text: nextMatch.text,
       emphasized: true,
-      href: "href" in nextMatch ? nextMatch.href : undefined,
+      href: nextMatch.href,
     });
     remaining = remaining.slice(nextMatch.index + nextMatch.text.length);
   }
