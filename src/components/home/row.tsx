@@ -57,7 +57,7 @@ const iconMap: Record<string, MixedIcon> = {
 
 function FallbackIcon() {
   return (
-    <span className="flex h-7 w-7 items-center justify-center rounded-[8px] border border-border bg-card text-[var(--icon-foreground)]">
+    <span className="flex h-7 w-7 items-center justify-center rounded-x sborder border-border bg-card text-[var(--icon-foreground)]">
       <span className="h-1.5 w-1.5 rounded-full bg-[var(--icon-dot)]" />
     </span>
   );
@@ -75,7 +75,7 @@ function ItemIcon({ iconKey }: { iconKey?: string }) {
   }
 
   return (
-    <span className="flex h-7 w-7 items-center justify-center rounded-[8px] border border-border bg-card text-[var(--icon-foreground)]">
+    <span className="flex h-7 w-7 items-center justify-center rounded-xsborder border-border bg-card text-[var(--icon-foreground)]">
       <IconComponent className="opacity-85" size={14} />
     </span>
   );

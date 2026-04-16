@@ -22,7 +22,7 @@ function ContactIcon({ iconKey }: { iconKey?: ContactLink["iconKey"] }) {
   const size = iconKey === "github" ? 16 : 14;
 
   return (
-    <span className="flex h-7 w-7 items-center justify-center rounded-[8px] border border-border bg-card text-[var(--icon-foreground)]">
+    <span className="flex h-7 w-7 items-center justify-center rounded-xs border border-border bg-card text-[var(--icon-foreground)]">
       {IconComponent ? (
         <IconComponent className="opacity-85" size={size} />
       ) : (

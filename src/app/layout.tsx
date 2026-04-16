@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, IBM_Plex_Mono } from "next/font/google";
 
+import { ThemeScript, ThemeToggle } from "@/components/ui/theme";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -25,9 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className={`${dmSans.variable} ${ibmPlexMono.variable} antialiased`}>
         {children}
+        <ThemeToggle />
       </body>
     </html>
   );
