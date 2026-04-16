@@ -1,7 +1,9 @@
 import { ActivitySection } from "@/components/home/activity";
 import { BioSection } from "@/components/home/bio";
+import { BlogSection } from "@/components/home/blog";
 import { ConnectSection } from "@/components/home/connect";
 import { ItemListSection } from "@/components/home/list";
+import { getBlogPosts } from "@/lib/blog";
 import { homepageContent } from "@/lib/content";
 import { getGitHubActivity } from "@/lib/github";
 
@@ -14,7 +16,10 @@ export async function PortfolioPage() {
     experienceItems,
     projectItems,
   } = homepageContent;
-  const activity = await getGitHubActivity(github.username, 30);
+  const [activity, posts] = await Promise.all([
+    getGitHubActivity(github.username, 30),
+    getBlogPosts(),
+  ]);
 
   return (
     <main className="min-h-screen px-5 py-8 text-foreground sm:px-8 md:px-10 md:py-12">
@@ -35,6 +40,7 @@ export async function PortfolioPage() {
             interactive
             divider={false}
           />
+          <BlogSection posts={posts} />
           <ItemListSection title="Tools" items={experienceItems} />
           <ConnectSection links={contactLinks} />
         </div>
