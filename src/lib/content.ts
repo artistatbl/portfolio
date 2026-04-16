@@ -28,6 +28,8 @@ export interface TimelineItemData {
   title: string;
   description?: string;
   iconKey?: string;
+  href?: string;
+  external?: boolean;
   meta?: string;
   metaVariant?: "plain" | "pill";
   detail?: ProjectDetail;
@@ -84,48 +86,64 @@ export const homepageContent: HomepageContent = {
       title: "Stripe",
       description: "Payments and billing",
       iconKey: "stripe",
+      href: "https://stripe.com",
+      external: true,
     },
     {
       id: "vercel-tool",
       title: "Vercel",
       description: "Hosting and deployment",
       iconKey: "vercel",
+      href: "https://vercel.com",
+      external: true,
     },
     {
       id: "nextjs-tool",
       title: "Next.js",
       description: "App router and product frontend",
       iconKey: "nextjs",
+      href: "https://nextjs.org",
+      external: true,
     },
     {
       id: "betterauth-tool",
       title: "Better Auth",
       description: "Authentication",
       iconKey: "betterauth",
+      href: "https://better-auth.com",
+      external: true,
     },
     {
       id: "shadcn-tool",
       title: "shadcn/ui",
       description: "Interface components",
       iconKey: "shadcn",
+      href: "https://ui.shadcn.com",
+      external: true,
     },
     {
       id: "convex-tool",
       title: "Convex",
       description: "Backend and realtime data",
       iconKey: "convex",
+      href: "https://convex.dev",
+      external: true,
     },
     {
       id: "clerk-tool",
       title: "Clerk",
       description: "Auth and user management",
       iconKey: "clerk",
+      href: "https://clerk.com",
+      external: true,
     },
     {
       id: "supabase-tool",
       title: "Supabase",
       description: "Database and storage",
       iconKey: "supabase",
+      href: "https://supabase.com",
+      external: true,
     },
   ],
   projectItems: [

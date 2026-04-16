@@ -1,10 +1,11 @@
 "use client";
 
-import { GitHubIcon } from "@/components/icons";
 import {
   BetterAuthIcon,
   ClerkIcon,
   ConvexIcon,
+  GitHubIcon,
+  LinkIcon,
   NextjsIcon,
   ShadcnIcon,
   StripeIcon,
@@ -98,6 +99,18 @@ function ItemMeta({ item }: { item: TimelineItemData }) {
   );
 }
 
+function ItemAction({ item }: { item: TimelineItemData }) {
+  if (item.href && !item.meta) {
+    return (
+      <span className="pointer-events-none flex items-center justify-end pt-0.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+        <LinkIcon size={14} />
+      </span>
+    );
+  }
+
+  return <ItemMeta item={item} />;
+}
+
 function RowBody({ item }: { item: TimelineItemData }) {
   return (
     <>
@@ -113,14 +126,29 @@ function RowBody({ item }: { item: TimelineItemData }) {
           ) : null}
         </p>
       </div>
-      <ItemMeta item={item} />
+      <ItemAction item={item} />
     </>
   );
 }
 
 function StaticRow({ item }: { item: TimelineItemData }) {
+  if (item.href) {
+    return (
+      <li>
+        <a
+          href={item.href}
+          target={item.external ? "_blank" : undefined}
+          rel={item.external ? "noreferrer noopener" : undefined}
+          className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-sm px-1.5 py-3 transition-colors hover:bg-muted/60"
+        >
+          <RowBody item={item} />
+        </a>
+      </li>
+    );
+  }
+
   return (
-    <li className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-sm px-1.5 py-3 transition-colors hover:bg-muted/60">
+    <li className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-sm px-1.5 py-3 transition-colors hover:bg-muted/60">
       <RowBody item={item} />
     </li>
   );
@@ -136,7 +164,7 @@ function ProjectDrawer({ item }: { item: TimelineItemData }) {
         <DrawerTrigger asChild>
           <button
             type="button"
-            className="grid w-full cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-sm px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
+            className="group grid w-full cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-sm px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
           >
             <RowBody item={item} />
           </button>
