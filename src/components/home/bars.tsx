@@ -56,7 +56,7 @@ export function ActivityBars({ days }: ActivityBarsProps) {
 
   return (
     <TooltipProvider delayDuration={0}>
-      <div className="grid grid-cols-[repeat(30,minmax(0,1fr))] items-end gap-1.5">
+      <div className="grid grid-cols-[repeat(30,minmax(0,1fr))] items-end gap-1">
         {days.map((day, index) => {
           const distance = activeIndex === null ? null : Math.abs(activeIndex - index);
           const isActive = activeIndex === index;
@@ -75,7 +75,7 @@ export function ActivityBars({ days }: ActivityBarsProps) {
                 <TooltipTrigger asChild>
                   <button
                     type="button"
-                    className={`block w-full rounded-[4px] ${activityClass(
+                    className={`block w-full rounded-[3px] ${activityClass(
                       day.level
                     )} h-6 cursor-pointer outline-none will-change-transform transition-transform ${
                       isActive ? "brightness-[0.92] saturate-[1.08]" : ""
