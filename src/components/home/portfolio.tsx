@@ -29,13 +29,13 @@ export async function PortfolioPage() {
             contributionCountLabel={`${activity.total} commits`}
             days={activity.days}
           />
-          <ItemListSection title="Experience" items={experienceItems} />
           <ItemListSection
             title="Projects"
             items={projectItems}
             interactive
             divider={false}
           />
+          <ItemListSection title="Tools" items={experienceItems} />
           <ConnectSection links={contactLinks} />
         </div>
       </div>

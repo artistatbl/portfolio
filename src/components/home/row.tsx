@@ -2,6 +2,13 @@
 
 import { GitHubIcon } from "@/components/icons";
 import {
+  BetterAuthIcon,
+  NextjsIcon,
+  ShadcnIcon,
+  StripeIcon,
+  VercelIcon,
+} from "@/components/icons";
+import {
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -12,11 +19,9 @@ import {
 } from "@/components/ui/drawer";
 import {
   Blocks,
-  BriefcaseBusiness,
   Code2,
   FolderOpen,
   Rocket,
-  SquareTerminal,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -31,13 +36,16 @@ type IconProps = {
 type MixedIcon = ComponentType<IconProps> | LucideIcon;
 
 const iconMap: Record<string, MixedIcon> = {
+  betterauth: BetterAuthIcon,
   blocks: Blocks,
-  briefcase: BriefcaseBusiness,
   code: Code2,
   folder: FolderOpen,
   github: GitHubIcon,
+  nextjs: NextjsIcon,
   rocket: Rocket,
-  terminal: SquareTerminal,
+  shadcn: ShadcnIcon,
+  stripe: StripeIcon,
+  vercel: VercelIcon,
 };
 
 function FallbackIcon() {
