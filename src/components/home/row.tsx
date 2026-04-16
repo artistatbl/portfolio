@@ -57,7 +57,7 @@ const iconMap: Record<string, MixedIcon> = {
 
 function FallbackIcon() {
   return (
-    <span className="flex h-7 w-7 items-center justify-center rounded-xs border border-border bg-card text-[var(--icon-foreground)]">
+    <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card text-[var(--icon-foreground)]">
       <span className="h-1.5 w-1.5 rounded-full bg-[var(--icon-dot)]" />
     </span>
   );
@@ -73,7 +73,7 @@ function FaviconIcon({ siteUrl }: { siteUrl: string }) {
   const faviconUrl = `https://www.google.com/s2/favicons?sz=64&domain_url=${encodeURIComponent(siteUrl)}`;
 
   return (
-    <span className="flex h-7 w-7 items-center justify-center rounded-xs border border-border bg-card">
+    <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card">
       <img
         src={faviconUrl}
         alt=""
@@ -100,7 +100,7 @@ function ItemIcon({ iconKey, siteUrl }: { iconKey?: string; siteUrl?: string }) 
   }
 
   return (
-    <span className="flex h-7 w-7 items-center justify-center rounded-xs border border-border bg-card text-[var(--icon-foreground)]">
+    <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card text-[var(--icon-foreground)]">
       <IconComponent className="opacity-85" size={14} />
     </span>
   );
