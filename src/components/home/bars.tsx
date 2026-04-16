@@ -73,7 +73,7 @@ export function ActivityBars({ days }: ActivityBarsProps) {
               }`}
               style={{
                 transform: `scaleX(${scaleX(distance)}) scaleY(${scaleY(distance)})`,
-                transformOrigin: "bottom center",
+                transformOrigin: "center center",
                 transitionDuration: "220ms",
                 transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
                 transitionDelay,
