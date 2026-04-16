@@ -7,20 +7,21 @@ interface BioSectionProps {
   currentProject: CurrentProject;
 }
 
-const EMPHASIS_PHRASES = [
-  "simple, clear",
-  "practical AI",
-  "Next.js, AI tools, and Codex",
-];
+const EMPHASIS_ITEMS = [
+  { text: "simple, clear" },
+  { text: "practical AI" },
+  { text: "Next.js", href: "https://nextjs.org" },
+  { text: "Codex", href: "https://openai.com/codex/" },
+] as const;
 
 function renderParagraphWithEmphasis(paragraph: string) {
-  const parts: Array<{ text: string; emphasized: boolean }> = [];
+  const parts: Array<{ text: string; emphasized: boolean; href?: string }> = [];
   let remaining = paragraph;
 
   while (remaining.length > 0) {
-    const nextMatch = EMPHASIS_PHRASES.map((phrase) => ({
-      phrase,
-      index: remaining.indexOf(phrase),
+    const nextMatch = EMPHASIS_ITEMS.map((item) => ({
+      ...item,
+      index: remaining.indexOf(item.text),
     }))
       .filter(({ index }) => index >= 0)
       .sort((left, right) => left.index - right.index)[0];
@@ -37,20 +38,37 @@ function renderParagraphWithEmphasis(paragraph: string) {
       });
     }
 
-    parts.push({ text: nextMatch.phrase, emphasized: true });
-    remaining = remaining.slice(nextMatch.index + nextMatch.phrase.length);
+    parts.push({
+      text: nextMatch.text,
+      emphasized: true,
+      href: nextMatch.href,
+    });
+    remaining = remaining.slice(nextMatch.index + nextMatch.text.length);
   }
 
   return parts.map((part, index) =>
     part.emphasized ? (
-      <span
-        key={`${part.text}-${index}`}
-        className={cn(
-          "select-none font-semibold text-foreground transition-colors duration-200 [background-image:radial-gradient(circle,var(--border)_0.7px,transparent_0.9px)] [background-position:0_calc(100%-1px)] [background-repeat:repeat-x] [background-size:6px_2px] pb-[0.08em] hover:text-[var(--icon-dot)] hover:[background-image:radial-gradient(circle,var(--icon-dot)_0.7px,transparent_0.9px)]"
-        )}
-      >
-        {part.text}
-      </span>
+      part.href ? (
+        <Anchor
+          key={`${part.text}-${index}`}
+          href={part.href}
+          target="_blank"
+          rel="noreferrer noopener"
+          variant="dotted"
+          className="select-none cursor-pointer font-semibold !text-foreground hover:!text-[var(--icon-dot)] hover:opacity-80"
+        >
+          {part.text}
+        </Anchor>
+      ) : (
+        <span
+          key={`${part.text}-${index}`}
+          className={cn(
+            "select-none font-semibold text-foreground transition-colors duration-200 [background-image:radial-gradient(circle,var(--border)_0.7px,transparent_0.9px)] [background-position:0_calc(100%-1px)] [background-repeat:repeat-x] [background-size:6px_2px] pb-[0.08em] hover:text-[var(--icon-dot)] hover:[background-image:radial-gradient(circle,var(--icon-dot)_0.7px,transparent_0.9px)]"
+          )}
+        >
+          {part.text}
+        </span>
+      )
     ) : (
       <span key={`${part.text}-${index}`}>{part.text}</span>
     )
