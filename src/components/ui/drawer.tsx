@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Drawer as DrawerPrimitive } from "vaul"
+import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -24,9 +25,22 @@ function DrawerPortal({
 }
 
 function DrawerClose({
+  className,
+  children,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Close>) {
-  return <DrawerPrimitive.Close data-slot="drawer-close" {...props} />
+  return (
+    <DrawerPrimitive.Close
+      data-slot="drawer-close"
+      className={cn(
+        "absolute right-0 top-0 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground",
+        className
+      )}
+      {...props}
+    >
+      {children ?? <X size={14} />}
+    </DrawerPrimitive.Close>
+  )
 }
 
 function DrawerOverlay({
@@ -77,7 +91,7 @@ function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="drawer-header"
       className={cn(
-        "flex flex-col gap-0.5 p-4 group-data-[vaul-drawer-direction=bottom]/drawer-content:text-center group-data-[vaul-drawer-direction=top]/drawer-content:text-center md:gap-1.5 md:text-left",
+        "relative flex flex-col gap-0.5 p-4 group-data-[vaul-drawer-direction=bottom]/drawer-content:text-center group-data-[vaul-drawer-direction=top]/drawer-content:text-center md:gap-1.5 md:text-left",
         className
       )}
       {...props}

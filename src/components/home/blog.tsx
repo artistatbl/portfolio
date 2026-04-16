@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/drawer";
 import { SectionBlock } from "@/components/home/block";
 import type { BlogPost } from "@/lib/blog";
-import { FileText, X } from "lucide-react";
+import { FileText } from "lucide-react";
 
 interface BlogSectionProps {
   posts: BlogPost[];
@@ -64,16 +64,8 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
       </li>
       <DrawerContent className="flex max-h-[88vh] w-full flex-col overflow-hidden rounded-t-[1.5rem] border-border bg-background">
         <DrawerHeader className="border-b border-border px-5 pb-4 pt-4 text-left sm:px-8 md:px-10">
-          <div className="relative w-full">
-            <DrawerClose asChild>
-              <button
-                type="button"
-                aria-label="Close blog post"
-                className="absolute right-0 top-0 flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                <X size={14} />
-              </button>
-            </DrawerClose>
+          <div className="w-full">
+            <DrawerClose aria-label="Close blog post" />
             <div className="mx-auto w-full max-w-[28rem] space-y-3 pr-10 pl-4 text-left sm:pl-5">
               <div className="space-y-2">
                 <DrawerTitle className="text-left text-[1.1rem] font-medium tracking-[-0.03em] text-foreground sm:text-[1.24rem]">

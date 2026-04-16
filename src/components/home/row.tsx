@@ -26,7 +26,6 @@ import {
   Code2,
   FolderOpen,
   Rocket,
-  X,
   type LucideIcon,
 } from "lucide-react";
 import { useState, type ComponentType } from "react";
@@ -197,6 +196,7 @@ function ProjectDrawer({ item }: { item: TimelineItemData }) {
       </li>
       <DrawerContent className="flex max-h-[85vh] w-full flex-col overflow-hidden rounded-t-[1.5rem] border-border bg-background">
         <DrawerHeader className="border-b border-border px-4 pb-4 pt-4 text-left sm:px-6">
+          <DrawerClose aria-label="Close project details" />
           <div className="flex w-full items-center justify-between gap-4">
             <div className="mx-auto flex w-full max-w-[44rem] min-w-0 items-center gap-3">
               <div className="flex min-w-0 items-center gap-2">
@@ -213,17 +213,6 @@ function ProjectDrawer({ item }: { item: TimelineItemData }) {
               <span className="rounded-full border border-border px-3 py-1 text-[0.68rem] text-muted-foreground">
                 Mock project
               </span>
-            </div>
-            <div className="shrink-0">
-              <DrawerClose asChild>
-                <button
-                  type="button"
-                  aria-label="Close project details"
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                >
-                  <X size={14} />
-                </button>
-              </DrawerClose>
             </div>
           </div>
         </DrawerHeader>
