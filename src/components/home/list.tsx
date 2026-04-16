@@ -17,7 +17,7 @@ export function ItemListSection({
 }: ItemListSectionProps) {
   return (
     <SectionBlock title={title} divider={divider}>
-      <ul className="[&>*]:border-t [&>*]:border-[var(--line)]">
+      <ul className="space-y-1.5">
         {items.map((item) => (
           <ItemRow key={item.id} item={item} interactive={interactive} />
         ))}

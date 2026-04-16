@@ -2,6 +2,7 @@ export interface ContactLink {
   label: string;
   href: string;
   external?: boolean;
+  iconKey?: "github" | "mail" | "x";
 }
 
 export interface CurrentProject {
@@ -56,13 +57,21 @@ export const homepageContent: HomepageContent = {
   },
   contactLinks: [
     {
+      label: "GitHub",
+      href: "https://github.com/artistatbl",
+      external: true,
+      iconKey: "github",
+    },
+    {
       label: "hi@jeandaly.dev",
       href: "mailto:hi@jeandaly.dev",
+      iconKey: "mail",
     },
     {
       label: "x.com",
       href: "https://x.com/yvesdalyy",
       external: true,
+      iconKey: "x",
     },
   ],
   github: {
