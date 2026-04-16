@@ -33,7 +33,7 @@ function DrawerClose({
     <DrawerPrimitive.Close
       data-slot="drawer-close"
       className={cn(
-        "absolute right-0 top-0 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground",
+        "absolute right-4 top-0 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground sm:right-5",
         className
       )}
       {...props}
