@@ -77,7 +77,7 @@ export function ActivityBars({ days }: ActivityBarsProps) {
                     type="button"
                     className={`block w-full rounded-[4px] ${activityClass(
                       day.level
-                    )} h-6 outline-none will-change-transform transition-transform ${
+                    )} h-6 cursor-pointer outline-none will-change-transform transition-transform ${
                       isActive ? "brightness-[0.92] saturate-[1.08]" : ""
                     }`}
                     style={{
