@@ -27,8 +27,8 @@ export function BioSection({
               <>
                 <span>I'm </span>
                 <a
-                  href="#"
-                  className="group inline-flex cursor-pointer font-semibold !text-blue-500 transition-colors"
+                  href="/"
+                  className="group inline-flex cursor-pointer font-semibold !text-foreground transition-colors"
                 >
                   <span className="transition-colors group-hover:text-muted-foreground">
                     J

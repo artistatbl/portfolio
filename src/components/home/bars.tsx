@@ -14,11 +14,11 @@ interface ActivityBarsProps {
 }
 
 function activityClass(level: number) {
-  if (level >= 4) return "bg-[var(--activity-4)]";
-  if (level === 3) return "bg-[var(--activity-3)]";
-  if (level === 2) return "bg-[var(--activity-2)]";
-  if (level === 1) return "bg-[var(--activity-1)]";
-  return "bg-[var(--activity-0)]";
+  if (level >= 4) return "bg-[#216e39]";
+  if (level === 3) return "bg-[#30a14e]";
+  if (level === 2) return "bg-[#40c463]";
+  if (level === 1) return "bg-[#9be9a8]";
+  return "bg-[#ebedf0]";
 }
 
 function formatTooltipDate(value: string) {
