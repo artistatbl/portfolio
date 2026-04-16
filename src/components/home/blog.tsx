@@ -64,40 +64,37 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
       </li>
       <DrawerContent className="flex max-h-[88vh] w-full flex-col overflow-hidden rounded-t-[1.5rem] border-border bg-background">
         <DrawerHeader className="border-b border-border px-4 pb-4 pt-4 text-left sm:px-6">
-          <div className="mx-auto flex w-full max-w-[40rem] items-start justify-between gap-4">
-            <div className="min-w-0 flex-1 space-y-3">
-              <div className="flex flex-wrap items-center gap-2">
-                {post.tag ? (
-                  <span className="rounded-full border border-border px-3 py-1 text-[0.68rem] text-muted-foreground">
-                    {post.tag}
-                  </span>
-                ) : null}
-                {formattedDate ? (
-                  <span className="text-[0.72rem] text-muted-foreground">
-                    {formattedDate}
-                  </span>
-                ) : null}
+          <div className="mx-auto w-full max-w-[40rem]">
+            <div className="relative">
+              <div className="mx-auto w-full max-w-[30rem] space-y-3 text-left">
+                <div className="space-y-2">
+                  <DrawerTitle className="text-left text-[1.05rem] font-medium tracking-[-0.03em] text-foreground sm:text-[1.2rem]">
+                    {post.title}
+                  </DrawerTitle>
+                  {post.summary ? (
+                    <p className="max-w-[24rem] text-left text-[0.88rem] leading-6 text-muted-foreground">
+                      {post.summary}
+                    </p>
+                    ) : null}
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  {formattedDate ? (
+                    <span className="text-[0.72rem] text-muted-foreground">
+                      {formattedDate}
+                    </span>
+                  ) : null}
+                </div>
               </div>
-              <div className="space-y-2">
-                <DrawerTitle className="max-w-[30rem] text-[1.05rem] font-medium tracking-[-0.03em] text-foreground sm:text-[1.2rem]">
-                  {post.title}
-                </DrawerTitle>
-                {post.summary ? (
-                  <p className="max-w-[30rem] text-[0.88rem] leading-6 text-muted-foreground">
-                    {post.summary}
-                  </p>
-                ) : null}
-              </div>
+              <DrawerClose asChild>
+                <button
+                  type="button"
+                  aria-label="Close blog post"
+                  className="absolute right-0 top-0 flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  <X size={14} />
+                </button>
+              </DrawerClose>
             </div>
-            <DrawerClose asChild>
-              <button
-                type="button"
-                aria-label="Close blog post"
-                className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                <X size={14} />
-              </button>
-            </DrawerClose>
           </div>
         </DrawerHeader>
         <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
