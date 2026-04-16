@@ -278,6 +278,18 @@ a {
     padding-left: 1.1rem;
   }
 
+  .blog-markdown ul {
+    list-style: disc;
+  }
+
+  .blog-markdown ol {
+    list-style: decimal;
+  }
+
+  .blog-markdown li::marker {
+    color: var(--muted-foreground);
+  }
+
   .blog-markdown li + li {
     margin-top: 0.6rem;
   }
