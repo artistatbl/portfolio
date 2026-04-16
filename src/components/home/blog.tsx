@@ -43,7 +43,7 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
         <DrawerTrigger asChild>
           <button
             type="button"
-            className="group grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2 rounded-md px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
+            className="group grid w-full cursor-pointer grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-2 rounded-md px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
           >
             <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card text-[var(--icon-foreground)]">
               <FileText size={14} />
@@ -56,9 +56,6 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
                 {post.summary}
               </p>
             </div>
-            <span className="rounded-full border border-border px-2.5 py-1 text-[0.68rem] text-muted-foreground transition-colors group-hover:border-foreground/20 group-hover:text-foreground">
-              Full
-            </span>
           </button>
         </DrawerTrigger>
       </li>
