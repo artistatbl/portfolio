@@ -151,7 +151,7 @@ export const homepageContent: HomepageContent = {
       id: "featul-project",
       title: "Featul",
       description: "Customer feedback platform",
-      iconKey: "rocket",
+      iconKey: "featul",
       meta: "2026",
       detail: {
         summary:
