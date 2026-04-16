@@ -46,7 +46,7 @@ function renderParagraphWithEmphasis(paragraph: string) {
       <span
         key={`${part.text}-${index}`}
         className={cn(
-          "select-none font-semibold text-foreground transition-colors duration-200 hover:text-[var(--icon-dot)]"
+          "select-none font-semibold text-foreground transition-colors duration-200 [background-image:radial-gradient(circle,var(--border)_0.7px,transparent_0.9px)] [background-position:0_calc(100%-1px)] [background-repeat:repeat-x] [background-size:6px_2px] pb-[0.08em] hover:text-[var(--icon-dot)] hover:[background-image:radial-gradient(circle,var(--icon-dot)_0.7px,transparent_0.9px)]"
         )}
       >
         {part.text}
