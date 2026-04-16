@@ -120,7 +120,7 @@ function RowBody({ item }: { item: TimelineItemData }) {
 
 function StaticRow({ item }: { item: TimelineItemData }) {
   return (
-    <li className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-[0.9rem] px-1.5 py-3 transition-colors hover:bg-muted/60">
+    <li className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-sm px-1.5 py-3 transition-colors hover:bg-muted/60">
       <RowBody item={item} />
     </li>
   );
@@ -136,7 +136,7 @@ function ProjectDrawer({ item }: { item: TimelineItemData }) {
         <DrawerTrigger asChild>
           <button
             type="button"
-            className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-[0.9rem] px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
+            className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-sm px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
           >
             <RowBody item={item} />
           </button>
