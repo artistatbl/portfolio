@@ -13,7 +13,7 @@ export function BioSection({
   links,
 }: BioSectionProps) {
   const copyClassName =
-    "max-w-[34ch] text-[1rem] font-medium leading-[1.75] tracking-[-0.02em] text-[var(--intro)] sm:text-[1.08rem]";
+    "max-w-[34ch] text-[1rem] font-normal leading-[1.75] tracking-[-0.02em] text-[var(--intro)] sm:text-[1.08rem]";
 
   return (
     <section className="space-y-7">

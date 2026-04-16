@@ -18,7 +18,7 @@ function activityClass(level: number) {
   if (level === 3) return "bg-[#30a14e]";
   if (level === 2) return "bg-[#40c463]";
   if (level === 1) return "bg-[#9be9a8]";
-  return "bg-[#ebedf0]";
+  return "bg-[#d8dee4]";
 }
 
 function formatTooltipDate(value: string) {
