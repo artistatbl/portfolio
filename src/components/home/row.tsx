@@ -139,7 +139,7 @@ function StaticRow({ item }: { item: TimelineItemData }) {
           href={item.href}
           target={item.external ? "_blank" : undefined}
           rel={item.external ? "noreferrer noopener" : undefined}
-          className="group grid cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-sm px-1.5 py-3 transition-colors hover:bg-muted/60"
+          className="group grid cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-md px-1.5 py-3 transition-colors hover:bg-muted/60"
         >
           <RowBody item={item} />
         </a>
@@ -148,7 +148,7 @@ function StaticRow({ item }: { item: TimelineItemData }) {
   }
 
   return (
-    <li className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-sm px-1.5 py-3 transition-colors hover:bg-muted/60">
+    <li className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-md px-1.5 py-3 transition-colors hover:bg-muted/60">
       <RowBody item={item} />
     </li>
   );
@@ -164,7 +164,7 @@ function ProjectDrawer({ item }: { item: TimelineItemData }) {
         <DrawerTrigger asChild>
           <button
             type="button"
-            className="group grid w-full cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-sm px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
+            className="group grid w-full cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 rounded-md px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
           >
             <RowBody item={item} />
           </button>

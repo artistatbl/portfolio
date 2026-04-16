@@ -46,7 +46,7 @@ export function ConnectSection({ links }: ConnectSectionProps) {
               href={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noreferrer noopener" : undefined}
-              className="grid w-full grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-1 rounded-sm px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
+              className="grid w-full grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-1 rounded-md px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
             >
               <ContactIcon iconKey={link.iconKey} />
               <div className="min-w-0">
