@@ -4,6 +4,14 @@ export interface ContactLink {
   external?: boolean;
 }
 
+export interface CurrentProject {
+  prefix: string;
+  name: string;
+  href: string;
+  suffix?: string;
+  external?: boolean;
+}
+
 export interface GitHubConfig {
   username: string;
   contributionWindowLabel: string;
@@ -26,6 +34,7 @@ export interface TimelineItemData {
 
 export interface HomepageContent {
   narrativeParagraphs: string[];
+  currentProject: CurrentProject;
   contactLinks: ContactLink[];
   github: GitHubConfig;
   experienceItems: TimelineItemData[];
@@ -37,8 +46,14 @@ export const homepageContent: HomepageContent = {
   narrativeParagraphs: [
     "I'm Jean Daly, a software developer who likes building products that feel simple, clear, and fast to use.",
     "I care about useful software, thoughtful interfaces, and shipping things people actually come back to especially around AI tools and practical workflows.",
-    "Right now I'm building Featul at featul.com.",
   ],
+  currentProject: {
+    prefix: "I'm currently building ",
+    name: "Featul",
+    href: "https://featul.com",
+    suffix: ".",
+    external: true,
+  },
   contactLinks: [
     {
       label: "hi@jeandaly.dev",
