@@ -47,7 +47,7 @@ export function ThemeToggle() {
         type="button"
         aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
         onClick={toggleTheme}
-        className="flex h-9 w-9 cursor-pointer items-center justify-center text-foreground transition-colors hover:text-muted-foreground"
+        className="flex h-9 w-9 cursor-pointer items-center justify-center text-[var(--intro)] transition-colors hover:text-[var(--intro)]"
       >
         <span
           className={`transition-transform duration-300 ${
