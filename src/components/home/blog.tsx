@@ -96,11 +96,13 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
           </div>
         </DrawerHeader>
         <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-          <div className="mx-auto w-full max-w-[28rem] px-5 py-7 pl-8 sm:px-8 sm:py-8 sm:pl-12 md:px-10">
-            <article
-              className="blog-markdown w-full"
-              dangerouslySetInnerHTML={{ __html: post.html }}
-            />
+          <div className="py-7 sm:py-8">
+            <div className="mx-auto w-full max-w-[28rem] pl-4 text-left sm:pl-5">
+              <article
+                className="blog-markdown w-full"
+                dangerouslySetInnerHTML={{ __html: post.html }}
+              />
+            </div>
           </div>
         </div>
       </DrawerContent>
