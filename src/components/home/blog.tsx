@@ -64,9 +64,18 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
       </li>
       <DrawerContent className="flex max-h-[88vh] w-full flex-col overflow-hidden rounded-t-[1.5rem] border-border bg-background">
         <DrawerHeader className="border-b border-border px-4 pb-4 pt-4 text-left sm:px-6">
-          <div className="mx-auto w-full max-w-[40rem]">
-            <div className="relative">
-              <div className="mx-auto w-full max-w-[30rem] space-y-3 text-left">
+          <div className="relative w-full">
+            <DrawerClose asChild>
+              <button
+                type="button"
+                aria-label="Close blog post"
+                className="absolute right-0 top-0 flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                <X size={14} />
+              </button>
+            </DrawerClose>
+            <div className="mx-auto w-full max-w-[40rem]">
+              <div className="mx-auto w-full max-w-[30rem] space-y-3 pr-10 text-left">
                 <div className="space-y-2">
                   <DrawerTitle className="text-left text-[1.05rem] font-medium tracking-[-0.03em] text-foreground sm:text-[1.2rem]">
                     {post.title}
@@ -75,7 +84,7 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
                     <p className="max-w-[24rem] text-left text-[0.88rem] leading-6 text-muted-foreground">
                       {post.summary}
                     </p>
-                    ) : null}
+                  ) : null}
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                   {formattedDate ? (
@@ -85,15 +94,6 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
                   ) : null}
                 </div>
               </div>
-              <DrawerClose asChild>
-                <button
-                  type="button"
-                  aria-label="Close blog post"
-                  className="absolute right-0 top-0 flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                >
-                  <X size={14} />
-                </button>
-              </DrawerClose>
             </div>
           </div>
         </DrawerHeader>
