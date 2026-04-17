@@ -33,6 +33,17 @@ export function HeroBackdrop() {
       className="pointer-events-none absolute left-1/2 top-0 z-0 h-[32rem] w-screen -translate-x-1/2 overflow-hidden opacity-90"
     >
       <div className="hero-cover absolute inset-0 hidden sm:block" />
+      <div
+        className="absolute inset-x-0 top-0 hidden h-[16rem] sm:block"
+        style={{
+          backgroundImage: "url('/noise.svg')",
+          backgroundSize: "180px 180px",
+          backgroundRepeat: "repeat",
+          opacity: 0.08,
+          filter: "blur(0.4px)",
+          mixBlendMode: "multiply",
+        }}
+      />
       <div className="absolute inset-0 hidden sm:block">
         {desktopBlinkers.map((blinker) => (
           <span
@@ -52,6 +63,17 @@ export function HeroBackdrop() {
         style={{
           background:
             "linear-gradient(to bottom, color-mix(in srgb, var(--background) 6%, transparent), transparent 72%), linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 4%, transparent), transparent 75%)",
+        }}
+      />
+      <div
+        className="absolute inset-x-0 top-0 h-[18rem] sm:hidden"
+        style={{
+          backgroundImage: "url('/noise.svg')",
+          backgroundSize: "120px 120px",
+          backgroundRepeat: "repeat",
+          opacity: 0.06,
+          filter: "blur(0.35px)",
+          mixBlendMode: "multiply",
         }}
       />
       <div className="absolute inset-x-0 top-0 h-[18rem] sm:hidden">
