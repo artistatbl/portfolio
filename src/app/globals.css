@@ -239,6 +239,41 @@ a {
 }
 
 @layer components {
+  .hero-cover {
+    background:
+      linear-gradient(to bottom, color-mix(in srgb, var(--background) 8%, transparent), transparent 68%),
+      linear-gradient(to right, color-mix(in srgb, var(--foreground) 10%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 9%, transparent) 1px, transparent 1px);
+    background-size: 100% 100%, 42px 42px, 42px 42px;
+    background-position: top center, top left, top left;
+    mask-image: linear-gradient(to bottom, black, black 70%, transparent);
+  }
+
+  .hero-cover__blinker {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 0;
+    border: 1px solid color-mix(in srgb, var(--foreground) 20%, transparent);
+    background: color-mix(in srgb, var(--foreground) 12%, transparent);
+    opacity: 0.3;
+  }
+
+  .hero-cover__blinker[data-blinking="true"] {
+    background:
+      radial-gradient(circle at center, color-mix(in srgb, var(--foreground) 42%, transparent), transparent 72%),
+      color-mix(in srgb, var(--background) 72%, transparent);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--background) 72%, transparent),
+      0 0 18px color-mix(in srgb, var(--foreground) 18%, transparent);
+    animation: hero-blink 2.6s ease-in-out infinite;
+    opacity: 0.72;
+  }
+
+  .hero-cover__fade {
+    background: linear-gradient(to bottom, transparent, var(--background));
+  }
+
   .blog-markdown {
     color: var(--foreground);
   }
@@ -334,5 +369,22 @@ a {
     border-left: 2px solid var(--border);
     padding-left: 1rem;
     color: var(--muted-foreground);
+  }
+}
+
+@keyframes hero-blink {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(0.96);
+  }
+
+  30% {
+    opacity: 0.78;
+    transform: scale(1);
+  }
+
+  55% {
+    opacity: 0.34;
   }
 }

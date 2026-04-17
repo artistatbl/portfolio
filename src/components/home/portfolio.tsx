@@ -2,6 +2,7 @@ import { ActivitySection } from "@/components/home/activity";
 import { BioSection } from "@/components/home/bio";
 import { BlogSection } from "@/components/home/blog";
 import { ConnectSection } from "@/components/home/connect";
+import { HeroBackdrop } from "@/components/home/hero-backdrop";
 import { ItemListSection } from "@/components/home/list";
 import { getBlogPosts } from "@/lib/blog";
 import { homepageContent } from "@/lib/content";
@@ -22,8 +23,9 @@ export async function PortfolioPage() {
   ]);
 
   return (
-    <main className="min-h-screen px-5 py-8 text-foreground sm:px-8 md:px-10 md:py-12">
-      <div className="mx-auto max-w-[26rem]">
+    <main className="relative min-h-screen overflow-x-hidden px-5 py-8 text-foreground sm:px-8 md:px-10 md:py-12">
+      <HeroBackdrop />
+      <div className="relative z-10 mx-auto max-w-[26rem]">
         <div className="space-y-10">
           <BioSection
             paragraphs={narrativeParagraphs}
