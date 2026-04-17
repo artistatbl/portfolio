@@ -16,7 +16,7 @@ export function HeroBackdrop() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute left-1/2 top-0 z-0 h-[31rem] w-screen -translate-x-1/2 overflow-hidden opacity-90"
+      className="pointer-events-none absolute left-1/2 top-0 z-0 h-[32rem] w-screen -translate-x-1/2 overflow-hidden opacity-90"
     >
       <div className="hero-cover absolute inset-0" />
       <div className="absolute inset-0">
@@ -33,8 +33,8 @@ export function HeroBackdrop() {
           />
         ))}
       </div>
-      <div className="absolute inset-x-0 top-[15.9rem] z-10 h-px bg-black/12 dark:bg-white/12" />
-      <div className="hero-cover__fade absolute inset-x-0 top-[15.9rem] h-24" />
+      <div className="absolute inset-x-0 top-[16rem] z-10 h-px bg-black/5 dark:bg-white/5" />
+      <div className="hero-cover__fade absolute inset-x-0 top-[16rem] h-24" />
     </div>
   );
 }
