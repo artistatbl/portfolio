@@ -71,9 +71,11 @@ export function HeroBackdrop() {
           backgroundImage: "url('/noise.svg')",
           backgroundSize: "120px 120px",
           backgroundRepeat: "repeat",
-          opacity: 0.06,
-          filter: "blur(0.35px)",
+          opacity: 0.025,
+          filter: "blur(0.8px)",
           mixBlendMode: "multiply",
+          maskImage:
+            "linear-gradient(to bottom, black 0%, black 52%, transparent 82%)",
         }}
       />
       <div className="absolute inset-x-0 top-0 h-[18rem] sm:hidden">

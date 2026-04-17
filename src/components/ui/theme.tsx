@@ -35,29 +35,44 @@ export function ThemeToggle() {
     updateTheme(theme === "dark" ? "light" : "dark");
   }
 
-  return (
-    <div
-      className="fixed z-[100]"
-      style={{
-        left: "max(1rem, env(safe-area-inset-left))",
-        bottom: "max(1rem, env(safe-area-inset-bottom))",
-      }}
+  const button = (
+    <button
+      type="button"
+      aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      onClick={toggleTheme}
+      className="flex h-9 w-9 cursor-pointer items-center justify-center text-[var(--intro)] transition-colors hover:text-[var(--intro)]"
     >
-      <button
-        type="button"
-        aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-        onClick={toggleTheme}
-        className="flex h-9 w-9 cursor-pointer items-center justify-center text-[var(--intro)] transition-colors hover:text-[var(--intro)]"
+      <span
+        className={`transition-transform duration-300 ${
+          mounted ? "rotate-0" : ""
+        } ${theme === "dark" ? "rotate-180" : "rotate-0"}`}
       >
-        <span
-          className={`transition-transform duration-300 ${
-            mounted ? "rotate-0" : ""
-          } ${theme === "dark" ? "rotate-180" : "rotate-0"}`}
-        >
-          {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-        </span>
-      </button>
-    </div>
+        {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+      </span>
+    </button>
+  );
+
+  return (
+    <>
+      <div
+        className="fixed right-0 top-0 z-[100] sm:hidden"
+        style={{
+          right: "max(1rem, env(safe-area-inset-right))",
+          top: "max(1rem, env(safe-area-inset-top))",
+        }}
+      >
+        {button}
+      </div>
+      <div
+        className="fixed bottom-0 left-0 z-[100] hidden sm:block"
+        style={{
+          left: "max(1rem, env(safe-area-inset-left))",
+          bottom: "max(1rem, env(safe-area-inset-bottom))",
+        }}
+      >
+        {button}
+      </div>
+    </>
   );
 }
 
