@@ -81,11 +81,11 @@ function DrawerContent({
       >
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-[0.04] mix-blend-multiply dark:opacity-[0.06]"
+          className="absolute inset-0 opacity-[0.08] mix-blend-overlay dark:opacity-[0.12]"
           style={{
             backgroundImage: "url('/noise.svg')",
             backgroundRepeat: "repeat",
-            backgroundSize: "180px 180px",
+            backgroundSize: "120px 120px",
           }}
         />
         <div className="mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full bg-muted group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
