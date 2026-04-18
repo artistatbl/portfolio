@@ -2,7 +2,7 @@ import { ActivitySection } from "@/components/home/activity";
 import { BioSection } from "@/components/home/bio";
 import { BlogSection } from "@/components/home/blog";
 import { ConnectSection } from "@/components/home/connect";
-import { HeroBackdrop } from "@/components/home/hero-backdrop";
+import { HeroBackdrop } from "@/components/home/backdrop";
 import { ItemListSection } from "@/components/home/list";
 import { getBlogPosts } from "@/lib/blog";
 import { homepageContent } from "@/lib/content";
