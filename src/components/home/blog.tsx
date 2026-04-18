@@ -84,7 +84,11 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
             </div>
           </div>
         </DrawerHeader>
-        <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <div
+          data-vaul-no-drag=""
+          className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain [touch-action:pan-y] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
           <div className="py-7 sm:py-8">
             <div className="mx-auto w-full max-w-[28rem] pl-4 text-left sm:pl-5">
               <article

@@ -216,7 +216,11 @@ function ProjectDrawer({ item }: { item: TimelineItemData }) {
             </div>
           </div>
         </DrawerHeader>
-        <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <div
+          data-vaul-no-drag=""
+          className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain [touch-action:pan-y] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
           <div className="mx-auto w-full max-w-[44rem] px-4 py-6 sm:px-6 sm:py-7">
             <div className="grid gap-5 md:grid-cols-2">
               <div className="rounded-[1.1rem] border border-border bg-muted/30 p-4">
