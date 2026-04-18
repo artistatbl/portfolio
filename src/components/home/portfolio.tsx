@@ -8,6 +8,7 @@ import { LoadCascade } from "@/components/home/cascade";
 import { getBlogPosts } from "@/lib/blog";
 import { homepageContent } from "@/lib/content";
 import { getGitHubActivity } from "@/lib/github";
+import { getProjectEntries } from "@/lib/projects";
 
 export async function PortfolioPage() {
   const {
@@ -18,10 +19,41 @@ export async function PortfolioPage() {
     experienceItems,
     projectItems,
   } = homepageContent;
-  const [activity, posts] = await Promise.all([
+  const [activity, posts, projectEntries] = await Promise.all([
     getGitHubActivity(github.username, 30),
     getBlogPosts(),
+    getProjectEntries(),
   ]);
+  const projectEntryMap = new Map(
+    projectEntries.map((entry) => [entry.slug, entry] as const)
+  );
+  const resolvedProjectItems = projectItems.map((item) => {
+    const entry = item.projectSlug ? projectEntryMap.get(item.projectSlug) : undefined;
+
+    if (!entry) {
+      return item;
+    }
+
+    return {
+      ...item,
+      title: entry.title || item.title,
+      description: entry.description || item.description,
+      siteUrl: entry.siteUrl || item.siteUrl,
+      meta: entry.year || item.meta,
+      detail: {
+        summary: entry.summary || item.detail?.summary || item.description || "",
+        points: entry.highlights.length ? entry.highlights : item.detail?.points ?? [],
+        html: entry.html,
+        repoUrl: entry.repoUrl,
+        deployUrl: entry.deployUrl || entry.siteUrl,
+        status: entry.status,
+        platform: entry.platform,
+        stack: entry.stack,
+        imageSrc: item.detail?.imageSrc,
+        imageAlt: item.detail?.imageAlt,
+      },
+    };
+  });
 
   return (
     <main className="relative min-h-screen overflow-x-hidden px-5 py-8 text-foreground sm:px-8 md:px-10 md:py-12">
@@ -39,7 +71,7 @@ export async function PortfolioPage() {
           />
           <ItemListSection
             title="Projects"
-            items={projectItems}
+            items={resolvedProjectItems}
             interactive
             divider={false}
           />

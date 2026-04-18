@@ -21,6 +21,14 @@ export interface GitHubConfig {
 export interface ProjectDetail {
   summary: string;
   points: string[];
+  html?: string;
+  repoUrl?: string;
+  deployUrl?: string;
+  status?: string;
+  platform?: string;
+  stack?: string[];
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
 export interface TimelineItemData {
@@ -33,6 +41,7 @@ export interface TimelineItemData {
   external?: boolean;
   meta?: string;
   metaVariant?: "plain" | "pill";
+  projectSlug?: string;
   detail?: ProjectDetail;
 }
 
@@ -168,18 +177,21 @@ export const homepageContent: HomepageContent = {
     {
       id: "halttype-project",
       title: "Halttype",
-      description: "Monkeytype alternative",
-      siteUrl: "https://halttype.com",
+      description: "Multilingual typing speed test",
+      siteUrl: "https://www.halttype.com",
       iconKey: "folder",
       meta: "2025",
+      projectSlug: "halttype",
       detail: {
         summary:
-          "Halttype is a typing product concept built as an alternative to Monkeytype with a simpler and more focused experience.",
+          "A clean typing product focused on speed, clarity, and a calmer daily-use experience.",
         points: [
-          "Built around practice, speed, and a cleaner typing flow.",
-          "Exploring a lighter interface direction for typing sessions and progress tracking.",
-          "Treating the project as a small product experiment with strong daily-use potential.",
+          "Built around multilingual practice, fast test flows, and a cleaner interface.",
+          "Set up as a real product with room for accounts, stats, saved tests, and leaderboards.",
+          "Deployed publicly and supported by a real repo, domain, and SEO setup.",
         ],
+        imageSrc: "/halttype.png",
+        imageAlt: "Halttype project interface",
       },
     },
     {
