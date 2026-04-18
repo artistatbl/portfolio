@@ -4,6 +4,7 @@ import { BlogSection } from "@/components/home/blog";
 import { ConnectSection } from "@/components/home/connect";
 import { HeroBackdrop } from "@/components/home/backdrop";
 import { ItemListSection } from "@/components/home/list";
+import { LoadCascade } from "@/components/home/load-cascade";
 import { getBlogPosts } from "@/lib/blog";
 import { homepageContent } from "@/lib/content";
 import { getGitHubActivity } from "@/lib/github";
@@ -26,7 +27,7 @@ export async function PortfolioPage() {
     <main className="relative min-h-screen overflow-x-hidden px-5 py-8 text-foreground sm:px-8 md:px-10 md:py-12">
       <HeroBackdrop />
       <div className="relative z-10 mx-auto max-w-[26rem]">
-        <div className="space-y-10">
+        <LoadCascade>
           <BioSection
             paragraphs={narrativeParagraphs}
             currentProject={currentProject}
@@ -45,7 +46,7 @@ export async function PortfolioPage() {
           <BlogSection posts={posts} />
           <ItemListSection title="Tools" items={experienceItems} />
           <ConnectSection links={contactLinks} />
-        </div>
+        </LoadCascade>
       </div>
     </main>
   );

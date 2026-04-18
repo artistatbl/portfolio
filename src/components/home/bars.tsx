@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Tooltip,
   TooltipContent,
@@ -18,6 +19,37 @@ type ActivityDay = {
 interface ActivityBarsProps {
   days: ActivityDay[];
 }
+
+const containerVariants = {
+  hidden: {},
+  visible: (shouldReduceMotion: boolean) => ({
+    transition: shouldReduceMotion
+      ? { staggerChildren: 0 }
+      : {
+          delayChildren: 0.08,
+          staggerChildren: 0.028,
+        },
+  }),
+};
+
+const barVariants = {
+  hidden: {
+    opacity: 0,
+    y: 14,
+    scaleY: 0.2,
+  },
+  visible: (shouldReduceMotion: boolean) => ({
+    opacity: 1,
+    y: 0,
+    scaleY: 1,
+    transition: shouldReduceMotion
+      ? { duration: 0.01 }
+      : {
+          duration: 0.42,
+          ease: [0.22, 1, 0.36, 1],
+        },
+  }),
+};
 
 function activityClass(level: number) {
   if (level >= 4) return "bg-[#216e39]";
@@ -53,19 +85,29 @@ function scaleX(distance: number | null) {
 
 export function ActivityBars({ days }: ActivityBarsProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <TooltipProvider delayDuration={0}>
-      <div className="grid grid-cols-[repeat(30,minmax(0,1fr))] items-end gap-1">
+      <motion.div
+        className="grid grid-cols-[repeat(30,minmax(0,1fr))] items-end gap-1"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        custom={shouldReduceMotion}
+      >
         {days.map((day, index) => {
           const distance = activeIndex === null ? null : Math.abs(activeIndex - index);
           const isActive = activeIndex === index;
           const transitionDelay = distance === null ? "0ms" : `${Math.min(distance, 3) * 18}ms`;
 
           return (
-            <div
+            <motion.div
               key={day.date}
               className="group relative flex h-7 items-end"
+              variants={barVariants}
+              custom={shouldReduceMotion}
+              style={{ transformOrigin: "50% 100%" }}
               onMouseEnter={() => setActiveIndex(index)}
               onMouseLeave={() => setActiveIndex(null)}
               onFocus={() => setActiveIndex(index)}
@@ -107,10 +149,10 @@ export function ActivityBars({ days }: ActivityBarsProps) {
                   ) : null}
                 </TooltipContent>
               </Tooltip>
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </TooltipProvider>
   );
 }
