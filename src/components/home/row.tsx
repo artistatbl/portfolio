@@ -212,7 +212,7 @@ function ProjectDrawer({ item }: { item: TimelineItemData }) {
       <DrawerContent className="flex max-h-[85vh] w-full flex-col overflow-hidden rounded-t-[1.5rem] border-border bg-background">
         <DrawerHeader className="border-b border-border px-4 pb-4 pt-4 text-left sm:px-6">
           <DrawerClose aria-label="Close project details" />
-          <div className="mx-auto w-full max-w-[42rem] space-y-3 text-left">
+          <div className="mx-auto w-full max-w-[52rem] space-y-3 text-left">
             <div className="flex items-center justify-between gap-4">
               <div className="flex min-w-0 items-center gap-2">
                 <ItemIcon iconKey={item.iconKey} siteUrl={item.siteUrl} />
@@ -225,9 +225,6 @@ function ProjectDrawer({ item }: { item: TimelineItemData }) {
                   ) : null}
                 </DrawerTitle>
               </div>
-              <span className="text-[0.68rem] uppercase tracking-[0.12em] text-muted-foreground">
-                {detail?.status ?? "Project"}
-              </span>
             </div>
             <div className="max-w-[34rem] space-y-2 text-left">
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
@@ -246,30 +243,30 @@ function ProjectDrawer({ item }: { item: TimelineItemData }) {
           className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain [touch-action:pan-y] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
-          <div className="mx-auto w-full max-w-[42rem] px-4 py-7 sm:px-6 sm:py-8">
+          <div className="mx-auto w-full max-w-[52rem] px-4 py-7 sm:px-6 sm:py-8">
             <div className="space-y-8">
+              {projectImage ? (
+                <a
+                  href={detail?.deployUrl ?? detail?.repoUrl ?? item.siteUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="group block cursor-pointer"
+                >
+                  <div className="rounded-[1.15rem] bg-[color-mix(in_srgb,var(--muted)_55%,transparent)] p-1 ring-1 ring-black/8 transition-all duration-300 group-hover:ring-black/14 dark:ring-white/12 dark:group-hover:ring-white/20">
+                    <div className="overflow-hidden rounded-[0.9rem] bg-background">
+                      <Image
+                        src={projectImage}
+                        alt={detail?.imageAlt ?? `${item.title} preview`}
+                        width={1600}
+                        height={1000}
+                        className="h-auto w-full rounded-[0.9rem] object-cover"
+                      />
+                    </div>
+                  </div>
+                </a>
+              ) : null}
               <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_13rem] lg:items-start">
                 <div className="space-y-5">
-                  {projectImage ? (
-                    <a
-                      href={detail?.deployUrl ?? detail?.repoUrl ?? item.siteUrl}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="group block cursor-pointer"
-                    >
-                      <div className="rounded-[1.4rem] bg-[color-mix(in_srgb,var(--muted)_55%,transparent)] p-2 ring-1 ring-black/8 transition-all duration-300 group-hover:ring-black/14 dark:ring-white/12 dark:group-hover:ring-white/20">
-                        <div className="overflow-hidden rounded-[1rem] bg-background">
-                          <Image
-                            src={projectImage}
-                            alt={detail?.imageAlt ?? `${item.title} preview`}
-                            width={1600}
-                            height={1000}
-                            className="h-auto w-full rounded-[1rem] object-cover"
-                          />
-                        </div>
-                      </div>
-                    </a>
-                  ) : null}
                   {detail?.html ? (
                     <article
                       className="prose prose-neutral max-w-none text-[var(--intro)] prose-headings:text-foreground prose-headings:tracking-[-0.02em] prose-headings:font-semibold prose-h2:mt-0 prose-h2:text-[1.02rem] prose-h3:text-[0.95rem] prose-p:text-[0.92rem] prose-p:leading-[1.9] prose-p:tracking-[-0.02em] prose-li:text-[0.9rem] prose-li:leading-[1.8] prose-li:tracking-[-0.02em] prose-strong:text-foreground prose-a:cursor-pointer prose-a:text-foreground prose-a:underline prose-a:decoration-[color-mix(in_srgb,var(--foreground)_20%,transparent)] prose-a:underline-offset-[0.16em] prose-code:rounded-[0.45rem] prose-code:border prose-code:border-border prose-code:bg-[color-mix(in_srgb,var(--muted)_55%,transparent)] prose-code:px-[0.35rem] prose-code:py-[0.1rem] prose-code:font-mono prose-code:text-[0.84em] prose-code:before:content-none prose-code:after:content-none prose-ul:list-disc prose-ol:list-decimal prose-li:marker:text-muted-foreground dark:prose-invert dark:prose-headings:text-foreground dark:prose-strong:text-foreground dark:prose-a:text-foreground dark:prose-code:text-foreground"
