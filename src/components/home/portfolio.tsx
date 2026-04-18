@@ -4,7 +4,7 @@ import { BlogSection } from "@/components/home/blog";
 import { ConnectSection } from "@/components/home/connect";
 import { HeroBackdrop } from "@/components/home/backdrop";
 import { ItemListSection } from "@/components/home/list";
-import { LoadCascade } from "@/components/home/load-cascade";
+import { LoadCascade } from "@/components/home/cascade";
 import { getBlogPosts } from "@/lib/blog";
 import { homepageContent } from "@/lib/content";
 import { getGitHubActivity } from "@/lib/github";
