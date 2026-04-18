@@ -1,5 +1,10 @@
 import { GitHubIcon, TwitterIcon } from "@/components/icons";
 import { SectionBlock } from "@/components/home/block";
+import {
+  HoverSlide,
+  hoverSlideContentClassName,
+  hoverSlideItemClassName,
+} from "@/components/ui/hover-slide";
 import type { ContactLink } from "@/lib/content";
 import { Mail, type LucideIcon } from "lucide-react";
 import type { ComponentType } from "react";
@@ -46,10 +51,13 @@ export function ConnectSection({ links }: ConnectSectionProps) {
               href={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noreferrer noopener" : undefined}
-              className="grid w-full grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-1 rounded-md px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
+              className={`${hoverSlideItemClassName} grid w-full grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-1 px-1.5 py-3 text-left`}
             >
-              <ContactIcon iconKey={link.iconKey} />
-              <div className="min-w-0">
+              <HoverSlide />
+              <div className={hoverSlideContentClassName}>
+                <ContactIcon iconKey={link.iconKey} />
+              </div>
+              <div className={`${hoverSlideContentClassName} min-w-0`}>
                 <p className="text-[0.92rem] font-medium leading-[1.55] tracking-[-0.02em] text-foreground sm:text-[0.98rem]">
                   {link.label}
                 </p>

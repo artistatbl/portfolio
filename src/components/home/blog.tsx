@@ -8,6 +8,11 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import {
+  HoverSlide,
+  hoverSlideContentClassName,
+  hoverSlideItemClassName,
+} from "@/components/ui/hover-slide";
 import { SectionBlock } from "@/components/home/block";
 import type { BlogPost } from "@/lib/blog";
 import { FileText } from "lucide-react";
@@ -43,12 +48,15 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
         <DrawerTrigger asChild>
           <button
             type="button"
-            className="group grid w-full cursor-pointer grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-2 rounded-md px-1.5 py-3 text-left transition-colors hover:bg-muted/60"
+            className={`${hoverSlideItemClassName} grid w-full cursor-pointer grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-2 px-1.5 py-3 text-left`}
           >
-            <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card text-[var(--icon-foreground)]">
+            <HoverSlide />
+            <span
+              className={`${hoverSlideContentClassName} flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card text-[var(--icon-foreground)]`}
+            >
               <FileText size={14} />
             </span>
-            <div className="min-w-0">
+            <div className={`${hoverSlideContentClassName} min-w-0`}>
               <p className="text-[0.92rem] font-medium leading-[1.55] tracking-[-0.02em] text-foreground sm:text-[0.98rem]">
                 {post.title}
               </p>
