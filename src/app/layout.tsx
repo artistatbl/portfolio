@@ -29,6 +29,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <ThemeScript />
+        <script
+          defer
+          src="https://assets.onedollarstats.com/stonks.js"
+          data-debug="jeandaly.dev"
+        ></script>
       </head>
       <body className={`${dmSans.variable} ${ibmPlexMono.variable} antialiased`}>
         {children}
