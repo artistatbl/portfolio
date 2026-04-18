@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
   Tooltip,
   TooltipContent,
@@ -20,7 +20,7 @@ interface ActivityBarsProps {
   days: ActivityDay[];
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: (shouldReduceMotion: boolean) => ({
     transition: shouldReduceMotion
@@ -32,7 +32,7 @@ const containerVariants = {
   }),
 };
 
-const barVariants = {
+const barVariants: Variants = {
   hidden: {
     opacity: 0,
     y: 14,
