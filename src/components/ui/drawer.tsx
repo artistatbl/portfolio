@@ -88,7 +88,7 @@ function DrawerContent({
             backgroundSize: "120px 120px",
           }}
         />
-        <div className="mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full bg-muted group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
+        <div className="mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full bg-background group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
         <div className="relative z-[1] flex h-full flex-col">
           {children}
         </div>

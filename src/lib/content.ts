@@ -64,7 +64,7 @@ export const homepageContent: HomepageContent = {
   currentProject: {
     prefix: "I'm currently building ",
     name: "Featul",
-    href: "https://featul.com",
+    href: "https://www.featul.com",
     suffix: ".",
     external: true,
   },
@@ -161,17 +161,20 @@ export const homepageContent: HomepageContent = {
     {
       id: "featul-project",
       title: "Featul",
-      description: "Customer feedback platform",
-      siteUrl: "https://featul.com",
+      description: "Privacy-first customer feedback platform",
+      siteUrl: "https://www.featul.com",
       meta: "2026",
+      projectSlug: "featul",
       detail: {
         summary:
-          "Featul is a customer feedback platform focused on helping teams collect, organize, and act on product feedback more clearly.",
+          "A privacy-first feedback platform that connects requests, roadmap planning, and changelog communication in one product system.",
         points: [
-          "Focused on turning raw feedback into something easier to sort, review, and ship against.",
-          "Exploring calmer product workflows for collecting requests, bugs, and user insights.",
-          "Designed as a tool teams can return to often without the interface feeling heavy.",
+          "Built for collecting requests, prioritizing product work, and publishing roadmap and changelog updates.",
+          "Structured as a full monorepo with product app, marketing/docs site, and shared internal packages.",
+          "Designed like a real SaaS product with billing, auth, analytics, and integration workflows.",
         ],
+        imageSrc: "/featul.png",
+        imageAlt: "Featul product interface",
       },
     },
     {
