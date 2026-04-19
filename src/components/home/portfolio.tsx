@@ -49,8 +49,8 @@ export async function PortfolioPage() {
         status: entry.status,
         platform: entry.platform,
         stack: entry.stack,
-        imageSrc: item.detail?.imageSrc,
-        imageAlt: item.detail?.imageAlt,
+        imageSrc: entry.imageSrc || item.detail?.imageSrc,
+        imageAlt: entry.imageAlt || item.detail?.imageAlt,
       },
     };
   });

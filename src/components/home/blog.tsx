@@ -9,8 +9,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import {
-  HoverSlide,
-  hoverSlideContentClassName,
+  HoverSlideItem,
   hoverSlideItemClassName,
 } from "@/components/ui/hover-slide";
 import { SectionBlock } from "@/components/home/block";
@@ -48,22 +47,21 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
         <DrawerTrigger asChild>
           <button
             type="button"
-            className={`${hoverSlideItemClassName} grid w-full cursor-pointer grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-2 px-1.5 py-3 text-left`}
+            className={`${hoverSlideItemClassName} cursor-pointer`}
           >
-            <HoverSlide />
-            <span
-              className={`${hoverSlideContentClassName} flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card text-[var(--icon-foreground)]`}
-            >
-              <FileText size={14} />
-            </span>
-            <div className={`${hoverSlideContentClassName} min-w-0`}>
-              <p className="text-[0.92rem] font-medium leading-[1.55] tracking-[-0.02em] text-foreground sm:text-[0.98rem]">
-                {post.title}
-              </p>
-              <p className="mt-1 max-w-[32ch] text-[0.8rem] leading-5 text-muted-foreground">
-                {post.summary}
-              </p>
-            </div>
+            <HoverSlideItem contentClassName="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card text-[var(--icon-foreground)]">
+                <FileText size={14} />
+              </span>
+              <div className="min-w-0">
+                <p className="text-[0.92rem] font-medium leading-[1.55] tracking-[-0.02em] text-foreground sm:text-[0.98rem]">
+                  {post.title}
+                </p>
+                <p className="mt-1 max-w-[32ch] text-[0.8rem] leading-5 text-muted-foreground">
+                  {post.summary}
+                </p>
+              </div>
+            </HoverSlideItem>
           </button>
         </DrawerTrigger>
       </li>

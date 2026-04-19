@@ -1,11 +1,20 @@
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 interface HoverSlideProps {
   className?: string;
 }
 
-export const hoverSlideItemClassName =
-  "group relative overflow-hidden rounded-md";
+interface HoverSlideItemProps {
+  children: ReactNode;
+  className?: string;
+  contentClassName?: string;
+}
+
+export const hoverSlideItemClassName = "group block w-full text-left";
+
+export const hoverSlideSurfaceClassName =
+  "relative overflow-hidden rounded-md px-1.5 py-3";
 
 export const hoverSlideContentClassName = "relative z-[1]";
 
@@ -21,5 +30,20 @@ export function HoverSlide({ className }: HoverSlideProps) {
         className
       )}
     />
+  );
+}
+
+export function HoverSlideItem({
+  children,
+  className,
+  contentClassName,
+}: HoverSlideItemProps) {
+  return (
+    <div className={cn(hoverSlideSurfaceClassName, className)}>
+      <HoverSlide />
+      <div className={cn(hoverSlideContentClassName, contentClassName)}>
+        {children}
+      </div>
+    </div>
   );
 }

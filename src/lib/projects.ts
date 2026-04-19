@@ -17,6 +17,8 @@ interface ProjectFrontmatter {
   siteUrl?: string;
   deployUrl?: string;
   repoUrl?: string;
+  imageSrc?: string;
+  imageAlt?: string;
   stack?: string[];
   highlights?: string[];
   published?: boolean;
@@ -33,6 +35,8 @@ export interface ProjectEntry {
   siteUrl?: string;
   deployUrl?: string;
   repoUrl?: string;
+  imageSrc?: string;
+  imageAlt?: string;
   stack: string[];
   highlights: string[];
   html: string;
@@ -75,6 +79,8 @@ export async function getProjectEntries(): Promise<ProjectEntry[]> {
         siteUrl: frontmatter.siteUrl,
         deployUrl: frontmatter.deployUrl,
         repoUrl: frontmatter.repoUrl,
+        imageSrc: frontmatter.imageSrc,
+        imageAlt: frontmatter.imageAlt,
         stack: frontmatter.stack ?? [],
         highlights: frontmatter.highlights ?? [],
         published: frontmatter.published ?? true,

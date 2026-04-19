@@ -23,8 +23,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import {
-  HoverSlide,
-  hoverSlideContentClassName,
+  HoverSlideItem,
   hoverSlideItemClassName,
 } from "@/components/ui/hover-slide";
 import {
@@ -143,11 +142,9 @@ function ItemAction({ item }: { item: TimelineItemData }) {
 
 function RowBody({ item }: { item: TimelineItemData }) {
   return (
-    <div className="contents">
-      <div className="relative z-[1]">
-        <ItemIcon iconKey={item.iconKey} siteUrl={item.siteUrl} />
-      </div>
-      <div className="relative z-[1] min-w-0 text-left">
+    <>
+      <ItemIcon iconKey={item.iconKey} siteUrl={item.siteUrl} />
+      <div className="min-w-0 text-left">
         <p className="text-[0.92rem] font-medium leading-[1.55] tracking-[-0.02em] text-foreground sm:text-[0.98rem]">
           {item.title}
           {item.description ? (
@@ -158,10 +155,8 @@ function RowBody({ item }: { item: TimelineItemData }) {
           ) : null}
         </p>
       </div>
-      <div className="relative z-[1]">
-        <ItemAction item={item} />
-      </div>
-    </div>
+      <ItemAction item={item} />
+    </>
   );
 }
 
@@ -173,21 +168,21 @@ function StaticRow({ item }: { item: TimelineItemData }) {
           href={item.href}
           target={item.external ? "_blank" : undefined}
           rel={item.external ? "noreferrer noopener" : undefined}
-          className={`${hoverSlideItemClassName} grid cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 px-1.5 py-3`}
+          className={`${hoverSlideItemClassName} cursor-pointer`}
         >
-          <HoverSlide />
-          <RowBody item={item} />
+          <HoverSlideItem contentClassName="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1">
+            <RowBody item={item} />
+          </HoverSlideItem>
         </a>
       </li>
     );
   }
 
   return (
-    <li
-      className={`${hoverSlideItemClassName} grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 px-1.5 py-3`}
-    >
-      <HoverSlide />
-      <RowBody item={item} />
+    <li className={hoverSlideItemClassName}>
+      <HoverSlideItem contentClassName="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1">
+        <RowBody item={item} />
+      </HoverSlideItem>
     </li>
   );
 }
@@ -216,10 +211,11 @@ function ProjectDrawer({ item }: { item: TimelineItemData }) {
         <DrawerTrigger asChild>
           <button
             type="button"
-            className={`${hoverSlideItemClassName} grid w-full cursor-pointer grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 px-1.5 py-3 text-left`}
+            className={`${hoverSlideItemClassName} cursor-pointer`}
           >
-            <HoverSlide />
-            <RowBody item={item} />
+            <HoverSlideItem contentClassName="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1">
+              <RowBody item={item} />
+            </HoverSlideItem>
           </button>
         </DrawerTrigger>
       </li>

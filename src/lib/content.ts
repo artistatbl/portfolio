@@ -200,18 +200,21 @@ export const homepageContent: HomepageContent = {
     {
       id: "dves-project",
       title: "Dves",
-      description: "Open source AI chat",
-      siteUrl: "https://dves.space",
+      description: "Hackathon AI chat app",
+      siteUrl: "https://www.dves.space",
       iconKey: "code",
       meta: "2025",
+      projectSlug: "dves",
       detail: {
         summary:
-          "Dves is an open source AI chat project centered on usable interfaces, practical workflows, and extensible chat experiences.",
+          "A fast AI chat app built in five days as a hackathon submission inspired by Theo's T3Chat.",
         points: [
-          "Focused on building an AI chat experience that feels approachable and useful.",
-          "Open source by design so the product can evolve in public.",
-          "Exploring how conversation, tooling, and interface design can work together more cleanly.",
+          "Built with a strong focus on chat UX, model flexibility, and speed under hackathon constraints.",
+          "Includes the kind of product details that make an AI chat app feel usable beyond a simple demo.",
+          "Shipped publicly with a real repo, image, live domain, and room to keep evolving.",
         ],
+        imageSrc: "/dves.png",
+        imageAlt: "Dves project interface",
       },
     },
   ],
