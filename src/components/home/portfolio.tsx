@@ -57,7 +57,7 @@ export async function PortfolioPage() {
 
   return (
     <main className="relative min-h-screen overflow-x-hidden px-5 py-8 text-foreground sm:px-8 md:px-10 md:py-12">
-      <HeroBackdrop />
+      {/* <HeroBackdrop /> */}
       <div className="relative z-10 mx-auto max-w-[26rem]">
         <LoadCascade>
           <BioSection
