@@ -4,6 +4,11 @@ import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type ThemeMode = "light" | "dark";
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (updateCallback: () => void) => {
+    finished: Promise<void>;
+  };
+};
 
 const storageKey = "portfolio-theme";
 
@@ -14,6 +19,7 @@ function applyTheme(theme: ThemeMode) {
 export function ThemeToggle() {
   const [theme, setTheme] = useState<ThemeMode>("light");
   const [mounted, setMounted] = useState(false);
+  const [transitioning, setTransitioning] = useState(false);
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem(storageKey);
@@ -32,7 +38,38 @@ export function ThemeToggle() {
   }
 
   function toggleTheme() {
-    updateTheme(theme === "dark" ? "light" : "dark");
+    if (transitioning) {
+      return;
+    }
+
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReducedMotion) {
+      updateTheme(nextTheme);
+      return;
+    }
+
+    const transitionDocument = document as ViewTransitionDocument;
+
+    if (!transitionDocument.startViewTransition) {
+      updateTheme(nextTheme);
+      return;
+    }
+
+    setTransitioning(true);
+    document.documentElement.dataset.themeTransition = nextTheme;
+
+    const viewTransition = transitionDocument.startViewTransition(() => {
+      updateTheme(nextTheme);
+    });
+
+    viewTransition.finished.finally(() => {
+      delete document.documentElement.dataset.themeTransition;
+      setTransitioning(false);
+    });
   }
 
   const button = (

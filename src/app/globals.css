@@ -269,6 +269,29 @@ a {
   .hero-cover__fade {
     background: linear-gradient(to bottom, transparent, var(--background));
   }
+
+}
+
+html[data-theme-transition]::view-transition-group(root) {
+  animation-duration: 760ms;
+  animation-timing-function: cubic-bezier(0.78, 0, 0.18, 1);
+}
+
+html[data-theme-transition]::view-transition-old(root),
+html[data-theme-transition]::view-transition-new(root) {
+  animation-duration: 760ms;
+  animation-timing-function: cubic-bezier(0.78, 0, 0.18, 1);
+  mix-blend-mode: normal;
+}
+
+html[data-theme-transition]::view-transition-old(root) {
+  animation-name: theme-page-hold;
+  z-index: 1;
+}
+
+html[data-theme-transition]::view-transition-new(root) {
+  animation-name: theme-page-reveal;
+  z-index: 2;
 }
 
 @keyframes hero-blink {
@@ -285,5 +308,22 @@ a {
 
   55% {
     opacity: 0.34;
+  }
+}
+
+@keyframes theme-page-hold {
+  from,
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes theme-page-reveal {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  to {
+    clip-path: inset(0);
   }
 }
