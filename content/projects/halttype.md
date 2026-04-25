@@ -8,6 +8,8 @@ platform: Web app
 siteUrl: https://www.halttype.com
 deployUrl: https://www.halttype.com
 repoUrl: https://github.com/artistatbl/halttype
+imageSrc: /halttype.png
+imageAlt: Halttype typing test interface
 stack:
   - Next.js 15
   - React 19
