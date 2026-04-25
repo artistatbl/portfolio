@@ -103,11 +103,11 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                     <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       Stack
                     </p>
-                    <div className="flex flex-wrap gap-x-4 gap-y-2">
+                    <div className="flex flex-wrap gap-2.5">
                       {stack.map((stackItem) => (
                         <span
                           key={stackItem}
-                          className="text-[0.82rem] text-muted-foreground"
+                          className="rounded-full bg-[color-mix(in_srgb,var(--muted)_22%,transparent)] px-3 py-1.5 text-[0.8rem] text-foreground"
                         >
                           {stackItem}
                         </span>
