@@ -13,6 +13,16 @@ interface ProjectDetailProps {
   project: ProjectEntry;
 }
 
+function splitHighlight(point: string) {
+  const [lead, ...restParts] = point.split(",");
+  const rest = restParts.join(",").trim();
+
+  return {
+    lead: lead.trim(),
+    rest,
+  };
+}
+
 export function ProjectDetail({ project }: ProjectDetailProps) {
   const notes = project.highlights;
   const stack = project.stack;
@@ -130,20 +140,29 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                     <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       Highlights
                     </p>
-                    <div className="grid gap-x-8 gap-y-5 sm:grid-cols-3">
-                      {notes.map((point, index) => (
-                        <div
-                          key={point}
-                          className="space-y-2"
-                        >
-                          <span className="block text-[0.68rem] font-semibold text-muted-foreground">
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
-                          <p className="text-[0.86rem] leading-7 text-foreground">
-                            {point}
-                          </p>
-                        </div>
-                      ))}
+                    <div className="space-y-5">
+                      {notes.map((point, index) => {
+                        const highlight = splitHighlight(point);
+
+                        return (
+                          <div key={point} className="grid gap-2 sm:grid-cols-[2rem_minmax(0,1fr)] sm:gap-4">
+                            <span className="block pt-0.5 text-[0.68rem] font-semibold text-muted-foreground">
+                              {String(index + 1).padStart(2, "0")}
+                            </span>
+                            <div className="space-y-1.5">
+                              <p className="text-[0.92rem] font-medium tracking-[-0.02em] text-foreground">
+                                {highlight.lead}
+                                {highlight.rest ? "." : null}
+                              </p>
+                              {highlight.rest ? (
+                                <p className="max-w-[34rem] text-[0.84rem] leading-6 text-muted-foreground">
+                                  {highlight.rest}
+                                </p>
+                              ) : null}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 ) : null}
