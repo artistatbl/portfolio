@@ -30,7 +30,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
   return (
     <main className="relative min-h-screen overflow-x-hidden px-5 py-8 text-foreground sm:px-8 md:px-10 md:py-12">
-      <div className="relative z-10 mx-auto w-full max-w-[56rem]">
+      <div className="relative z-10 mx-auto w-full max-w-[50rem]">
         <div className="space-y-10">
           <Link
             href="/"
@@ -81,30 +81,39 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             ) : null}
           </header>
 
-          {project.imageSrc ? (
-            <section className="space-y-3">
-              <a
-                href={primaryImageHref}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="group block cursor-pointer"
-              >
-                <div className="overflow-hidden rounded-[1rem] border border-[color-mix(in_srgb,var(--border)_55%,transparent)] bg-[color-mix(in_srgb,var(--muted)_20%,transparent)] transition-opacity duration-300 group-hover:opacity-95">
-                  <Image
-                    src={project.imageSrc}
-                    alt={project.imageAlt ?? `${project.title} preview`}
-                    width={1600}
-                    height={1000}
-                    className="h-auto w-full object-cover"
-                  />
-                </div>
-              </a>
-            </section>
-          ) : null}
-
           <section className="space-y-8">
-            {(quickFacts.length || stack.length || notes.length) ? (
+            {(project.imageSrc || quickFacts.length || stack.length || notes.length) ? (
               <div className="space-y-6 border-b border-[color-mix(in_srgb,var(--border)_60%,transparent)] pb-8">
+                {project.imageSrc ? (
+                  <div className="grid gap-4 border-b border-[color-mix(in_srgb,var(--border)_45%,transparent)] pb-6 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-6">
+                    <div className="space-y-1.5">
+                      <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                        Preview
+                      </p>
+                      <p className="text-[0.76rem] leading-6 text-muted-foreground">
+                        A quick look at the product interface.
+                      </p>
+                    </div>
+
+                    <a
+                      href={primaryImageHref}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="group block cursor-pointer"
+                    >
+                      <div className="overflow-hidden rounded-[0.9rem] border border-[color-mix(in_srgb,var(--border)_45%,transparent)] bg-[color-mix(in_srgb,var(--muted)_16%,transparent)] transition-opacity duration-300 group-hover:opacity-95">
+                        <Image
+                          src={project.imageSrc}
+                          alt={project.imageAlt ?? `${project.title} preview`}
+                          width={1600}
+                          height={1000}
+                          className="h-auto w-full object-cover"
+                        />
+                      </div>
+                    </a>
+                  </div>
+                ) : null}
+
                 {quickFacts.length ? (
                   <div className="space-y-3">
                     <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
