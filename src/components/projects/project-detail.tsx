@@ -85,16 +85,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             {(project.imageSrc || quickFacts.length || stack.length || notes.length) ? (
               <div className="space-y-6 border-b border-[color-mix(in_srgb,var(--border)_60%,transparent)] pb-8">
                 {project.imageSrc ? (
-                  <div className="grid gap-4 border-b border-[color-mix(in_srgb,var(--border)_45%,transparent)] pb-6 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-6">
-                    <div className="space-y-1.5">
-                      <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                        Preview
-                      </p>
-                      <p className="text-[0.76rem] leading-6 text-muted-foreground">
-                        A quick look at the product interface.
-                      </p>
-                    </div>
-
+                  <div className="border-b border-[color-mix(in_srgb,var(--border)_45%,transparent)] pb-6">
                     <a
                       href={primaryImageHref}
                       target="_blank"
