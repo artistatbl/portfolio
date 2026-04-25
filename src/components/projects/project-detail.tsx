@@ -56,7 +56,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             </div>
 
             {headerMeta.length ? (
-              <div className="flex flex-wrap gap-x-4 gap-y-2 border-y border-[color-mix(in_srgb,var(--border)_60%,transparent)] py-3 text-[0.78rem] text-muted-foreground">
+              <div className="flex flex-wrap gap-x-5 gap-y-2 text-[0.78rem] text-muted-foreground">
                 {headerMeta.map((item) => (
                   <span key={item}>{item}</span>
                 ))}
@@ -64,7 +64,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             ) : null}
 
             {linkItems.length ? (
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-x-5 gap-y-2">
                 {linkItems.map((link) => (
                   <a
                     key={link.href}
