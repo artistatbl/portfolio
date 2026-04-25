@@ -25,7 +25,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
   return (
     <main className="relative min-h-screen overflow-x-hidden px-5 py-8 text-foreground sm:px-8 md:px-10 md:py-12">
-      <div className="relative z-10 mx-auto w-full max-w-[50rem]">
+      <div className="relative z-10 mx-auto w-full max-w-[46rem]">
         <div className="space-y-10">
           <Link
             href="/"
