@@ -8,6 +8,8 @@ platform: Web app + marketing site
 siteUrl: https://www.featul.com
 deployUrl: https://www.featul.com
 repoUrl: https://github.com/usefeatul/featul
+imageSrc: /featul.png
+imageAlt: Featul product interface
 stack:
   - Next.js 16
   - React 19
