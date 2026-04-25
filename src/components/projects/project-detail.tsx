@@ -107,8 +107,12 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                       {stack.map((stackItem) => (
                         <span
                           key={stackItem}
-                          className="rounded-full bg-[color-mix(in_srgb,var(--muted)_22%,transparent)] px-3 py-1.5 text-[0.8rem] text-foreground"
+                          className="inline-flex items-center gap-2 text-[0.82rem] text-foreground"
                         >
+                          <span
+                            aria-hidden="true"
+                            className="h-1.5 w-1.5 rounded-full bg-[color-mix(in_srgb,var(--foreground)_55%,transparent)]"
+                          />
                           {stackItem}
                         </span>
                       ))}
