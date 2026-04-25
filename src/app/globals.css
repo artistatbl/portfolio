@@ -270,6 +270,41 @@ a {
     background: linear-gradient(to bottom, transparent, var(--background));
   }
 
+  .blog-prose-emphasis :where(a, strong) {
+    background-image:
+      radial-gradient(circle, var(--border) 0.7px, transparent 0.9px),
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 34%,
+        color-mix(in oklab, var(--foreground) 20%, transparent) 50%,
+        transparent 66%,
+        transparent 100%
+      );
+    background-position: 0 calc(100% - 1px), -140% 100%;
+    background-repeat: repeat-x, no-repeat;
+    background-size: 6px 2px, 200% 2px;
+    padding-bottom: 0.08em;
+    text-decoration: none;
+    transition: color 300ms ease-out, background-position 300ms ease-out, opacity 300ms ease-out, filter 300ms ease-out;
+  }
+
+  .blog-prose-emphasis :where(a, strong):hover {
+    background-image:
+      radial-gradient(circle, var(--icon-dot) 0.7px, transparent 0.9px),
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 34%,
+        color-mix(in oklab, var(--foreground) 55%, white 45%) 50%,
+        transparent 66%,
+        transparent 100%
+      );
+    background-position: 0 calc(100% - 1px), 140% 100%;
+    color: var(--icon-dot);
+    opacity: 0.9;
+  }
+
 }
 
 html[data-theme-transition]::view-transition-group(root) {
