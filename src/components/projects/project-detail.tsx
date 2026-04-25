@@ -22,11 +22,6 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
     project.year ? { label: "Year", value: project.year } : null,
   ].flatMap((fact) => (fact ? [fact] : []));
   const primaryImageHref = project.deployUrl ?? project.repoUrl ?? project.siteUrl;
-  const headerMeta = [
-    project.year ? `Year ${project.year}` : null,
-    project.status ? `Status ${project.status}` : null,
-    project.platform ? project.platform : null,
-  ].flatMap((item) => (item ? [item] : []));
 
   return (
     <main className="relative min-h-screen overflow-x-hidden px-5 py-8 text-foreground sm:px-8 md:px-10 md:py-12">
@@ -54,31 +49,6 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 </p>
               </div>
             </div>
-
-            {headerMeta.length ? (
-              <div className="flex flex-wrap gap-x-5 gap-y-2 text-[0.78rem] text-muted-foreground">
-                {headerMeta.map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </div>
-            ) : null}
-
-            {linkItems.length ? (
-              <div className="flex flex-wrap gap-x-5 gap-y-2">
-                {linkItems.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="inline-flex items-center gap-1.5 text-[0.82rem] text-foreground underline decoration-[color-mix(in_srgb,var(--foreground)_16%,transparent)] underline-offset-[0.24em] transition-colors hover:text-muted-foreground"
-                  >
-                    {link.label}
-                    <ArrowUpRight size={12} />
-                  </a>
-                ))}
-              </div>
-            ) : null}
           </header>
 
           <section className="space-y-8">
