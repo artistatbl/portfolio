@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
+import {
+  dottedUnderlineClassName,
+  dottedUnderlineHoverAccentClassName,
+} from "@/components/ui/anchor";
+import { cn } from "@/lib/utils";
 import type { ProjectEntry } from "@/lib/projects";
 
 interface ProjectDetailProps {
@@ -103,16 +108,16 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                     <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       Stack
                     </p>
-                    <div className="flex flex-wrap gap-2.5">
+                    <div className="flex flex-wrap gap-x-4 gap-y-2">
                       {stack.map((stackItem) => (
                         <span
                           key={stackItem}
-                          className="inline-flex items-center gap-2 text-[0.82rem] text-foreground"
+                          className={cn(
+                            "select-none cursor-default text-[0.82rem] text-foreground",
+                            dottedUnderlineClassName,
+                            dottedUnderlineHoverAccentClassName
+                          )}
                         >
-                          <span
-                            aria-hidden="true"
-                            className="h-1.5 w-1.5 rounded-full bg-[color-mix(in_srgb,var(--foreground)_55%,transparent)]"
-                          />
                           {stackItem}
                         </span>
                       ))}
