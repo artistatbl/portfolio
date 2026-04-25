@@ -53,16 +53,16 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
           <section className="space-y-8">
             {(project.imageSrc || quickFacts.length || stack.length || notes.length) ? (
-              <div className="space-y-6 border-b border-[color-mix(in_srgb,var(--border)_60%,transparent)] pb-8">
+              <div className="space-y-8">
                 {project.imageSrc ? (
-                  <div className="border-b border-[color-mix(in_srgb,var(--border)_45%,transparent)] pb-6">
+                  <div>
                     <a
                       href={primaryImageHref}
                       target="_blank"
                       rel="noreferrer noopener"
                       className="group block cursor-pointer"
                     >
-                      <div className="overflow-hidden rounded-[0.9rem] border border-[color-mix(in_srgb,var(--border)_45%,transparent)] bg-[color-mix(in_srgb,var(--muted)_16%,transparent)] transition-opacity duration-300 group-hover:opacity-95">
+                      <div className="overflow-hidden rounded-[0.9rem] bg-[color-mix(in_srgb,var(--muted)_12%,transparent)] transition-opacity duration-300 group-hover:opacity-95">
                         <Image
                           src={project.imageSrc}
                           alt={project.imageAlt ?? `${project.title} preview`}
@@ -76,20 +76,22 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 ) : null}
 
                 {quickFacts.length ? (
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       Overview
                     </p>
-                    <div className="grid gap-y-3 sm:grid-cols-2 sm:gap-x-8">
+                    <div className="grid gap-x-10 gap-y-5 sm:grid-cols-2">
                       {quickFacts.map((fact) => (
                         <div
                           key={fact.label}
-                          className="grid grid-cols-[5.3rem_minmax(0,1fr)] gap-3 text-[0.82rem] leading-6"
+                          className="space-y-1.5"
                         >
-                          <span className="uppercase tracking-[0.1em] text-muted-foreground">
+                          <span className="block text-[0.66rem] uppercase tracking-[0.12em] text-muted-foreground">
                             {fact.label}
                           </span>
-                          <span className="text-foreground">{fact.value}</span>
+                          <span className="block text-[0.9rem] leading-7 text-foreground">
+                            {fact.value}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -97,15 +99,15 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 ) : null}
 
                 {stack.length ? (
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       Stack
                     </p>
-                    <div className="flex flex-wrap gap-x-3 gap-y-2">
+                    <div className="flex flex-wrap gap-x-4 gap-y-2">
                       {stack.map((stackItem) => (
                         <span
                           key={stackItem}
-                          className="text-[0.78rem] text-muted-foreground"
+                          className="text-[0.82rem] text-muted-foreground"
                         >
                           {stackItem}
                         </span>
@@ -115,20 +117,20 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                 ) : null}
 
                 {notes.length ? (
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                       Highlights
                     </p>
-                    <div className="space-y-3">
+                    <div className="grid gap-x-8 gap-y-5 sm:grid-cols-3">
                       {notes.map((point, index) => (
                         <div
                           key={point}
-                          className="grid grid-cols-[1.6rem_minmax(0,1fr)] gap-3"
+                          className="space-y-2"
                         >
-                          <span className="pt-0.5 text-[0.68rem] font-semibold text-muted-foreground">
+                          <span className="block text-[0.68rem] font-semibold text-muted-foreground">
                             {String(index + 1).padStart(2, "0")}
                           </span>
-                          <p className="text-[0.84rem] leading-6 text-foreground">
+                          <p className="text-[0.86rem] leading-7 text-foreground">
                             {point}
                           </p>
                         </div>
@@ -140,7 +142,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             ) : null}
 
             <div className="space-y-5">
-              <div className="flex items-center justify-between border-b border-[color-mix(in_srgb,var(--border)_60%,transparent)] pb-3">
+              <div className="flex items-center justify-between">
                 <p className="text-[0.8rem] font-medium text-foreground">
                   README.md
                 </p>
