@@ -113,7 +113,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                         <span
                           key={stackItem}
                           className={cn(
-                            "select-none cursor-default text-[0.82rem] text-foreground",
+                            "select-none cursor-pointer text-[0.82rem] text-foreground",
                             dottedUnderlineClassName,
                             dottedUnderlineHoverAccentClassName
                           )}
