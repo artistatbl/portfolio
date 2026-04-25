@@ -42,6 +42,36 @@ export interface ProjectEntry {
   html: string;
 }
 
+async function readProjectEntry(fileName: string): Promise<ProjectEntry & { published: boolean }> {
+  const slug = fileName.replace(/\.md$/, "");
+  const source = await fs.readFile(path.join(PROJECT_DIRECTORY, fileName), "utf8");
+  const { data, content } = matter(source);
+  const frontmatter = data as ProjectFrontmatter;
+  const processed = await remark()
+    .use(remarkGfm)
+    .use(remarkHtml)
+    .process(content);
+
+  return {
+    slug,
+    title: frontmatter.title ?? slug,
+    summary: frontmatter.summary ?? "",
+    description: frontmatter.description ?? "",
+    year: normalizeYear(frontmatter.year),
+    status: frontmatter.status,
+    platform: frontmatter.platform,
+    siteUrl: frontmatter.siteUrl,
+    deployUrl: frontmatter.deployUrl,
+    repoUrl: frontmatter.repoUrl,
+    imageSrc: frontmatter.imageSrc,
+    imageAlt: frontmatter.imageAlt,
+    stack: frontmatter.stack ?? [],
+    highlights: frontmatter.highlights ?? [],
+    published: frontmatter.published ?? true,
+    html: processed.toString(),
+  };
+}
+
 function isMarkdownFile(fileName: string) {
   return fileName.endsWith(".md");
 }
@@ -58,38 +88,29 @@ export async function getProjectEntries(): Promise<ProjectEntry[]> {
   const fileNames = await fs.readdir(PROJECT_DIRECTORY);
 
   const entries = await Promise.all(
-    fileNames.filter(isMarkdownFile).map(async (fileName) => {
-      const slug = fileName.replace(/\.md$/, "");
-      const source = await fs.readFile(path.join(PROJECT_DIRECTORY, fileName), "utf8");
-      const { data, content } = matter(source);
-      const frontmatter = data as ProjectFrontmatter;
-      const processed = await remark()
-        .use(remarkGfm)
-        .use(remarkHtml)
-        .process(content);
-
-      return {
-        slug,
-        title: frontmatter.title ?? slug,
-        summary: frontmatter.summary ?? "",
-        description: frontmatter.description ?? "",
-        year: normalizeYear(frontmatter.year),
-        status: frontmatter.status,
-        platform: frontmatter.platform,
-        siteUrl: frontmatter.siteUrl,
-        deployUrl: frontmatter.deployUrl,
-        repoUrl: frontmatter.repoUrl,
-        imageSrc: frontmatter.imageSrc,
-        imageAlt: frontmatter.imageAlt,
-        stack: frontmatter.stack ?? [],
-        highlights: frontmatter.highlights ?? [],
-        published: frontmatter.published ?? true,
-        html: processed.toString(),
-      };
-    })
+    fileNames.filter(isMarkdownFile).map((fileName) => readProjectEntry(fileName))
   );
 
   return entries
     .filter((entry) => entry.published)
     .map(({ published: _published, ...entry }) => entry);
+}
+
+export async function getProjectEntry(slug: string): Promise<ProjectEntry | null> {
+  const filePath = path.join(PROJECT_DIRECTORY, `${slug}.md`);
+
+  try {
+    await fs.access(filePath);
+  } catch {
+    return null;
+  }
+
+  const entry = await readProjectEntry(`${slug}.md`);
+
+  if (!entry.published) {
+    return null;
+  }
+
+  const { published: _published, ...project } = entry;
+  return project;
 }
