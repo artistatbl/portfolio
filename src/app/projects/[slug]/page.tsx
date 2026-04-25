@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { ProjectDetail } from "@/components/projects/project-detail";
 import { getProjectEntries, getProjectEntry } from "@/lib/projects";
+import { siteConfig } from "@/lib/site";
 
 interface ProjectPageProps {
   params: Promise<{
@@ -26,13 +27,39 @@ export async function generateMetadata({
 
   if (!project) {
     return {
-      title: "Project not found | Jean Daly",
+      title: "Project not found",
     };
   }
 
+  const title = `${project.title} project`;
+  const description = project.summary || project.description || siteConfig.description;
+  const url = `/projects/${project.slug}`;
+  const image = project.imageSrc || siteConfig.ogImage;
+
   return {
-    title: `${project.title} | Jean Daly`,
-    description: project.summary || project.description,
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      type: "article",
+      url,
+      title: `${project.title} | ${siteConfig.name}`,
+      description,
+      images: [
+        {
+          url: image,
+          alt: project.imageAlt || `${project.title} preview`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} | ${siteConfig.name}`,
+      description,
+      images: [image],
+    },
   };
 }
 
