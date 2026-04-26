@@ -18,7 +18,7 @@ function splitHighlight(point: string) {
   const rest = restParts.join(",").trim();
 
   return {
-    lead: lead.trim(),
+    lead: (lead ?? "").trim(),
     rest,
   };
 }

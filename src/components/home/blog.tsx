@@ -14,10 +14,14 @@ import {
 } from "@/components/ui/hover-slide";
 import { SectionBlock } from "@/components/home/block";
 import type { BlogPost } from "@/lib/blog";
-import { FileText } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, FileText } from "lucide-react";
 
 interface BlogSectionProps {
   posts: BlogPost[];
+  limit?: number;
+  moreHref?: string;
+  moreLabel?: string;
 }
 
 function formatDate(value: string) {
@@ -109,17 +113,46 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
   );
 }
 
-export function BlogSection({ posts }: BlogSectionProps) {
+export function BlogSection({
+  posts,
+  limit,
+  moreHref,
+  moreLabel = "View more",
+}: BlogSectionProps) {
   if (!posts.length) {
     return null;
   }
 
+  const visiblePosts = typeof limit === "number" ? posts.slice(0, limit) : posts;
+  const shouldShowMore =
+    typeof limit === "number" && posts.length > limit && Boolean(moreHref);
+
   return (
     <SectionBlock title="Writing" divider={false}>
       <ul className="space-y-1.5">
-        {posts.map((post) => (
+        {visiblePosts.map((post) => (
           <BlogPostDrawer key={post.slug} post={post} />
         ))}
+        {shouldShowMore && moreHref ? (
+          <li>
+            <Link
+              href={moreHref}
+              className={`${hoverSlideItemClassName} cursor-pointer`}
+            >
+              <HoverSlideItem contentClassName="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1">
+                <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card text-[var(--icon-foreground)]">
+                  <ArrowRight size={14} />
+                </span>
+                <span className="min-w-0 text-[0.92rem] font-medium leading-[1.55] tracking-[-0.02em] text-foreground sm:text-[0.98rem]">
+                  {moreLabel}
+                </span>
+                <span className="pointer-events-none flex items-center justify-end text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+                  <ArrowRight className="scale-150" size={22} />
+                </span>
+              </HoverSlideItem>
+            </Link>
+          </li>
+        ) : null}
       </ul>
     </SectionBlock>
   );

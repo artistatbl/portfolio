@@ -6,16 +6,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  experimental: {
-    swcMinify: true,
-  },
-  compiler: {
-    transform: {
-      react: {
-        throwIfNamespace: false,
-      },
-    },
-  },
 };
 
 export default nextConfig;
