@@ -51,7 +51,7 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
         <DrawerTrigger asChild>
           <button
             type="button"
-            className={`${hoverSlideItemClassName} cursor-pointer`}
+            className={`${hoverSlideItemClassName} w-full cursor-pointer text-left`}
           >
             <HoverSlideItem contentClassName="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-2">
               <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card text-[var(--icon-foreground)]">
@@ -90,6 +90,11 @@ function BlogPostDrawer({ post }: { post: BlogPost }) {
                     {formattedDate}
                   </span>
                 ) : null}
+                {post.tag ? (
+                  <span className="text-[0.72rem] text-muted-foreground">
+                    {post.tag}
+                  </span>
+                ) : null}
               </div>
             </div>
           </div>
@@ -124,8 +129,7 @@ export function BlogSection({
   }
 
   const visiblePosts = typeof limit === "number" ? posts.slice(0, limit) : posts;
-  const shouldShowMore =
-    typeof limit === "number" && posts.length > limit && Boolean(moreHref);
+  const shouldShowMore = typeof limit === "number" && Boolean(moreHref);
 
   return (
     <SectionBlock title="Writing" divider={false}>

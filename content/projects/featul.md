@@ -25,6 +25,7 @@ stack:
   - PostHog
   - Sentry
 highlights:
+  - Built because most open-source customer feedback platforms feel outdated, and Featul aims to bring a fresh, modern open-source alternative to the space.
   - Combines feedback collection, public roadmaps, changelogs, workspace settings, and customer communication in one product.
   - Uses a shared monorepo architecture so the product app and marketing/docs site can reuse API, auth, db, UI, and editor packages.
   - Includes production-grade integrations for billing, analytics, error monitoring, issue sync, passkeys, and content/SEO workflows.
@@ -36,6 +37,16 @@ published: true
 Featul is a privacy-first customer feedback platform built for teams that want to collect user requests, organise product decisions, publish a roadmap, and close the loop with changelog updates in one place.
 
 Rather than treating feedback as a loose inbox, Featul is structured like a product operating system: it gives teams a way to collect ideas, connect them to roadmap work, manage workspace settings and members, and communicate progress publicly.
+
+## Why I'm Building Featul
+
+I decided to build Featul because a lot of open-source customer feedback platforms feel old, both in product direction and in interface quality.
+
+Many of the OSS options available today feel dated, and I wanted to create something that feels more current, more thoughtful, and more in tune with how modern teams want to collect and manage feedback.
+
+Featul is my way of bringing a fresh twist to the customer feedback space: a product that feels modern, open source, and more exciting than the tools that already exist.
+
+It is also being built toward a full release planned for May, which makes this project feel less like an experiment and more like a real product I want to keep pushing forward.
 
 ## What It Does
 

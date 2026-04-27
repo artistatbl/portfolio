@@ -1,28 +1,10 @@
-import { promises as fs } from "node:fs";
 import path from "node:path";
-import matter from "gray-matter";
-import { remark } from "remark";
-import remarkGfm from "remark-gfm";
-import remarkHtml from "remark-html";
+import { promises as fs } from "node:fs";
+import { z } from "zod";
+
+import { readMarkdownDirectory, readMarkdownFile } from "@/lib/markdown-content";
 
 const PROJECT_DIRECTORY = path.join(process.cwd(), "content", "projects");
-
-interface ProjectFrontmatter {
-  title?: string;
-  summary?: string;
-  description?: string;
-  year?: string | number;
-  status?: string;
-  platform?: string;
-  siteUrl?: string;
-  deployUrl?: string;
-  repoUrl?: string;
-  imageSrc?: string;
-  imageAlt?: string;
-  stack?: string[];
-  highlights?: string[];
-  published?: boolean;
-}
 
 export interface ProjectEntry {
   slug: string;
@@ -42,16 +24,32 @@ export interface ProjectEntry {
   html: string;
 }
 
-async function readProjectEntry(fileName: string): Promise<ProjectEntry & { published: boolean }> {
-  const slug = fileName.replace(/\.md$/, "");
-  const source = await fs.readFile(path.join(PROJECT_DIRECTORY, fileName), "utf8");
-  const { data, content } = matter(source);
-  const frontmatter = data as ProjectFrontmatter;
-  const processed = await remark()
-    .use(remarkGfm)
-    .use(remarkHtml)
-    .process(content);
+const projectFrontmatterSchema = z.object({
+  title: z.string().optional(),
+  summary: z.string().optional(),
+  description: z.string().optional(),
+  year: z.union([z.string(), z.number()]).optional(),
+  status: z.string().optional(),
+  platform: z.string().optional(),
+  siteUrl: z.string().optional(),
+  deployUrl: z.string().optional(),
+  repoUrl: z.string().optional(),
+  imageSrc: z.string().optional(),
+  imageAlt: z.string().optional(),
+  stack: z.array(z.string()).optional(),
+  highlights: z.array(z.string()).optional(),
+  published: z.boolean().optional(),
+});
 
+function normalizeProjectEntry({
+  slug,
+  frontmatter,
+  html,
+}: {
+  slug: string;
+  frontmatter: z.infer<typeof projectFrontmatterSchema>;
+  html: string;
+}): ProjectEntry & { published: boolean } {
   return {
     slug,
     title: frontmatter.title ?? slug,
@@ -68,15 +66,11 @@ async function readProjectEntry(fileName: string): Promise<ProjectEntry & { publ
     stack: frontmatter.stack ?? [],
     highlights: frontmatter.highlights ?? [],
     published: frontmatter.published ?? true,
-    html: processed.toString(),
+    html,
   };
 }
 
-function isMarkdownFile(fileName: string) {
-  return fileName.endsWith(".md");
-}
-
-function normalizeYear(value: string | number | undefined) {
+function normalizeYear(value: string | number | undefined): string {
   if (typeof value === "number") {
     return String(value);
   }
@@ -85,10 +79,8 @@ function normalizeYear(value: string | number | undefined) {
 }
 
 export async function getProjectEntries(): Promise<ProjectEntry[]> {
-  const fileNames = await fs.readdir(PROJECT_DIRECTORY);
-
-  const entries = await Promise.all(
-    fileNames.filter(isMarkdownFile).map((fileName) => readProjectEntry(fileName))
+  const entries = (await readMarkdownDirectory(PROJECT_DIRECTORY, projectFrontmatterSchema)).map(
+    normalizeProjectEntry
   );
 
   return entries
@@ -105,7 +97,9 @@ export async function getProjectEntry(slug: string): Promise<ProjectEntry | null
     return null;
   }
 
-  const entry = await readProjectEntry(`${slug}.md`);
+  const entry = normalizeProjectEntry(
+    await readMarkdownFile(PROJECT_DIRECTORY, `${slug}.md`, projectFrontmatterSchema)
+  );
 
   if (!entry.published) {
     return null;
