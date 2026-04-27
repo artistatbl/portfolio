@@ -3,6 +3,7 @@ import {
   dottedUnderlineClassName,
   dottedUnderlineHoverAccentClassName,
 } from "@/components/ui/anchor";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import type { CurrentProject } from "@/lib/content";
 
@@ -108,8 +109,8 @@ export function BioSection({ paragraphs, currentProject }: BioSectionProps) {
           <p key={paragraph} className={copyClassName}>
             {hasIntroPrefix ? (
               <>
-                <span>I'm </span>
-                <a
+                <span>I&apos;m </span>
+                <Link
                   href="/"
                   className="group inline-flex cursor-pointer font-semibold !text-foreground transition-colors"
                 >
@@ -122,7 +123,7 @@ export function BioSection({ paragraphs, currentProject }: BioSectionProps) {
                     D
                   </span>
                   <span>aly</span>
-                </a>
+                </Link>
                 <span>{renderParagraphWithEmphasis(introRemainder)}</span>
               </>
             ) : (

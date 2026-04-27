@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState, type ComponentType } from "react";
 import {
@@ -70,11 +71,14 @@ function FaviconIcon({ siteUrl }: { siteUrl: string }) {
 
   return (
     <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card">
-      <img
+      <Image
         src={faviconUrl}
         alt=""
+        width={16}
+        height={16}
         className="h-4 w-4 rounded-[4px]"
         onError={() => setFailed(true)}
+        unoptimized
       />
     </span>
   );
