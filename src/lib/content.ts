@@ -169,6 +169,7 @@ export const homepageContent: HomepageContent = {
         summary:
           "A privacy-first feedback platform that connects requests, roadmap planning, and changelog communication in one product system.",
         points: [
+          "Built because most open-source customer feedback tools feel outdated, with Featul bringing a fresher and more modern open-source alternative.",
           "Built for collecting requests, prioritizing product work, and publishing roadmap and changelog updates.",
           "Structured as a full monorepo with product app, marketing/docs site, and shared internal packages.",
           "Designed like a real SaaS product with billing, auth, analytics, and integration workflows.",
