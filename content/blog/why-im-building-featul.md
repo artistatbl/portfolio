@@ -6,7 +6,7 @@ tag: Product notes
 published: true
 ---
 
-I decided to build Featul because most open-source customer feedback platforms do not feel good enough anymore.
+I decided to build [featul.com](https://www.featul.com) because most open-source customer feedback platforms do not feel good enough anymore.
 
 A lot of the existing options feel old. The OSS versions are often outdated, and the interface quality usually feels behind what modern products should feel like. They work, but they do not feel fresh, exciting, or thoughtfully designed for how teams want to handle feedback today.
 
