@@ -10,7 +10,7 @@ I decided to build Featul because most open-source customer feedback platforms d
 
 A lot of the existing options feel old. The OSS versions are often outdated, and the interface quality usually feels behind what modern products should feel like. They work, but they do not feel fresh, exciting, or thoughtfully designed for how teams want to handle feedback today.
 
-That gap is what pushed me to start Featul.
+That gap is what pushed me to start [featul.com](https://www.featul.com).
 
 I wanted to build something that brings a new twist to the customer feedback space. Not just another tool in the same category, but something that feels more modern, more polished, and more enjoyable to use from the first impression onward.
 
@@ -18,4 +18,4 @@ For me, Featul is also about raising the standard for what an open-source feedba
 
 I am building Featul because I believe there is room for a better open-source option. One that feels current, clean, and genuinely well made.
 
-It is also moving toward a full release planned for May, which makes it feel even more real to me. Featul is not just an idea I wanted to explore. It is a product I want to keep pushing until it becomes something people are genuinely excited to use.
+It is also moving toward a full release planned for May, which makes it feel even more real to me. [featul.com](https://www.featul.com) is not just an idea I wanted to explore. It is a product I want to keep pushing until it becomes something people are genuinely excited to use.
